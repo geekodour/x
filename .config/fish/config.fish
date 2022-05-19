@@ -3,7 +3,7 @@ if status is-interactive
   keychain --eval --quiet --quick --nogui id_ed25519 | source
 end
 
-# sway poop asl;kjdlask
+# sway
 if test (tty) = "/dev/tty1"
   sway
 end
