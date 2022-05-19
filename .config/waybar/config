@@ -1,0 +1,96 @@
+{
+  "layer": "top",
+	"position": "bottom",
+	"modules-left": ["sway/workspaces", "sway/mode"],
+	"modules-right": ["custom/disk_home", "cpu", "memory", "backlight", "network", "pulseaudio", "clock", "battery", "idle_inhibitor"],
+	"sway/workspaces": {
+		"disable-scroll": true,
+		"all-outputs": true,
+		"format": "{icon}",
+		"format-icons": {
+			"1": "🥼",
+			"2": "🥎️",
+			"3": "✏️",
+			"4": "〽️",
+			"5": "🎸",
+			"6": "💩",
+			"7": "📜",
+			"8": "🧨️",
+			"9": "👑",
+			"10": "🍓"
+		}
+	},
+	"sway/mode": {
+		"format": "{}"
+	},
+	"custom/disk_home": {
+		"format": "🍩 {} ",
+		"interval": 30,
+		"exec": "df -h --output=avail $HOME | tail -1 | tr -d ' '"
+	},
+	"cpu": {
+		"format": "🐒 {usage}%",
+		"tooltip": false
+	},
+	"memory": {
+		"format": "🦉 {used:0.1f}G"
+	},
+	"network": {
+    "tooltip": false,
+		"family": "ipv4",
+    "interface": "wlan0",
+		"format-wifi": "🔼 {bandwidthUpBits} 🔽 {bandwidthDownBits}",
+		"format-ethernet": "{ifname}: {ipaddr}/{cidr} ",
+		"format-linked": "{ifname} (No IP) ",
+		"format-disconnected": "Disconnected ⚠",
+		"format-alt": "{ipaddr}/{cidr}",
+		"interval": 5
+	},
+	"backlight": {
+		"format": "💡{percent}% "
+	},
+	"pulseaudio": {
+    "tooltip": false,
+		"format": "{icon} {volume}% {format_source}",
+		"format-muted": "🔇 {format_source}",
+		"format-bluetooth": "{icon} {volume}% {format_source}",
+		"format-bluetooth-muted": "🔇 {format_source}",
+		"format-source": " {volume}%",
+		"format-source-muted": "",
+		"format-icons": {
+			"headphones": "",
+			"handsfree": "",
+			"headset": "",
+			"phone": "",
+			"portable": "",
+			"car": "",
+			"default": ["🔈", "🔉", "🔊"]
+		},
+		"on-click": "ponymix -N -t sink toggle",
+		"on-click-right": "ponymix -N -t source toggle"
+	},
+	"clock": {
+		"interval": 1,
+		"format": "⏰ {:%d %A %I:%M%p}",
+    "tooltip": false
+	},
+	"battery": {
+		"states": {
+			"warning": 20,
+			"critical": 10
+		},
+		"format": "🔋{capacity}%",
+		"format-charging": "⚡️{capacity}%",
+		"format-not-charging": " {capacity}%",
+    "format-warning": "🎃{capacity}%",
+    "format-critical": "🧛{capacity}%",
+	},
+	"idle_inhibitor": {
+		"format": "{icon}",
+		"format-icons": {
+			"activated": "🔒",
+			"deactivated": "🔓"
+		},
+		"on-click": "swaylock -eFfki"
+	}
+}

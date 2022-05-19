@@ -1,0 +1,12 @@
+# logging happens at:
+# ~/.cache/starship/session_${STARSHIP_SESSION_KEY}.log
+
+add_newline = true
+
+# prompt
+right_format = """$all"""
+format = """$character"""
+
+[character] 
+success_symbol = "[λ](bold green)"
+error_symbol = "[λ](bold red)"
