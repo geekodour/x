@@ -1,0 +1,11 @@
+# list all available remote plugins 
+asdf plugin-list-all
+
+# list all installed plugins 
+asdf plugin-list --urls
+
+# install plugin
+asdf plugin add <plugin_name> https://github.com/xxx.git
+
+# list all available versions from remote
+asdf list all <plugin_name>
