@@ -1,3 +1,3 @@
 function neofetch --description 'alias neofetch neofetch && id'
- command neofetch && id && lsblk && w && paru -P -s;
+ command neofetch && id && duf && hr 🍑 && w && hr 🌻 && paru -P -s;
 end

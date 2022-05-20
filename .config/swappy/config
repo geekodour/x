@@ -1,0 +1,4 @@
+[Default]
+save_dir=$HOME/screenshots
+save_filename_format=sc-%Y%m%d-%H%M%S.png
+show_panel=false
