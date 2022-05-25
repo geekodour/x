@@ -1,9 +1,12 @@
 # variables
 set -l preview_ui 'p:preview-tui'
-set -l imgur 'i:imgur'
+set -l fixname 'f:fixname'
+set -l nmount 'n:nmount'
+set -l fzcd 'c:fzcd'
+set -l upload 'u:upload'
 
 # plugins
-set -gx NNN_PLUG "$preview_ui;$imgur"
+set -gx NNN_PLUG "$preview_ui;$fixname;$fzcd;$upload;$nmount"
 
 # trash
 #set -gx NNN_TRASH 1
@@ -16,4 +19,5 @@ set -gx NNN_BMS 'd:~/dump;c:~/.config'
 set -gx NNN_ARCHIVE '\.(7z|a|ace|alz|arc|arj|bz|bz2|cab|cpio|deb|gz|jar|lha|lz|lzh|lzma|lzo|rar|rpm|rz|t7z|tar|tbz|tbz2|tgz|tlz|txz|tZ|tzo|war|xpi|xz|Z|zip)$'
 
 # opener
-set -gx NNN_OPENER ~/.config/nnn/plugins/nuke
+set -gx NNN_OPENER /home/geekodour/.config/nnn/plugins/nuke
+set -gx GUI 1 # see nuke for why we need to set this

@@ -5,5 +5,6 @@ function r --wraps=nnn --description 'alias r nnn'
   # -o open files on return key only
   # -r show cp/mv progress
   # -Q disable confirmation on quit w multple act. contexts
+  #nnn -adorQ $argv; 
   nnn -acdorQ $argv; 
 end
