@@ -6,5 +6,15 @@
 	defaultBranch = main
 [core]
 	editor = nvim
+	pager = delta
 [pull]
 	rebase = true
+[interactive]
+	diffFilter = delta --color-only
+[delta]
+    navigate = true
+    light = false
+[merge]
+    conflictstyle = diff3
+[diff]
+    colorMoved = default

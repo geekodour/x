@@ -17,6 +17,9 @@
   bindsym $mod+p move workspace to output right
   bindsym $mod+q move workspace to output left
 
+# notification daemon
+exec mako
+
 # idle configuration
   exec swayidle -w \
     timeout 300 'swaylock -f -c 000000' \

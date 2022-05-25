@@ -1,0 +1,20 @@
+# send stdout and stderr to same file:
+- pip install rtv > stdouterr.txt 2>&1
+- & is used to "write into" a stream, eg. &1 to write into stdout
+
+# xargs:
+λ cat list.txt
+a b c d
+
+λ xargs -t touch < list.txt
+λ echo "x y z" | xargs touch
+λ ls
+a b c d list.txt x y z
+
+# say yes:
+yes | pip install pkg --upgrade
+
+# list of tools that are useful when exploring files:
+- file
+- strings
+- ar, nm, ldd, readelf

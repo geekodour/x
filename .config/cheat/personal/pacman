@@ -1,4 +1,13 @@
-# list all explicitly installed native packages which are not deps to anything else:
+# list all explicitly installed native packages which are not deps to anything
+# else:
 pacman -Qetn
-# list all packages installed from aur
+
+# list all packages installed from aur:
 pacman -Qm
+
+# fuzzy match a package when the results are too long, the terms can be from
+# the description too:
+pacman -Ss <term1> <term2>
+
+# show details on an installed package:
+pacman -Qi sampler
