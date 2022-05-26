@@ -50,6 +50,15 @@ exec mako
   bindsym $mod+Shift+r restart
   # exit sway
   bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -B 'Yes, exit sway' 'swaymsg exit'
+  # note: using wev to get the wayland events
+  # brightness control
+  bindsym XF86MonBrightnessUp exec brightnessctl s 200+
+  bindsym XF86MonBrightnessDown exec brightnessctl s 200-
+  # volume and mic control
+  bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +10%
+  bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -10%
+  bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle
+  bindsym XF86AudioMicMute exec pactl set-source-mute @DEFAULT_SOURCE@ toggle
 
 # moving around
   # move your focus around
