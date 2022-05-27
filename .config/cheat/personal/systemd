@@ -1,0 +1,17 @@
+https://github.com/lzap/systemd-shortcuts
+
+take time to study systemd and other community cheatsheets as well
+
+# show systemd service file:
+systemctl cat dhcpcd.service
+
+# systemd-analyze plot : units that take a long time to start:
+systemd-analyze plot > plot.svg
+
+# get log for a service, -b for current boot:
+journalctl -u zookeeper.service -b
+
+# Look for errors in the log files located at /var/log, as well as high priority errors in the systemd journal:
+journalctl -p 3 -b
+systemctl --failed
+

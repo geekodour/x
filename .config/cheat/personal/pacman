@@ -2,12 +2,58 @@
 # else:
 pacman -Qetn
 
-# list all packages installed from aur:
+# list all packages installed from aur(foreign packages):
 pacman -Qm
 
-# fuzzy match a package when the results are too long, the terms can be from
-# the description too:
+# lists installed packages no longer available (anywhere):
+ancient-packages
+
+# fuzzy search a package to ext database when the results are too long, the
+# terms can be from the description too:
 pacman -Ss <term1> <term2>
 
-# show details on an installed package:
-pacman -Qi sampler
+# fuzzy search an installed package:
+pacman -Qs <term1> <term2>
+
+# show details on an installed package, this also shows required
+# by and deps etc:
+pacman -Qi <package_name>
+
+# list all files owned by a given package:
+pacman -Ql <package_name>
+
+# remove a package and its dependencies which are not required by any other
+# installed package:
+pacman -Rs <package_name>
+
+# check for packages that were installed(both native and foreign) as a
+# dependency but now, no other packages depend on them. (orphans):
+pacman -Qtd
+
+# clean orphaned packages
+pacman -Rs $(pacman -Qqtd)
+
+# orphaned files not owned by any arch packages:
+lostfiles
+
+# view the dependency tree of a package: 
+pactree <package_name> : dependencies
+pactree -r <package_name> : dependants 
+
+# clean the package cache
+paccache -dv
+paccache -rv
+
+# see how much size the packages are consuming:
+pacgraph -c
+
+# listing all changed files from packages
+# note: i don't understand what this actually does completely
+paccheck --md5sum --quiet  
+
+# useful info:
+- no partial upgrades
+  - never run pacman -Sy
+  - always use pacman -Syu
+  - Always upgrade (with pacman -Syu) before installing a package
+  - if there's any error when running -Syu, it should be resolved asap
