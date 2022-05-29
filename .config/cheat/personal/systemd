@@ -1,17 +1,28 @@
-https://github.com/lzap/systemd-shortcuts
+# other systemd tools
+- systemd-cgls # show cgroup tree
+- systemd-cgtop # show cgroup resource usage
+- hostnamectl # fart with system hostname
+- localectl # system locale and keyboard layout
+- coredumpctl # TODO explore
+- systemd-delta # find overidden files
 
-take time to study systemd and other community cheatsheets as well
+# systemd-analyze (boot up inspection):
+systemd-analyze time # (default) 
+systemd-analyze plot > plot.svg # startup time plot
+systemd-analyze blame # list running units ordered by time to init
 
-# show systemd service file:
-systemctl cat dhcpcd.service
+# journalctl filters:
+journalctl -u <unit> -b # for some unit, for the most recent boot
+journalctl -p 3 -b # list errors(see -p flag) for the most recent boot
+journalctl -f # follow log (like tail -f)
+journalctl --since=2012-10-15 --until="2011-10-16 23:59:59" # To filter by time period:
+journalctl /usr/bin/dbus-daemon # filters by executable name
+journalctl _PID=123 # filters by pid
+journalctl _COMM=sshd # filters by command
+journalctl _UID=1000 # filters by specific user id
+journalctl -k # filters only kernal messages
 
-# systemd-analyze plot : units that take a long time to start:
-systemd-analyze plot > plot.svg
-
-# get log for a service, -b for current boot:
-journalctl -u zookeeper.service -b
-
-# Look for errors in the log files located at /var/log, as well as high priority errors in the systemd journal:
-journalctl -p 3 -b
-systemctl --failed
-
+# journalctl listings:
+journalctl -F _SYSTEMD_UNIT # list systemd units logged
+journalctl --list-boots # list all available boots
+journalctl --disk-usage # disk usage of all journal files

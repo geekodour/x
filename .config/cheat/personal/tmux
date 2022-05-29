@@ -1,17 +1,18 @@
 # some basic strokes after (Ctrl+a):
-| key    | description      |
-| -------| -----------------|
-| d      | detach session   |
-| t      | big clock        |
-| ?      | list shortcut    |
-| :      | prompt           |
-| w      | list windows     |
-| s      | list sessions    |
-| $      | rename session   |
-| x      | kill pane/window |
-| |      | v split          |
-| -      | h split          |
-| [0-9]  | switch to window |
+| key    | description                           |
+| -------| --------------------------------------|
+| d      | detach session                        |
+| t      | big clock                             |
+| ?      | list shortcut                         |
+| :      | prompt                                |
+| w      | list windows                          |
+| s      | list sessions                         |
+| $      | rename session                        |
+| x      | kill pane/window                      |
+| |      | v split                               |
+| -      | h split                               |
+| [0-9]  | switch to window                      |
+| !      | break pane, switch it to a new window |
 
 # detach already attached session
 # (moving devices w diff resolutions):

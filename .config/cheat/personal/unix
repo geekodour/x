@@ -18,3 +18,10 @@ yes | pip install pkg --upgrade
 - file
 - strings
 - ar, nm, ldd, readelf
+
+# TODO
+pstree etc.
+
+# blogposts for later
+- https://mbuki-mvuki.org/posts/2021-05-30-memoize-commands-or-bash-functions-with-coprocs/
+- https://smallstep.com/blog/command-line-secrets/

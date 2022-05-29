@@ -1,55 +1,27 @@
-# list all explicitly installed native packages which are not deps to anything
-# else:
-pacman -Qetn
+# list:
+pacman -Qetn # explicitly installed native packages
+pacman -Qm   # packages installed from aur(foreign packages)
+ancient-packages # installed packages no longer available (anywhere)
+pacman -Ql <package_name> # list all files owned by a given package
+pacman -Qtd # list orphan packages
+lostfiles # orphaned files not owned by any arch packages:
+paccheck --md5sum --quiet  # listing all changed files from packages # TODO: add info
 
-# list all packages installed from aur(foreign packages):
-pacman -Qm
+# search:
+pacman -Ss <term1> <term2> # fuzzy search db
+pacman -Qs <term1> <term2> # fuzzy search installed packages
 
-# lists installed packages no longer available (anywhere):
-ancient-packages
+# info:
+pacman -Qi <package_name> # details on an installed package
+pactree <package_name> : # dependency tree: dependencies 
+pactree -r <package_name> # dependency tree: dependants 
+pacgraph -c # see how much size the packages are consuming:
 
-# fuzzy search a package to ext database when the results are too long, the
-# terms can be from the description too:
-pacman -Ss <term1> <term2>
-
-# fuzzy search an installed package:
-pacman -Qs <term1> <term2>
-
-# show details on an installed package, this also shows required
-# by and deps etc:
-pacman -Qi <package_name>
-
-# list all files owned by a given package:
-pacman -Ql <package_name>
-
-# remove a package and its dependencies which are not required by any other
-# installed package:
-pacman -Rs <package_name>
-
-# check for packages that were installed(both native and foreign) as a
-# dependency but now, no other packages depend on them. (orphans):
-pacman -Qtd
-
-# clean orphaned packages
-pacman -Rs $(pacman -Qqtd)
-
-# orphaned files not owned by any arch packages:
-lostfiles
-
-# view the dependency tree of a package: 
-pactree <package_name> : dependencies
-pactree -r <package_name> : dependants 
-
-# clean the package cache
-paccache -dv
-paccache -rv
-
-# see how much size the packages are consuming:
-pacgraph -c
-
-# listing all changed files from packages
-# note: i don't understand what this actually does completely
-paccheck --md5sum --quiet  
+# remove/clean:
+pacman -Rs <package_name> # remove a package and its dependencies(safe) 
+pacman -Rs $(pacman -Qqtd) # clean orphaned packages
+paccache -dv # list
+paccache -rv # clean
 
 # useful info:
 - no partial upgrades
