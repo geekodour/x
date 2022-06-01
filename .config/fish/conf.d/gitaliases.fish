@@ -15,6 +15,11 @@ function gd --wraps='git diff' --description 'alias (git): short for git diff'
   clear; git diff $argv; 
 end
 
+function gdp --wraps='git --no-pager diff' --description 'alias (git): no pager diff'
+  git --no-pager diff $argv; 
+end
+
+
 function gs --wraps='git status' --description 'alias (git): short for git status'
   clear; git status $argv; 
 end
@@ -33,10 +38,6 @@ end
 
 function grepos --wraps='gfold' --description 'alias (git): gfold, show repos under curdir'
   gfold
-end
-
-function gtui --wraps='grv' --description 'alias (git): explore git repo in tui'
-  grv
 end
 
 function grsum --wraps='onefetch' --description 'alias (git): print summary of git repo'
