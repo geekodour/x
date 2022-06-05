@@ -9,3 +9,6 @@ asdf plugin add <plugin_name> https://github.com/xxx.git
 
 # list all available versions from remote
 asdf list all <plugin_name>
+
+# swutch TODo
+asdf shell nodejs 16.15.0

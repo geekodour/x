@@ -10,6 +10,7 @@ end
 
 # exports
 set -x MANPAGER "sh -c 'col -bx | bat -l man -p'"
+set -x DOOMDIR "~/.config/doom"
 
 source ~/.config/nnn/init # nnn
 source ~/.config/cheat/init # cheat

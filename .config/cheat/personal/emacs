@@ -1,20 +1,82 @@
+# general note
+  i am just getting started with doom, some of the things here are supposed to
+  become muscle memory or atleast which-key is supposed to help. So I'll keep
+  updating, removing things from this cheatsheet often based on my personal
+  journey into emacs
+
 # concept and theory
-- 'modifier': certain keys
-  - ctrl (C) : Control key
-  - left alt (M) : Meta key
-  - windows key (s) : Super key
-  - space key (SPC) : Leader key (evil mode)
-- 'chord': modifier keys pressed with a single non-modifier key
-  - Eg. C-c, M-x, S-v, C-S-v
-- 'sequence': series of chords, pressed and released in row
-  - Eg. C-x C-c
+  # keys
+  - 'modifier': certain keys
+    - ctrl (C) : Control key
+    - left alt (M) : Meta key
+    - windows key (s) : Super key
+    - space key (SPC) : Leader key (evil mode)
+  - 'chord': modifier keys pressed with a single non-modifier key
+    - Eg. C-c, M-x, S-v, C-S-v
+  - 'sequence': series of chords, pressed and released in row
+    - Eg. C-x C-c
 
-# basic usage
+  # layout
+  | Object      | Description                                           |
+  | ----------- | ----------------------------------------------------- |
+  | buffer      | buffers are assigned to windows. text you are editing |
+  |             | in emacs resides in an object called a window.        |
+  | window      | window displays a mode                                |
+  | mode-line   | windows contain a mode-line at the bottom             |
+  | mini-buffer | located at the bottom of emacs. It is used for the    |
+  |             | evil ex command line among other things.              |
+  | frame/tab   | holds multiple windows, other names: workspace        |
+  | session     | TODO                                                  |
+  | major-mode  | each buffer usually has only one major mode, eg.      |
+  |             | filetype. modes have their own keymaps                |
+  | minor-mode  | buffer can have multiple minor modes that can be      |
+  |             | toggled on and off, eg. flyspell-mode                 |
+  | vim modes   | vim modes are called states in evil mode              |
 
-# buffers
+# usage
+  # basic
+  - SPC-p-p : list projects
+  - ESC/C-g : usually quits the minibuffer
+  - M-x <mode-name> : switch major mode
+  - M-: : evaluate an expression in the minibuffer, also can use eshell
+  - SPC-h-m : Show active modes in buffer
+  - SPC-i : insert shit
+  - SPC-o-p : toggle sidebar (treemacs in our case)
+  - select codeblock + = : to auto-format codeblock
 
-# navigation
+  # treemacs
+  - ? : keybindings
+  - c-{f,d} : create file/dir
+  - treemacs-edit-workspaces edit project workspaces in org-mode
+
+  # avy
+  - g-s-SPC : open search in buffer
+
+  # magit
+  SPC-g-B : git blame
+    - B : open blame window
+
+  # org-mode
+  - M-{j,k} : Move headings/listings up or down(re-order)
+  - M-{h,l} : Move headings/listings up or down(re-promote)
+  - M-RET : in lists, starts a new item in the numbered/non-numbered list
+  - Shift-TAB : Toggle outline at different levels
+  - <s-TAB : code block
+    - SPC-m-' : open codeblock in separate buffer (org edit special)
+
+  # buffers
+  - SPC-b-b or SPC-, : List buffers in workspace
+  - multi-cursor:
+    - select and press R to select all in the current buffer
+    - select and press M-d(next) M-D(previous)
+
   
-# other stuff
-
-# line numbers
+  # workspace
+  - SPC-TAB-TAB : List tabs
+  - SPC-TAB-d : Delete current workspace (switches to other existing workspace)
+  
+  # doom
+  - doom upgrade: Update doom and packages
+  - SPC-f-p : Open dooms private config directory
+  - SPC-h-d : Open doom specific help and other shit
+  - avoid modifying files in ~/.emacs.d. customizations should be kept in DOOMDIR

@@ -109,6 +109,7 @@ exec mako
 
   # use swaymsg -t get_tree|grep app_id or grep class
   assign [class="firefox"] workspace 2
+  assign [class="Emacs"] workspace 3
   assign [app_id="cmus"] workspace 5
   assign [app_id="mpv"] workspace 6
   assign [app_id="telegramdesktop"] workspace 9
