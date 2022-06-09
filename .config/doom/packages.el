@@ -1,22 +1,30 @@
 ;; -*- no-byte-compile: t; -*-
 ;;; $DOOMDIR/packages.el
 
-;; To install a package with Doom you must declare them here and run 'doom sync'
-;; on the command line, then restart Emacs for the changes to take effect -- or
-;; use 'M-x doom/reload'.
-
-
-;; To install SOME-PACKAGE from MELPA, ELPA or emacsmirror:
-;(package! some-package)
-(package! focus) ; dim the font color of text in surrounding paragraphs
+;; fun:
 (package! nyan-mode)
+;; lang:
 (package! fish-mode)
+;; treesitter:
 (package! tree-sitter)
 (package! tree-sitter-langs)
+;; helpful:
+(package! focus) ; dim the font color of text in surrounding paragraphs
 (package! info-colors)
 (package! command-log-mode)
-(package! org-modern)
-;;(package! org-appear)
+;; org-mode related:
+(package! org-appear)
+(package! org-transclusion)
+(package! org-fancy-priorities) ; we not using +pretty from doom
+(package! org-modern) ; we not using +pretty from doom
+;(package! org-super-agenda)
+
+;; other packages to look for later:
+;; (package! org-ol-tree) ;; does not seem to be available
+;;(package! org-roam-ui) ;; use after undertanding what can unpinning of org-roam can do
+;;(package! org-ref) ;; also check org-cite
+;;(package! org-roam-bibtex) ;; take notes on bibliography files
+;;(package! org-noter) ;; taking notes on pdf
 ;;https://github.com/alphapapa/org-sidebar
 ;; org fany priorities
 
