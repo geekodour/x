@@ -12,6 +12,7 @@
   ;; (remove-hook 'org-mode-hook #'auto-fill-mode) ;; not now
   ;; (setq company-global-modes '(not org-mode)) ;; not now
   (setq
+   ;; general settings
    org-tags-column -80
    org-auto-align-tags t
    org-hide-emphasis-markers t
@@ -23,27 +24,67 @@
    ;; TODO: some tags for later
    ;; - surprise, felt real good/flow, first timer
    ;;
-   ;;
    ;; org-agenda
+   ;; TODO: learn how to evaluate lisp commands directly and to play with
+   ;;       org-ql, having that will make configuring this much much easier
    org-agenda-current-time-string "⭠ now ─────────────────────────────────────────────────"
    org-agenda-skip-scheduled-if-done t
    org-agenda-skip-deadline-if-done t
-   org-agenda-include-deadlines t
-   org-agenda-include-diary nil
-   org-agenda-block-separator nil
-   org-agenda-compact-blocks t
-   org-agenda-start-with-log-mode nil
-   org-agenda-start-day nil
-   org-super-agenda-groups
-      '(
-        (:name "Important tasks without a date" :date nil :priority "A")
-        ;;(:name "Next Items" :tag ("tag1"))
-        ;;(:name "Important" :priority "A")
-        ;;(:priority<= "B" :scheduled future :order 1)
-        )
-   ;;org-agenda-tags-column 0
-   ;;org-agenda-block-separator ?─
-   ;;org-agenda-time-grid '((daily today require-timed) (800 1000 1200 1400 1600 1800 2000) " ┄┄┄┄┄ " "┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄")
+   org-agenda-block-separator "────────────────"
+   org-agenda-custom-commands
+   '(("d" "the ageeenda"
+      (
+       ;; unscheduled shit
+       (tags-todo "*" ( ; required filtering only happens to work with tags-todo currently
+                       (org-agenda-overriding-header "🌀 Unscheduled(High Priority)")
+                       (org-super-agenda-groups '(
+                                                  (:name "tasks ⚒" :and (:scheduled nil :deadline nil :todo "TODO" :priority "A") :order 1)
+                                                  (:name "waits ⏰" :and (:scheduled nil :deadline nil :todo "WAITING" :priority "A") :order 1)
+                                                  (:name "consuption 🔖" :and (:scheduled nil :deadline nil :todo "TOCONSUME" :priority "A") :order 2)
+                                                  (:discard (:anything))
+                                                  ))
+                       ))
+       ;; today
+       (agenda "" (
+                   (org-agenda-overriding-header "\n👊 Today's Agenda")
+                   (org-agenda-span 'day)
+                   (org-agenda-start-day nil)
+                   (org-agenda-skip-scheduled-if-done nil)
+                   (org-agenda-skip-deadline-if-done nil)
+                   (org-agenda-include-deadlines t)
+                   (org-super-agenda-groups '(
+                                              (:name "" :time-grid t :order 1)
+                                              (:discard (:anything))
+                                              ))
+                   ))
+       ;; next 3 days
+       (agenda "" (
+                   (org-agenda-overriding-header "\n📅 Next three days")
+                   (org-agenda-time-grid nil)
+                   (org-agenda-show-all-dates nil)
+                   (org-agenda-span 3)
+                   (org-agenda-start-day "+1d")
+                   ))
+       ;; deadlines for next 14 days
+       (agenda "" ((org-agenda-overriding-header "\n🗡 Upcoming deadlines (+14d)")
+                   (org-agenda-time-grid nil)
+                   (org-agenda-start-on-weekday nil)
+                   (org-agenda-start-day "+4d") ;; already have a next 3 days section
+                   (org-agenda-span 14)
+                   (org-agenda-show-all-dates nil)
+                   (org-deadline-warning-days 0)
+                   (org-agenda-entry-types '(:deadline))
+                   ))
+       ;; dues
+       (alltodo "" (
+                   (org-agenda-overriding-header "\n🔥 Overdue")
+                   (org-super-agenda-groups '(
+                                              (:name "deadlines 💀" :deadline past)
+                                              (:name "schedules ♻" :scheduled past)
+                                              (:discard (:anything))
+                                              ))
+                   ))
+       )))
    )
   ;; custom faces
   (custom-set-faces!
@@ -78,7 +119,7 @@
           ;; lb: blog list; online readings, tweets, blogs etc.
           ;; lm: watch list; movie, youtube videos, documentaries etc.
           ;; lr: reading list; book/paper readings etc.
-          ;; lw: buying/wanting wish list; things i want to buy/gift someday.
+          ;; lw: buying/wanting wish list; things i want to buy/gift someday, not a shopping list.
           ;; TODO: extend with links
           ("l", "lists")
           ("lb" "add bloglist item" entry (file ,(concat org-directory "blog_list.org")) "* TOCONSUME %?" :empty-lines 1)
@@ -176,47 +217,3 @@
 (use-package! org-super-agenda
   :hook (org-agenda-mode . org-super-agenda-mode)
 )
-
-
-;; (let ((org-super-agenda-groups
-;;        '(;; Each group has an implicit boolean OR operator between its selectors.
-;;          (:name "Today"  ; Optionally specify section name
-;;                 :time-grid t  ; Items that appear on the time grid
-;;                 :todo "TODO")  ; Items that have this TODO keyword
-;;          (:name "Important"
-;;                 ;; Single arguments given alone
-;;                 :tag "tag2"
-;;                 :priority "C")
-;;          ;; Set order of multiple groups at once
-;;          (:order-multi (2 (:name "Shopping in town"
-;;                                  ;; Boolean AND group matches items that match all subgroups
-;;                                  :and (:tag "shopping" :tag "@town"))
-;;                           (:name "Food-related"
-;;                                  ;; Multiple args given in list with implicit OR
-;;                                  :tag ("food" "dinner"))
-;;                           (:name "Personal"
-;;                                  :habit t
-;;                                  :tag "personal")
-;;                           (:name "Space-related (non-moon-or-planet-related)"
-;;                                  ;; Regexps match case-insensitively on the entire entry
-;;                                  :and (:regexp ("space" "NASA")
-;;                                                ;; Boolean NOT also has implicit OR between selectors
-;;                                                :not (:regexp "moon" :tag "planet")))))
-;;          ;; Groups supply their own section names when none are given
-;;          (:todo "WAITING" :order 8)  ; Set order of this section
-;;          (:todo ("SOMEDAY" "TO-READ" "CHECK" "TO-WATCH" "WATCHING")
-;;                 ;; Show this group at the end of the agenda (since it has the
-;;                 ;; highest number). If you specified this group last, items
-;;                 ;; with these todo keywords that e.g. have priority A would be
-;;                 ;; displayed in that group instead, because items are grouped
-;;                 ;; out in the order the groups are listed.
-;;                 :order 9)
-;;          (:priority<= "B"
-;;                       ;; Show this section after "Today" and "Important", because
-;;                       ;; their order is unspecified, defaulting to 0. Sections
-;;                       ;; are displayed lowest-number-first.
-;;                       :order 1)
-;;          ;; After the last group, the agenda will display items that didn't
-;;          ;; match any of these groups, with the default order position of 99
-;;          )))
-;;   (org-agenda nil "a"))

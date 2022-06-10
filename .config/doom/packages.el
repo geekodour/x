@@ -17,7 +17,7 @@
 (package! org-transclusion)
 (package! org-fancy-priorities) ; we not using +pretty from doom
 (package! org-modern) ; we not using +pretty from doom
-;(package! org-super-agenda)
+(package! org-super-agenda)
 
 ;; other packages to look for later:
 ;; (package! org-ol-tree) ;; does not seem to be available
