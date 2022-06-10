@@ -15,9 +15,8 @@
 ;; org-mode related:
 (package! org-appear)
 (package! org-transclusion)
-(package! org-fancy-priorities) ; we not using +pretty from doom
-(package! org-modern) ; we not using +pretty from doom
 (package! org-super-agenda)
+;;(package! org-modern) ; i tried using it, does not play very well with my setup
 
 ;; other packages to look for later:
 ;; (package! org-ol-tree) ;; does not seem to be available

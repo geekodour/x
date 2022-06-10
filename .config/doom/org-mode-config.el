@@ -1,4 +1,12 @@
-;; see https://github.com/sunnyhasija/Academic-Doom-Emacs-Config/blob/master/config.org
+;; following paragraph from some online forum and pritam convinced me to try out
+;; org-mode:
+;;
+;; "My files are 'logbook', 'life', 'project-1', 'project-2', etc. At any time I
+;; can hit a key and capture an idea/meeting to any of those places, and as I'm
+;; taking notes I can mark anything as a todo and schedule/deadline them. In the
+;; 'agenda' I can see a single overview of all my todo items, and my schedule,
+;; from all my notes."
+
 ;; global variables:
 (setq
  org-directory "~/notes/org/"
@@ -9,8 +17,6 @@
 
 ;; org mode settings:
 (after! org
-  ;; (remove-hook 'org-mode-hook #'auto-fill-mode) ;; not now
-  ;; (setq company-global-modes '(not org-mode)) ;; not now
   (setq
    ;; general settings
    org-tags-column -80
@@ -21,9 +27,6 @@
    org-pretty-entities t
    org-ellipsis "…"
    org-complete-tags-always-offer-all-agenda-tags t
-   ;; TODO: some tags for later
-   ;; - surprise, felt real good/flow, first timer
-   ;;
    ;; org-agenda
    ;; TODO: learn how to evaluate lisp commands directly and to play with
    ;;       org-ql, having that will make configuring this much much easier
@@ -185,6 +188,13 @@
   :after org-roam
   )
 
+;; fancy priorities:
+(after! org-fancy-priorities
+  (setq
+   org-fancy-priorities-list '("🌕" "🌗" "🌙" "☕")
+   )
+  )
+
 ;; org-journal:
 (setq
  org-journal-date-prefix "#+title: "
@@ -192,10 +202,6 @@
  org-journal-date-format "%a, %d-%m-%y"
  org-journal-file-format "%d_%m_%Y.org" ; important to have the .org otherwise org-agenda does not pick the todos
  )
-
-
-;; org-super-agenda
-;;
 
 ;; custom functions
 ;; directly copied from jparcill/emacs_config/blob/master/config.el
@@ -209,11 +215,11 @@
   (goto-char (point-min)))
 
 ;; TODO
-;; - text wrapping
-;; - org fany priorities
+;; - text wrapping (this should go in learn_emacs.org file)
+;; - org-roam
+;; - finalize the files, set peoper titles and start taking notes
 
 ;; minor modes
-(global-org-modern-mode)
 (use-package! org-super-agenda
   :hook (org-agenda-mode . org-super-agenda-mode)
 )
