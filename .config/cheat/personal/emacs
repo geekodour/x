@@ -43,6 +43,9 @@
   - SPC-i : insert shit
   - SPC-o-p : toggle sidebar (treemacs in our case)
   - select codeblock + = : to auto-format codeblock
+  - SPC-m : local leader key (this gives different keys based on the mode you're on or something similar)
+  - gc to comment/uncomment a bunch of text
+  - if in cases, intent fucks up, just to SPC-t-i (toggle it back and forth)
 
   # treemacs
   - ? : keybindings
@@ -57,12 +60,22 @@
     - B : open blame window
 
   # org-mode
+  - SPC-n
   - M-{j,k} : Move headings/listings up or down(re-order)
   - M-{h,l} : Move headings/listings up or down(re-promote)
   - M-RET : in lists, starts a new item in the numbered/non-numbered list
-  - Shift-TAB : Toggle outline at different levels
+  - S-TAB : Toggle outline at different levels
+    - TAB or z to toggle outline at individual levels
   - <s-TAB : code block
     - SPC-m-' : open codeblock in separate buffer (org edit special)
+  - when in deft-mode, C-c will open deft options
+  - when in calandar buffer, shift+arrow keys will move you in the calandar
+  - todo
+    - setting dates: SPC-m-d
+    - change todo status: SPC-m-t
+    - change priority: SPC-m-p-p
+  - org-roam
+    - some options are under SPC-n-r and some when in the org file, SPC-m-m
 
   # buffers
   - SPC-b-b or SPC-, : List buffers in workspace
