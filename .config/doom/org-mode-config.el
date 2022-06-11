@@ -10,6 +10,7 @@
 ;; global variables:
 (setq
  org-directory "~/notes/org/"
+ org-roam-directory "~/notes/org/roam" ; expects the directory to exist
  org-agenda-files '("~/notes/org" "~/notes/org/journal") ; it looks for files with .org extensions
  deft-directory "~/notes"
  deft-recursive t
@@ -35,7 +36,7 @@
    org-agenda-skip-deadline-if-done t
    org-agenda-block-separator "────────────────"
    org-agenda-custom-commands
-   '(("d" "the ageeenda"
+   '(("d" "daily agenda 🏃"
       (
        ;; unscheduled shit
        (tags-todo "*" ( ; required filtering only happens to work with tags-todo currently
@@ -113,10 +114,10 @@
           ;; td: self reminders
           ;; tw: blocked reminders
           ("t", "tasks")
-          ("tt" "add todo" entry (file ,(concat org-directory "personal.org")) "* TODO %?" :empty-lines 1)
-          ("ts" "add todo[scheduled]" entry (file ,(concat org-directory "personal.org")) "* TODO %? \nSCHEDULED: %^T" :empty-lines 1)
-          ("td" "add todo[deadline]" entry (file ,(concat org-directory "personal.org")) "* TODO %? \nDEADLINE: %^T" :empty-lines 1)
-          ("tw" "add wait[deadline]" entry (file ,(concat org-directory "personal.org")) "* WAITING %? \nDEADLINE: %^T" :empty-lines 1)
+          ("tt" "add todo" entry (file ,(concat org-directory "tasks.org")) "* TODO %?" :empty-lines 1)
+          ("ts" "add todo[scheduled]" entry (file ,(concat org-directory "tasks.org")) "* TODO %? \nSCHEDULED: %^T" :empty-lines 1)
+          ("td" "add todo[deadline]" entry (file ,(concat org-directory "tasks.org")) "* TODO %? \nDEADLINE: %^T" :empty-lines 1)
+          ("tw" "add wait[deadline]" entry (file ,(concat org-directory "tasks.org")) "* WAITING %? \nDEADLINE: %^T" :empty-lines 1)
 
           ;; buy/watch/read lists
           ;; lb: blog list; online readings, tweets, blogs etc.
@@ -125,27 +126,27 @@
           ;; lw: buying/wanting wish list; things i want to buy/gift someday, not a shopping list.
           ;; TODO: extend with links
           ("l", "lists")
-          ("lb" "add bloglist item" entry (file ,(concat org-directory "blog_list.org")) "* TOCONSUME %?" :empty-lines 1)
-          ("lm" "add watchlist item" entry (file ,(concat org-directory "watch_list.org")) "* TOCONSUME %?" :empty-lines 1)
-          ("lr" "add reading list item" entry (file ,(concat org-directory "reading_list.org")) "* TOCONSUME %?" :empty-lines 1)
-          ("lw" "add wishlist item" entry (file ,(concat org-directory "wishlist.org")) "* TOACQUIRE %?" :empty-lines 1)
+          ("lb" "add bloglist item" entry (file ,(concat org-directory "lists/blog_list.org")) "* TOCONSUME %?" :empty-lines 1)
+          ("lm" "add watchlist item" entry (file ,(concat org-directory "lists/watch_list.org")) "* TOCONSUME %?" :empty-lines 1)
+          ("lr" "add reading list item" entry (file ,(concat org-directory "lists/reading_list.org")) "* TOCONSUME %?" :empty-lines 1)
+          ("lw" "add wishlist item" entry (file ,(concat org-directory "lists/wish_list.org")) "* TOACQUIRE %?" :empty-lines 1)
 
           ;; today i x
+          ;; inspiration: https://simonwillison.net/2021/May/2/one-year-of-tils/
           ;; xl: today i learned
           ;; xf: today i fucked up
           ("x", "todayi")
-          ;; inspiration: https://simonwillison.net/2021/May/2/one-year-of-tils/
-          ("xl" "add til" entry (file ,(concat org-directory "til.org")) "* %? %^g\nCREATED: %U" :empty-lines 1)
-          ("xf" "add tifu" entry (file ,(concat org-directory "list.org")) "* %?\nCREATED: %U" :empty-lines 1)
+          ("xl" "add til" entry (file ,(concat org-directory "todayi/til.org")) "* %? %^g\nCREATED: %U" :empty-lines 1)
+          ("xf" "add tifu" entry (file ,(concat org-directory "todayi/tifu.org")) "* %?\nCREATED: %U" :empty-lines 1)
 
           ;; idea
-          ;; il: new idea
+          ;; il: new idea, can be anything
           ;; if: some feedback/suggestion about anything
           ;; ip: some project idea
           ("i", "ideas")
-          ("il" "add idea" entry (file ,(concat org-directory "ideas.org")) "* %?" :empty-lines 1)
-          ("if" "add feedback/suggestion" entry (file ,(concat org-directory "suggestions.org")) "* %?" :empty-lines 1)
-          ("ip" "add project idea" entry (file ,(concat org-directory "projects.org")) "* %? %^g" :empty-lines 1)
+          ("il" "add idea" entry (file ,(concat org-directory "ideas/ideas.org")) "* %?" :empty-lines 1)
+          ("if" "add feedback/suggestion" entry (file ,(concat org-directory "ideas/suggestions.org")) "* %?" :empty-lines 1)
+          ("ip" "add project idea" entry (file ,(concat org-directory "ideas/projects.org")) "* %? %^g" :empty-lines 1)
 
           ;; journal
           ;; jj: journal entry, custom journal entry template attempts to emulate org-journal insertion.
@@ -168,7 +169,7 @@
 ** Day Plan" :empty-lines 1 :prepend t)
           ;; NOTE: night journal can probably also include accomplishments
          ("jn" "add night journal entry" entry (function cf/org-journal-find-location) "* %<%H:%M> Today's Learnings: \n%?" :empty-lines 1)
-         ("jh" "add health journal entry" entry (file ,(concat org-directory "my_health.org")) "* %T %?" :empty-lines 1))
+         ("jh" "add health journal entry" entry (file ,(concat org-directory "health.org")) "* %T %?" :empty-lines 1))
         )
   )
 
@@ -187,6 +188,9 @@
 (use-package! org-transclusion
   :after org-roam
   )
+(setq
+ org-roam-mode-sections '(org-roam-backlinks-section org-roam-reflinks-section)
+ )
 
 ;; fancy priorities:
 (after! org-fancy-priorities
@@ -216,7 +220,6 @@
 
 ;; TODO
 ;; - text wrapping (this should go in learn_emacs.org file)
-;; - org-roam
 ;; - finalize the files, set peoper titles and start taking notes
 
 ;; minor modes

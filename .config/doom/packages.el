@@ -17,6 +17,8 @@
 (package! org-transclusion)
 (package! org-super-agenda)
 ;;(package! org-modern) ; i tried using it, does not play very well with my setup
+;;anki
+(package! anki-editor)
 
 ;; other packages to look for later:
 ;; (package! org-ol-tree) ;; does not seem to be available
