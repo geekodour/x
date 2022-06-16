@@ -21,7 +21,6 @@
   (setq
    ;; general settings
    org-tags-column 0
-   ;;org-tags-column -80
    org-auto-align-tags t
    org-hide-emphasis-markers t
    org-catch-invisible-edits 'show-and-error
@@ -29,6 +28,11 @@
    org-pretty-entities t
    org-ellipsis "…"
    org-complete-tags-always-offer-all-agenda-tags t
+   ; org-download
+   ; TODO: this has been intentionally defined 2-3 times around the file because
+   ; of how doom handles org-download. a better way would be to remove
+   ; +dragndrop and install org-download separately
+   org-download-image-dir "~/pictures/org"
    ;; org-agenda
    ;; TODO: learn how to evaluate lisp commands directly and to play with
    ;;       org-ql, having that will make configuring this much much easier
@@ -105,7 +109,7 @@
   (custom-set-faces!
     '(org-level-1 :height 1.2 :weight extrabold :slant normal)
     '(org-level-2 :height 1.1 :weight bold :slant normal)
-    '(org-level-3 :height 0.8 :weight bold :slant normal)
+    '(org-level-3 :height 1.0 :weight bold :slant normal)
     '(org-document-title :height 180 :weight medium :family "Roboto")
     )
 
@@ -225,6 +229,20 @@
  org-journal-date-format "%a, %d-%m-%y"
  org-journal-file-format "%d_%m_%Y.org" ; important to have the .org otherwise org-agenda does not pick the todos
  )
+
+;; org-download
+(after! org-download
+  (setq-default
+   org-download-image-dir "~/pictures/org" ; buf local: -*- mode: Org; org-download-image-dir: "~/pictures/foo"; -*-
+   )
+  (setq
+   org-download-method 'directory
+   org-download-image-dir "~/pictures/org" ; buf local: -*- mode: Org; org-download-image-dir: "~/pictures/foo"; -*-
+   org-download-heading-lvl nil ; do not want this categorized by headings
+   org-download-timestamp "%Y%m%d-%H%M%S_"
+   org-image-actual-width 300
+   )
+  )
 
 ;; custom functions
 ;; directly copied from jparcill/emacs_config/blob/master/config.el
