@@ -3,6 +3,7 @@
 - & is used to "write into" a stream, eg. &1 to write into stdout
 
 # xargs:
+# note: https://codefaster.substack.com/p/xargs-considered-harmful
 λ cat list.txt
 a b c d
 

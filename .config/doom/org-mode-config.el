@@ -11,7 +11,7 @@
 (setq
  org-directory "~/notes/org/"
  org-roam-directory "~/notes/org/roam" ; expects the directory to exist
- org-agenda-files '("~/notes/org" "~/notes/org/journal") ; it looks for files with .org extensions
+ org-agenda-files '("~/notes/org" "~/notes/org/journal" "~/notes/org/ideas" "~/notes/org/lists") ; it looks for files with .org extensions
  deft-directory "~/notes"
  deft-recursive t
  )
@@ -20,7 +20,8 @@
 (after! org
   (setq
    ;; general settings
-   org-tags-column -80
+   org-tags-column 0
+   ;;org-tags-column -80
    org-auto-align-tags t
    org-hide-emphasis-markers t
    org-catch-invisible-edits 'show-and-error
@@ -88,7 +89,17 @@
                                               (:discard (:anything))
                                               ))
                    ))
-       )))
+       ))
+     (
+      "l" "list of project ideas"
+      (
+       (tags-todo "*" ( ; required filtering only happens to work with tags-todo currently
+                       (org-agenda-overriding-header "🌀 Seeds(High Priority)")
+                       (org-super-agenda-groups)
+                       ))
+       )
+      )
+     )
    )
   ;; custom faces
   (custom-set-faces!
@@ -101,9 +112,14 @@
   (setq
    org-todo-keywords
    '(
+     ;;tasks
      (sequence "TODO(t)" "INPROGRESS(i)" "WAITING(w)" "|" "DONE(d)" "CANCELLED(c)")
+     ;;media
      (sequence "TOCONSUME" "CONSUMING" "|" "FINISHED" "DROPPED")
+     ;;items
      (sequence "TOACQUIRE" "|" "ACQUIRED")
+     ;;projects
+     (sequence "SEED" "SAPLING" "GROWING" "|" "GROWN" "DIED")
      )
    )
   (setq org-capture-templates
@@ -146,7 +162,10 @@
           ("i", "ideas")
           ("il" "add idea" entry (file ,(concat org-directory "ideas/ideas.org")) "* %?" :empty-lines 1)
           ("if" "add feedback/suggestion" entry (file ,(concat org-directory "ideas/suggestions.org")) "* %?" :empty-lines 1)
-          ("ip" "add project idea" entry (file ,(concat org-directory "ideas/projects.org")) "* %? %^g" :empty-lines 1)
+          ("ip" "add project idea" entry (file ,(concat org-directory "ideas/projects.org"))
+"* SEED %? %^g
+** Description:
+** References:" :empty-lines 1)
 
           ;; journal
           ;; jj: journal entry, custom journal entry template attempts to emulate org-journal insertion.
@@ -217,10 +236,6 @@
   ;; Position point on the journal's top-level heading so that org-capture
   ;; will add the new entry as a child entry.
   (goto-char (point-min)))
-
-;; TODO
-;; - text wrapping (this should go in learn_emacs.org file)
-;; - finalize the files, set peoper titles and start taking notes
 
 ;; minor modes
 (use-package! org-super-agenda

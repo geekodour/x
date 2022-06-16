@@ -46,6 +46,7 @@
   - SPC-m : local leader key (this gives different keys based on the mode you're on or something similar)
   - gc to comment/uncomment a bunch of text
   - if in cases, intent fucks up, just to SPC-t-i (toggle it back and forth)
+  - in a wrong spelling, z= for correcting it.
 
   # treemacs
   - ? : keybindings

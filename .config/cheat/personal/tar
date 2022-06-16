@@ -1,3 +1,6 @@
+# TODO: Probably needs a re-write based on this blogpost
+# see: https://imoverclocked.blogspot.com/2015/12/for-love-of-bits-stop-using-gzip.html
+
 # extract:
 tar -xvf /path/to/foo.tar # uncompressed
 tar -zxvf /path/to/foo.{tgz|tar.gz}
