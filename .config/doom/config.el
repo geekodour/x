@@ -34,7 +34,8 @@
 
 ;; package configurations(after load):
 (after! projectile
-  (setq projectile-project-search-path '("~/projects/")))
+  (setq projectile-project-search-path '("~/projects/"))
+  (projectile-add-known-project "~/notes/"))
 (after! which-key
   (setq which-key-popup-type 'minibuffer) ;; default popup does not show full contents sometimes
   )
@@ -49,7 +50,7 @@
 
 ;; default set of variables:
 (setq-default
- x-stretch-cursor t ; stretch cursor to the glyph width
+ ;;x-stretch-cursor t ; stretch cursor to the glyph width
  evil-want-fine-undo t  ; by default while in insert all changes are one big blob. Be more granular
  auto-save-default t ; nobody likes to loose work, I certainly don't
  truncate-string-ellipsis "…"  ; unicode ellispis are nicer than "..."
