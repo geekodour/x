@@ -99,7 +99,12 @@
       (
        (tags-todo "*" ( ; required filtering only happens to work with tags-todo currently
                        (org-agenda-overriding-header "🌀 Seeds(High Priority)")
-                       (org-super-agenda-groups)
+                       (org-super-agenda-groups
+                        '(
+                          (:name "seeds ⚒" :and (:scheduled nil :deadline nil :todo "SEED") :order 1)
+                          (:discard (:anything))
+                          )
+                        )
                        ))
        )
       )
@@ -144,12 +149,15 @@
           ;; lm: watch list; movie, youtube videos, documentaries etc.
           ;; lr: reading list; book/paper readings etc.
           ;; lw: buying/wanting wish list; things i want to buy/gift someday, not a shopping list.
-          ;; TODO: extend with links
+          ;; lp: person contact/details
+          ;; lo: organization contact/details
           ("l", "lists")
           ("lb" "add bloglist item" entry (file ,(concat org-directory "lists/blog_list.org")) "* TOCONSUME %?" :empty-lines 1)
           ("lm" "add watchlist item" entry (file ,(concat org-directory "lists/watch_list.org")) "* TOCONSUME %?" :empty-lines 1)
           ("lr" "add reading list item" entry (file ,(concat org-directory "lists/reading_list.org")) "* TOCONSUME %?" :empty-lines 1)
           ("lw" "add wishlist item" entry (file ,(concat org-directory "lists/wish_list.org")) "* TOACQUIRE %?" :empty-lines 1)
+          ("lp" "add person" entry (file ,(concat org-directory "lists/contact_list.org")) "* %?" :empty-lines 1)
+          ("lo" "add organization" entry (file ,(concat org-directory "lists/org_list.org")) "* %?" :empty-lines 1)
 
           ;; today i x
           ;; inspiration: https://simonwillison.net/2021/May/2/one-year-of-tils/
@@ -163,9 +171,11 @@
           ;; il: new idea, can be anything
           ;; if: some feedback/suggestion about anything
           ;; ip: some project idea
+          ;; iq: some question
           ("i", "ideas")
           ("il" "add idea" entry (file ,(concat org-directory "ideas/ideas.org")) "* %?" :empty-lines 1)
           ("if" "add feedback/suggestion" entry (file ,(concat org-directory "ideas/suggestions.org")) "* %?" :empty-lines 1)
+          ("iq" "add question" entry (file ,(concat org-directory "ideas/questions.org")) "* %?" :empty-lines 1)
           ("ip" "add project idea" entry (file ,(concat org-directory "ideas/projects.org"))
 "* SEED %? %^g
 ** Description:
@@ -181,7 +191,7 @@
           ("jm" "add morning journal entry" entry (function cf/org-journal-find-location)
 "* %<%H:%M> Morning Entry
 ** Checklist
-    - [[https://youtube.com/watch?v=GADW8Nlnc1s]]
+    - [[https://youtube.com/watch?v=GADW8Nlnc1s][5m interval timer(delete me)]]
     - [ ] Put on this week's album
     - [ ] make bed meditatively and clean (5 min)
     - [ ] Workout (5 min)
@@ -190,8 +200,17 @@
     - [ ] Refresh phone orgzly
 ** Looking Forward To \n%?
 ** Day Plan" :empty-lines 1 :prepend t)
-          ;; NOTE: night journal can probably also include accomplishments
-         ("jn" "add night journal entry" entry (function cf/org-journal-find-location) "* %<%H:%M> Today's Learnings: \n%?" :empty-lines 1)
+         ("jn" "add night journal entry" entry (function cf/org-journal-find-location)
+"* %<%H:%M>
+** Checklist
+  - [[https://www.youtube.com/watch?v=4ASKMcdCc3g][10m timer(delete me)]]
+  - [ ] Update loop habit tracker
+  - [ ] Brush teeth
+  - [ ] Daily Active recall (10 min)
+  - [ ] Review and push daily diff for notes (10 min)
+  - [ ] Plan next day's agenda (5 min)
+  - [ ] Plan next week if friday 🍺 (5 min)
+** What do I remember from today?\n%?" :empty-lines 1)
          ("jh" "add health journal entry" entry (file ,(concat org-directory "health.org")) "* %T %?" :empty-lines 1))
         )
   )
@@ -214,6 +233,17 @@
 (setq
  org-roam-mode-sections '(org-roam-backlinks-section org-roam-reflinks-section)
  )
+(map!
+ (:leader :desc "insert node immediate" "n r k" #'cf/org-roam-node-insert-immediate)
+ (:leader :desc "node complete" "n r c" #'completion-at-point)
+ )
+
+;; ox-hugo
+;; (after! ox-hugo
+;;   (setq
+;;    org-hugo-base-dir "~/projects/mogoz"
+;;    )
+;;   )
 
 ;; fancy priorities:
 (after! org-fancy-priorities
@@ -245,8 +275,8 @@
   )
 
 ;; custom functions
-;; directly copied from jparcill/emacs_config/blob/master/config.el
 ;; cf: custom function
+;; directly copied from jparcill/emacs_config/blob/master/config.el
 (defun cf/org-journal-find-location ()
   ;; Open today's journal, but specify a non-nil prefix argument in order to
   ;; inhibit inserting the heading; org-capture will insert the heading.
@@ -254,6 +284,13 @@
   ;; Position point on the journal's top-level heading so that org-capture
   ;; will add the new entry as a child entry.
   (goto-char (point-min)))
+;; directly copied from https://systemcrafters.net/build-a-second-brain-in-emacs/5-org-roam-hacks/
+(defun cf/org-roam-node-insert-immediate (arg &rest args)
+  (interactive "P")
+  (let ((args (cons arg args))
+        (org-roam-capture-templates (list (append (car org-roam-capture-templates)
+                                                  '(:immediate-finish t)))))
+    (apply #'org-roam-node-insert args)))
 
 ;; minor modes
 (use-package! org-super-agenda

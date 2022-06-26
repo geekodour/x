@@ -12,6 +12,7 @@
 (package! focus) ; dim the font color of text in surrounding paragraphs
 (package! info-colors)
 (package! command-log-mode)
+(package! golden-ratio)
 ;; org-mode related:
 (package! org-appear)
 (package! org-transclusion)
