@@ -11,7 +11,8 @@
 (setq
  org-directory "~/notes/org/"
  org-roam-directory "~/notes/org/roam" ; expects the directory to exist
- org-agenda-files '("~/notes/org" "~/notes/org/journal" "~/notes/org/ideas" "~/notes/org/lists") ; it looks for files with .org extensions
+ ;org-agenda-files '("~/notes/org" "~/notes/org/journal" "~/notes/org/ideas" "~/notes/org/lists") ; it looks for files with .org extensions
+ org-agenda-files '("~/notes/org" "~/notes/org/journal" "~/notes/org/ideas" "~/projects/o/content-org/anti_lib.org") ; it looks for files with .org extensions
  deft-directory "~/notes"
  deft-recursive t
  )
@@ -152,20 +153,18 @@
           ;; lp: person contact/details
           ;; lo: organization contact/details
           ("l", "lists")
-          ("lb" "add bloglist item" entry (file ,(concat org-directory "lists/blog_list.org")) "* TOCONSUME %?" :empty-lines 1)
-          ("lm" "add watchlist item" entry (file ,(concat org-directory "lists/watch_list.org")) "* TOCONSUME %?" :empty-lines 1)
-          ("lr" "add reading list item" entry (file ,(concat org-directory "lists/reading_list.org")) "* TOCONSUME %?" :empty-lines 1)
-          ("lw" "add wishlist item" entry (file ,(concat org-directory "lists/wish_list.org")) "* TOACQUIRE %?" :empty-lines 1)
-          ("lp" "add person" entry (file ,(concat org-directory "lists/contact_list.org")) "* %?" :empty-lines 1)
-          ("lo" "add organization" entry (file ,(concat org-directory "lists/org_list.org")) "* %?" :empty-lines 1)
+          ("lp" "add post" entry (file+olp "~/projects/o/content-org/anti_lib.org" "Posts" "Un-categorized") "*** TOCONSUME %?" :empty-lines 1)
+          ("lm" "add movie" entry (file+olp "~/projects/o/content-org/anti_lib.org" "Movies" "Un-categorized") "*** TOCONSUME %?" :empty-lines 1)
+          ("lv" "add video" entry (file+olp "~/projects/o/content-org/anti_lib.org" "Videos" "Un-categorized") "*** TOCONSUME %?" :empty-lines 1)
+          ("lb" "add book" entry (file+olp "~/projects/o/content-org/anti_lib.org" "Books" "Un-categorized") "*** TOCONSUME %?" :empty-lines 1)
 
           ;; today i x
           ;; inspiration: https://simonwillison.net/2021/May/2/one-year-of-tils/
           ;; xl: today i learned
           ;; xf: today i fucked up
           ("x", "todayi")
-          ("xl" "add til" entry (file ,(concat org-directory "todayi/til.org")) "* %? %^g\nCREATED: %U" :empty-lines 1)
-          ("xf" "add tifu" entry (file ,(concat org-directory "todayi/tifu.org")) "* %?\nCREATED: %U" :empty-lines 1)
+          ("xl" "add til" entry (file ,"~/projects/todayi/content-org/til.org") (function org-hugo-new-subtree-post-capture-template))
+          ("xf" "add tifu" entry (file ,"~/projects/todayi/content-org/tifu.org") (function org-hugo-new-subtree-post-capture-template))
 
           ;; idea
           ;; il: new idea, can be anything
@@ -176,7 +175,7 @@
           ("il" "add idea" entry (file ,(concat org-directory "ideas/ideas.org")) "* %?" :empty-lines 1)
           ("if" "add feedback/suggestion" entry (file ,(concat org-directory "ideas/suggestions.org")) "* %?" :empty-lines 1)
           ("iq" "add question" entry (file ,(concat org-directory "ideas/questions.org")) "* %?" :empty-lines 1)
-          ("ip" "add project idea" entry (file ,(concat org-directory "ideas/projects.org"))
+          ("ip" "add project idea" entry (file ,(concat org-directory "ideas/project_ideas.org"))
 "* SEED %? %^g
 ** Description:
 ** References:" :empty-lines 1)
@@ -238,13 +237,6 @@
  (:leader :desc "node complete" "n r c" #'completion-at-point)
  )
 
-;; ox-hugo
-;; (after! ox-hugo
-;;   (setq
-;;    org-hugo-base-dir "~/projects/mogoz"
-;;    )
-;;   )
-
 ;; fancy priorities:
 (after! org-fancy-priorities
   (setq
@@ -256,6 +248,7 @@
 (setq
  org-journal-date-prefix "#+title: "
  org-journal-time-prefix "* "
+ org-journal-file-header 'cf/org-journal-date-prefix
  org-journal-date-format "%a, %d-%m-%y"
  org-journal-file-format "%d_%m_%Y.org" ; important to have the .org otherwise org-agenda does not pick the todos
  )
@@ -276,6 +269,32 @@
 
 ;; custom functions
 ;; cf: custom function
+;; copied from https://github.com/kaushalmodi/ox-hugo/discussions/585#discussioncomment-2335203=
+(defun cf/hugo-export-all (&optional org-files-root-dir dont-recurse)
+  "Export all Org files (including nested) under ORG-FILES-ROOT-DIR.
+Example usage in Emacs Lisp: (ox-hugo/export-all \"~/org\")."
+  (interactive)
+  (let* ((org-files-root-dir (or org-files-root-dir default-directory))
+         (dont-recurse (or dont-recurse (and current-prefix-arg t)))
+         (search-path (file-name-as-directory (expand-file-name org-files-root-dir)))
+         (org-files (if dont-recurse
+                        (directory-files search-path :full "\.org$")
+                      (directory-files-recursively search-path "\.org$")))
+         (num-files (length org-files))
+         (cnt 1))
+    (if (= 0 num-files)
+        (message (format "No Org files found in %s" search-path))
+      (progn
+        (message (format (if dont-recurse
+                             "[ox-hugo/export-all] Exporting %d files from %S .."
+                           "[ox-hugo/export-all] Exporting %d files recursively from %S ..")
+                         num-files search-path))
+        (dolist (org-file org-files)
+          (with-current-buffer (find-file-noselect org-file)
+            (message (format "[ox-hugo/export-all file %d/%d] Exporting %s" cnt num-files org-file))
+            (org-hugo-export-wim-to-md :all-subtrees)
+            (setq cnt (1+ cnt))))
+        (message "Done!")))))
 ;; directly copied from jparcill/emacs_config/blob/master/config.el
 (defun cf/org-journal-find-location ()
   ;; Open today's journal, but specify a non-nil prefix argument in order to
@@ -291,6 +310,29 @@
         (org-roam-capture-templates (list (append (car org-roam-capture-templates)
                                                   '(:immediate-finish t)))))
     (apply #'org-roam-node-insert args)))
+(defun cf/org-journal-date-prefix (time)
+  (let* (
+         (date (format-time-string (org-time-stamp-format :long :inactive) (org-current-time))))
+    (mapconcat #'identity
+               `("#+HUGO_SECTION: journal" ,(concat "#+DATE: " date))
+               "\n")))
+;; directly copied from https://ox-hugo.scripter.co/doc/org-capture-setup/
+(defun org-hugo-new-subtree-post-capture-template ()
+  "Returns `org-capture' template string for new Hugo post. See `org-capture-templates' for more information."
+  (let* (;; http://www.holgerschurig.de/en/emacs-blog-from-org-to-hugo/
+         (date (format-time-string (org-time-stamp-format :long :inactive) (org-current-time)))
+         (title (read-from-minibuffer "Post Title: ")) ;Prompt to enter the post title
+         (fname (org-hugo-slug title)))
+    (mapconcat #'identity
+               `(
+                 ,(concat "* TODO " title)
+                 ":PROPERTIES:"
+                 ,(concat ":EXPORT_FILE_NAME: " fname)
+                 ,(concat ":EXPORT_DATE: " date) ;Enter current date and time
+                 ":END:"
+                 "%?\n")                ;Place the cursor here finally
+               "\n")))
+
 
 ;; minor modes
 (use-package! org-super-agenda

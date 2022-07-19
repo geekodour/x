@@ -52,7 +52,7 @@
 (setq-default
  ;;x-stretch-cursor t ; stretch cursor to the glyph width
  evil-want-fine-undo t  ; by default while in insert all changes are one big blob. Be more granular
- auto-save-default t ; nobody likes to loose work, I certainly don't
+ auto-save-default nil ; auto save creates a lot of issues for me.
  truncate-string-ellipsis "…"  ; unicode ellispis are nicer than "..."
  )
 
