@@ -312,9 +312,12 @@ Example usage in Emacs Lisp: (ox-hugo/export-all \"~/org\")."
     (apply #'org-roam-node-insert args)))
 (defun cf/org-journal-date-prefix (time)
   (let* (
-         (date (format-time-string (org-time-stamp-format :long :inactive) (org-current-time))))
+         (date (format-time-string (org-time-stamp-format :long :inactive) (org-current-time)))
+         (year (format-time-string "%Y"))
+         (month (format-time-string "%m"))
+         )
     (mapconcat #'identity
-               `("#+HUGO_SECTION: journal" ,(concat "#+DATE: " date))
+               `("", (format "#+HUGO_SECTION: journal/%s/%s" year month),(concat "#+DATE: " date))
                "\n")))
 ;; directly copied from https://ox-hugo.scripter.co/doc/org-capture-setup/
 (defun org-hugo-new-subtree-post-capture-template ()
