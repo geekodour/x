@@ -11,8 +11,7 @@
 (setq
  org-directory "~/notes/org/"
  org-roam-directory "~/notes/org/roam" ; expects the directory to exist
- ;org-agenda-files '("~/notes/org" "~/notes/org/journal" "~/notes/org/ideas" "~/notes/org/lists") ; it looks for files with .org extensions
- org-agenda-files '("~/notes/org" "~/notes/org/journal" "~/notes/org/ideas" "~/projects/o/content-org/anti_lib.org") ; it looks for files with .org extensions
+ org-agenda-files '("~/notes/org/tasks.org" "~/projects/o/content-org/anti_lib.org") ; it looks for files with .org extensions
  deft-directory "~/notes"
  deft-recursive t
  )
@@ -22,9 +21,10 @@
   (setq
    ;; general settings
    org-tags-column 0
+   org-element-use-cache nil ; emacs doesn't let me save files or exit emacs otherwise, emacs bug. follow up.
    org-auto-align-tags t
    org-hide-emphasis-markers t
-   org-catch-invisible-edits 'show-and-error
+   org-fold-catch-invisible-edits 'show-and-error
    org-insert-heading-respect-content t
    org-pretty-entities t
    org-ellipsis "…"
@@ -146,17 +146,15 @@
           ("tw" "add wait[deadline]" entry (file ,(concat org-directory "tasks.org")) "* WAITING %? \nDEADLINE: %^T" :empty-lines 1)
 
           ;; buy/watch/read lists
-          ;; lb: blog list; online readings, tweets, blogs etc.
-          ;; lm: watch list; movie, youtube videos, documentaries etc.
+          ;; lp: post list; online readings, tweets, blogs etc.
+          ;; lm: movie list; movie, youtube videos, documentaries etc.
+          ;; lv: video list; youtube videos, other short videos etc.
           ;; lr: reading list; book/paper readings etc.
-          ;; lw: buying/wanting wish list; things i want to buy/gift someday, not a shopping list.
-          ;; lp: person contact/details
-          ;; lo: organization contact/details
           ("l", "lists")
           ("lp" "add post" entry (file+olp "~/projects/o/content-org/anti_lib.org" "Posts" "Un-categorized") "*** TOCONSUME %?" :empty-lines 1)
           ("lm" "add movie" entry (file+olp "~/projects/o/content-org/anti_lib.org" "Movies" "Un-categorized") "*** TOCONSUME %?" :empty-lines 1)
           ("lv" "add video" entry (file+olp "~/projects/o/content-org/anti_lib.org" "Videos" "Un-categorized") "*** TOCONSUME %?" :empty-lines 1)
-          ("lb" "add book" entry (file+olp "~/projects/o/content-org/anti_lib.org" "Books" "Un-categorized") "*** TOCONSUME %?" :empty-lines 1)
+          ("lr" "add book" entry (file+olp "~/projects/o/content-org/anti_lib.org" "Books" "Un-categorized") "*** TOCONSUME %?" :empty-lines 1)
 
           ;; today i x
           ;; inspiration: https://simonwillison.net/2021/May/2/one-year-of-tils/
@@ -174,8 +172,8 @@
           ("i", "ideas")
           ("il" "add idea" entry (file ,(concat org-directory "ideas/ideas.org")) "* %?" :empty-lines 1)
           ("if" "add feedback/suggestion" entry (file ,(concat org-directory "ideas/suggestions.org")) "* %?" :empty-lines 1)
-          ("iq" "add question" entry (file ,(concat org-directory "ideas/questions.org")) "* %?" :empty-lines 1)
           ("ip" "add project idea" entry (file ,(concat org-directory "ideas/project_ideas.org"))
+          ("iq" "add question" entry (file ,(concat org-directory "ideas/questions.org")) "* %?" :empty-lines 1)
 "* SEED %? %^g
 ** Description:
 ** References:" :empty-lines 1)
@@ -192,23 +190,25 @@
 ** Checklist
     - [[https://youtube.com/watch?v=GADW8Nlnc1s][5m interval timer(delete me)]]
     - [ ] Put on this week's album
-    - [ ] make bed meditatively and clean (5 min)
-    - [ ] Workout (5 min)
-    - [ ] Yesterday's journal if not done (5 min)
-    - [ ] Review whole month, and agenda TODOs (5 min)
-    - [ ] Refresh phone orgzly
-** Looking Forward To \n%?
-** Day Plan" :empty-lines 1 :prepend t)
+    - [ ] Make bed meditatively and clean (5m)
+    - [ ] Mini Workout (5m)
+    - [ ] Confirm Day's agenda (5m)
+    - [ ] Fill yesterday's journal if not done (5m)
+    - [ ] Refresh phone orgzly (5m)
+    - [ ] Freshen up (15m)
+    - [ ] Meditate (10m)
+** Looking Forward To \n%?" :empty-lines 1 :prepend t)
          ("jn" "add night journal entry" entry (function cf/org-journal-find-location)
-"* %<%H:%M>
+"* %<%H:%M> Night Entry
 ** Checklist
   - [[https://www.youtube.com/watch?v=4ASKMcdCc3g][10m timer(delete me)]]
   - [ ] Update loop habit tracker
   - [ ] Brush teeth
-  - [ ] Daily Active recall (10 min)
-  - [ ] Review and push daily diff for notes (10 min)
-  - [ ] Plan next day's agenda (5 min)
-  - [ ] Plan next week if friday 🍺 (5 min)
+  - [ ] Give acknowledgement/reply to any pending messages (5m)
+  - [ ] Daily Active recall, write below (10m)
+  - [ ] Review and push daily diff for notes (10m)
+  - [ ] Plan next day's agenda (5m)
+  - [ ] Plan next week if friday 🍺 (10m)
 ** What do I remember from today?\n%?" :empty-lines 1)
          ("jh" "add health journal entry" entry (file ,(concat org-directory "health.org")) "* %T %?" :empty-lines 1))
         )
