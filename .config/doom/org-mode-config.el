@@ -51,6 +51,7 @@
                                                   (:name "tasks ⚒" :and (:scheduled nil :deadline nil :todo "TODO" :priority "A") :order 1)
                                                   (:name "waits ⏰" :and (:scheduled nil :deadline nil :todo "WAITING" :priority "A") :order 1)
                                                   (:name "consuption 🔖" :and (:scheduled nil :deadline nil :todo "TOCONSUME" :priority "A") :order 2)
+                                                  (:name "consuming 🐄" :and (:scheduled nil :deadline nil :todo "CONSUMING" :priority "A") :order 2)
                                                   (:discard (:anything))
                                                   ))
                        ))
@@ -188,7 +189,6 @@
           ("jm" "add morning journal entry" entry (function cf/org-journal-find-location)
 "* %<%H:%M> Morning Entry
 ** Checklist
-    - [[https://youtube.com/watch?v=GADW8Nlnc1s][5m interval timer(delete me)]]
     - [ ] Put on this week's album
     - [ ] Make bed meditatively and clean (5m)
     - [ ] Mini Workout (5m)
@@ -201,14 +201,16 @@
          ("jn" "add night journal entry" entry (function cf/org-journal-find-location)
 "* %<%H:%M> Night Entry
 ** Checklist
-  - [[https://www.youtube.com/watch?v=4ASKMcdCc3g][10m timer(delete me)]]
   - [ ] Update loop habit tracker
   - [ ] Brush teeth
   - [ ] Give acknowledgement/reply to any pending messages (5m)
   - [ ] Daily Active recall, write below (10m)
   - [ ] Review and push daily diff for notes (10m)
-  - [ ] Plan next day's agenda (5m)
-  - [ ] Plan next week if friday 🍺 (10m)
+  - [ ] Plan next day's agenda if not done already (5m)
+  - [ ] Move any notes from other places(phone, tw, telegram) to org notes. (5m)
+  - [ ] *If friday*: (10m)
+    - [ ] Plan next week if not done in the evening
+    - [ ] =Syllabus+Antilibrary= sync+re-org if not done in the evening
 ** What do I remember from today?\n%?" :empty-lines 1)
          ("jh" "add health journal entry" entry (file ,(concat org-directory "health.org")) "* %T %?" :empty-lines 1))
         )

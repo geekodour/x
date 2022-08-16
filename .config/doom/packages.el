@@ -20,6 +20,7 @@
 ;;(package! org-modern) ; i tried using it, does not play very well with my setup
 ;;anki
 (package! anki-editor)
+(package! toc-org)
 
 ;; other packages to look for later:
 ;; (package! org-ol-tree) ;; does not seem to be available
