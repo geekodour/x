@@ -11,6 +11,8 @@ end
 # exports
 set -x MANPAGER "sh -c 'col -bx | bat -l man -p'"
 set -x DOOMDIR "~/.config/doom"
+set -x npm_config_prefix "~/.local"
+set -g direnv_fish_mode eval_on_arrow
 
 source ~/.config/nnn/init # nnn
 source ~/.config/cheat/init # cheat
