@@ -33,3 +33,6 @@ asdf install <plugin_name> <version> # most basic usecase
 asdf global <plugin_name> <version> # sets the global version by creating .tool-versions in $HOME
 asdf local <plugin_name> <version> # sets the local version by creating .tool-versions
 asdf shell <plugin_name> <version> # sets the version for current shell session
+
+# others
+asdf direnv local # initiate direnv for asdf
