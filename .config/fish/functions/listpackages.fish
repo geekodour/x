@@ -2,11 +2,11 @@ function listpackages -d 'list packages installed by pacman' -a source
   if test (count $argv) -eq 1
     switch $source
     case all
-      pacman -Qetq
+      pacman -Qettq
     case aur
-      pacman -Qetmq
+      pacman -Qettmq
     case official
-      pacman -Qetnq
+      pacman -Qettnq
     case '*'
       echo "unknown argument. should be one of all, aur, official."
     end

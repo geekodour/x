@@ -47,6 +47,7 @@
   - gc to comment/uncomment a bunch of text
   - if in cases, intent fucks up, just to SPC-t-i (toggle it back and forth)
   - in a wrong spelling, z= for correcting it.
+  - SHIFT-k : for any documentation/signature
 
   # treemacs
   - ? : keybindings
@@ -86,6 +87,9 @@
   - multi-cursor:
     - select and press R to select all in the current buffer
     - select and press M-d(next) M-D(previous)
+
+  # coding
+  - flycheck-consult : This will list all the liniting issues from the buffer in one place.
 
   
   # workspace
