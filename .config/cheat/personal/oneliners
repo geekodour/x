@@ -1,0 +1,22 @@
+# formatting usb
+$ dd if=/dev/zero of=/dev/sdX status=progress
+$ fdisk /dev/sdb
+$ mkfs.vfat /dev/sdb1
+
+# rsync a file from server
+$ rsync -avzhP -e "ssh -i path_to_key" /from/dir/ username@host:/to/dir/
+
+# grep and replace
+$ grep -rl assets|xargs sed -i 's/assets/\/img\//g'
+
+# git grep with file globs
+$ git grep pattern_here -- '*.js'
+$ grep -ri --include="*.js" pattern_here
+
+# list duplicates
+cat myson.json | jq '[.data[].url]| group_by(.) | map(select(length>1))'
+
+# Poor man's stress test by @bwplokta
+# Replaces every newline with x then `head` for 4GB(4*10^9bytes)
+# then feed it to `grep`, grep will slowly consume 4GB of memory.
+$ yes | tr \\n x | head -c $BYTES | grep showmedamoney

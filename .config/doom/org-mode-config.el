@@ -161,20 +161,17 @@
           ;; inspiration: https://simonwillison.net/2021/May/2/one-year-of-tils/
           ;; xl: today i learned
           ;; xf: today i fucked up
+          ;; TODO: Remove these, TILs and TIFUs to be fetched from Github issues
           ("x", "todayi")
           ("xl" "add til" entry (file ,"~/projects/todayi/content-org/til.org") (function org-hugo-new-subtree-post-capture-template))
           ("xf" "add tifu" entry (file ,"~/projects/todayi/content-org/tifu.org") (function org-hugo-new-subtree-post-capture-template))
 
           ;; idea
           ;; il: new idea, can be anything
-          ;; if: some feedback/suggestion about anything
           ;; ip: some project idea
-          ;; iq: some question
           ("i", "ideas")
           ("il" "add idea" entry (file ,(concat org-directory "ideas/ideas.org")) "* %?" :empty-lines 1)
-          ("if" "add feedback/suggestion" entry (file ,(concat org-directory "ideas/suggestions.org")) "* %?" :empty-lines 1)
           ("ip" "add project idea" entry (file ,(concat org-directory "ideas/project_ideas.org"))
-          ("iq" "add question" entry (file ,(concat org-directory "ideas/questions.org")) "* %?" :empty-lines 1)
 "* SEED %? %^g
 ** Description:
 ** References:" :empty-lines 1)
@@ -310,8 +307,9 @@ Example usage in Emacs Lisp: (ox-hugo/export-all \"~/org\")."
   (interactive "P")
   (let ((args (cons arg args))
         (org-roam-capture-templates (list (append (car org-roam-capture-templates)
-                                                  '(:immediate-finish t)))))
+                                                  '(:immediate-finish t :unnarrowed t)))))
     (apply #'org-roam-node-insert args)))
+
 (defun cf/org-journal-date-prefix (time)
   (let* (
          (date (format-time-string (org-time-stamp-format :long :inactive) (org-current-time)))
@@ -338,6 +336,31 @@ Example usage in Emacs Lisp: (ox-hugo/export-all \"~/org\")."
                  "%?\n")                ;Place the cursor here finally
                "\n")))
 
+(defun slot/org-roam-insert-image ()
+  "Select and insert an image at point."
+  (interactive)
+  (let* ((file-name (format "%s-%s.png"
+                            (file-name-sans-extension (buffer-name))
+                            (cl-random (expt 2 31))))
+         (path (format "%s/%s/%s" org-roam-directory "images" file-name)))
+    (let ((grim-exit (call-process "/usr/bin/fish" nil t nil "-c" (format "grim -g \"$(slurp)\" - | swappy -f - -o %s" path))))
+      (when (= grim-exit 0)
+        ;; ox-hugo needs the file prefix to properly set the path for the image when exported
+        (insert (format "[[file:./images/%s]]" file-name)))
+      )))
+
+;; org-roam ui
+(use-package! websocket
+    :after org-roam)
+
+(use-package! org-roam-ui
+    :after org-roam ;; or :after org
+;;  :hook (after-init . org-roam-ui-mode)
+    :config
+    (setq org-roam-ui-sync-theme t
+          org-roam-ui-follow t
+          org-roam-ui-update-on-save t
+          org-roam-ui-open-on-start t))
 
 ;; minor modes
 (use-package! org-super-agenda

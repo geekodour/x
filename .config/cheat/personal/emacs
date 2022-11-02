@@ -78,6 +78,8 @@
     - change priority: SPC-m-p-p
   - org-roam
     - some options are under SPC-n-r and some when in the org file, SPC-m-m
+    - z i : toggle images
+    - ctrl+return : When inserting immediate node and fuzzy match is happening on new node name
   - babel
     - C-c C-c : Execute
     - C-c ; : Open code in a buffer

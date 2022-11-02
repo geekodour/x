@@ -17,9 +17,13 @@
 (package! org-appear)
 (package! org-transclusion)
 (package! org-super-agenda)
+; org-roam
+(unpin! org-roam)
+(package! org-roam-ui)
 ;;(package! org-modern) ; i tried using it, does not play very well with my setup
 ;;anki
-(package! anki-editor)
+;; (package! org-anki :recipe (:host github :repo "geekodour/org-anki" :branch "shell-support"))
+(package! org-anki)
 (package! toc-org)
 
 ;; other packages to look for later:

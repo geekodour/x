@@ -21,7 +21,7 @@
 
 ;; splash screen:
 (setq
- fancy-splash-image (concat doom-private-dir "splash/mario.png")
+ fancy-splash-image (concat doom-user-dir "splash/mario.png")
  +doom-dashboard-functions '(doom-dashboard-widget-banner doom-dashboard-widget-loaded)
  )
 
@@ -34,7 +34,7 @@
 
 ;; package configurations(after load):
 (after! projectile
-  (setq projectile-project-search-path '("~/projects/"))
+  (setq projectile-project-search-path '("~/projects/" "~/open_source"))
   (projectile-add-known-project "~/notes/"))
 (after! which-key
   (setq which-key-popup-type 'minibuffer) ;; default popup does not show full contents sometimes
@@ -54,10 +54,11 @@
  evil-want-fine-undo t  ; by default while in insert all changes are one big blob. Be more granular
  auto-save-default nil ; auto save creates a lot of issues for me.
  truncate-string-ellipsis "…"  ; unicode ellispis are nicer than "..."
+ shell-file-name "/bin/bash" ; I use fish as my default shell but org-anki has issues with fish shell because of no heredoc support, for now I don't really need fish
  )
 
 ;; loading other private config:
-(load (concat doom-private-dir "org-mode-config.el"))
+(load (concat doom-user-dir "org-mode-config.el"))
 
 ;; environment variables
 (setenv "XDG_SESSION_TYPE" "wayland") ;; for some reason emacs does not pick this up so we set it up manually

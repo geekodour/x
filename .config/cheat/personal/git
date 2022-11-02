@@ -1,0 +1,23 @@
+# some linux patch trick
+$ git show --format=email HEAD | ./scripts/checkpatch.pl --strict --codespell
+
+# delete remote branch
+$ git push origin --delete a1
+
+# open all files changed in a PR in vim
+$ vim $(git diff master --name-only)
+
+# Stash a singe file
+$ git stash -- filename.ext
+
+# Remove from added/staged
+$ git reset filename.txt
+
+# delete all untracked files
+$ git clean -fdx
+
+# show all untracked files
+git ls-files --others --exclude-standard
+
+# prepare list of commits for cherry picking
+gl <commit_hash>..HEAD --reverse| awk '{print $1}' | paste -s -d ' '
