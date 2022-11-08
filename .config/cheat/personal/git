@@ -16,6 +16,9 @@ $ git reset filename.txt
 # delete all untracked files
 $ git clean -fdx
 
+# make git forget about a file that it is tracking
+git rm --cached <file>
+
 # show all untracked files
 git ls-files --others --exclude-standard
 

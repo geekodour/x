@@ -34,7 +34,7 @@
 
 ;; package configurations(after load):
 (after! projectile
-  (setq projectile-project-search-path '("~/projects/" "~/open_source"))
+  (setq projectile-project-search-path '("~/projects/" "~/open_source" "~/clientwork"))
   (projectile-add-known-project "~/notes/"))
 (after! which-key
   (setq which-key-popup-type 'minibuffer) ;; default popup does not show full contents sometimes
