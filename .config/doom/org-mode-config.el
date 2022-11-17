@@ -189,22 +189,9 @@
           ("jj" "add journal entry" entry (function cf/org-journal-find-location) "* %<%H:%M> %?\n%i")
           ("jm" "add morning journal entry" entry (function cf/org-journal-find-location)
 "* %<%H:%M> Morning Entry
-** Checklist
-    - [ ] Put on this week's album (1m)
-    - [ ] Make bed meditatively and clean (5m)
-    - [ ] Mini Workout (5m)
-    - [ ] Confirm Day's agenda (5m)
-    - [ ] Fill yesterday's journal if not done (5m)
-    - [ ] Freshen up (bath also) (20m)
-    - [ ] Meditate/Pray (10m)
 ** Looking Forward To \n%?" :empty-lines 1 :prepend t)
          ("jn" "add night journal entry" entry (function cf/org-journal-find-location)
 "* %<%H:%M> Night Entry
-** Checklist
-  - [ ] Ack/reply to any pending messages (5m)
-  - [ ] Check daily(activity, habit, til) tracker and do active recall, write below. (20m)
-  - [ ] Move any notes from other places(eg. telegram) to org. (5m)
-  - [ ] Plan next day's agenda if not done already (5m)
 ** What do I remember from today?\n%?" :empty-lines 1)
          ("jh" "add health journal entry" entry (file ,(concat org-directory "health.org")) "* %T %?" :empty-lines 1))
         )
