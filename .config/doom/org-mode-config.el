@@ -11,7 +11,7 @@
 (setq
  org-directory "~/notes/org/"
  org-roam-directory "~/notes/org/roam" ; expects the directory to exist
- org-agenda-files '("~/notes/org/tasks.org" "~/projects/o/content-org/anti_lib.org") ; it looks for files with .org extensions
+ org-agenda-files '("~/notes/org/tasks.org" "~/notes/org/l.org" "~/projects/o/content-org/anti_lib.org") ; it looks for files with .org extensions
  deft-directory "~/notes"
  deft-recursive t
  )
@@ -41,8 +41,26 @@
    org-agenda-skip-scheduled-if-done t
    org-agenda-skip-deadline-if-done t
    org-agenda-block-separator "────────────────"
+   ;; use org-store-agenda-views to export agenda into the files
    org-agenda-custom-commands
-   '(("d" "daily agenda 🏃"
+   '(("t" "only today 🌞"
+      (
+       ;; today
+       (agenda "" (
+                   (org-agenda-overriding-header "\n👊 Today's Agenda")
+                   (org-agenda-span 'day)
+                   (org-agenda-start-day nil)
+                   (org-agenda-skip-scheduled-if-done nil)
+                   (org-agenda-skip-deadline-if-done nil)
+                   (org-agenda-include-deadlines t)
+                   (org-super-agenda-groups '(
+                                              (:name "" :time-grid t :order 1)
+                                              (:discard (:anything))
+                                              ))
+                   ))
+       ) nil ("~/daily.html" "daily.txt")
+      )
+     ("d" "daily agenda 🏃"
       (
        ;; unscheduled shit
        (tags-todo "*" ( ; required filtering only happens to work with tags-todo currently
@@ -96,20 +114,6 @@
                                               ))
                    ))
        ))
-     (
-      "l" "list of project ideas"
-      (
-       (tags-todo "*" ( ; required filtering only happens to work with tags-todo currently
-                       (org-agenda-overriding-header "🌀 Seeds(High Priority)")
-                       (org-super-agenda-groups
-                        '(
-                          (:name "seeds ⚒" :and (:scheduled nil :deadline nil :todo "SEED") :order 1)
-                          (:discard (:anything))
-                          )
-                        )
-                       ))
-       )
-      )
      )
    )
   ;; custom faces
@@ -186,28 +190,21 @@
           ("jm" "add morning journal entry" entry (function cf/org-journal-find-location)
 "* %<%H:%M> Morning Entry
 ** Checklist
-    - [ ] Put on this week's album
+    - [ ] Put on this week's album (1m)
     - [ ] Make bed meditatively and clean (5m)
     - [ ] Mini Workout (5m)
     - [ ] Confirm Day's agenda (5m)
     - [ ] Fill yesterday's journal if not done (5m)
-    - [ ] Refresh phone orgzly (5m)
-    - [ ] Freshen up (15m)
-    - [ ] Meditate (10m)
+    - [ ] Freshen up (bath also) (20m)
+    - [ ] Meditate/Pray (10m)
 ** Looking Forward To \n%?" :empty-lines 1 :prepend t)
          ("jn" "add night journal entry" entry (function cf/org-journal-find-location)
 "* %<%H:%M> Night Entry
 ** Checklist
-  - [ ] Update loop habit tracker
-  - [ ] Brush teeth
-  - [ ] Give acknowledgement/reply to any pending messages (5m)
-  - [ ] Daily Active recall, write below (10m)
-  - [ ] Review and push daily diff for notes (10m)
+  - [ ] Ack/reply to any pending messages (5m)
+  - [ ] Check daily(activity, habit, til) tracker and do active recall, write below. (20m)
+  - [ ] Move any notes from other places(eg. telegram) to org. (5m)
   - [ ] Plan next day's agenda if not done already (5m)
-  - [ ] Move any notes from other places(phone, tw, telegram) to org notes. (5m)
-  - [ ] *If friday*: (10m)
-    - [ ] Plan next week if not done in the evening
-    - [ ] =Syllabus+Antilibrary= sync+re-org if not done in the evening
 ** What do I remember from today?\n%?" :empty-lines 1)
          ("jh" "add health journal entry" entry (file ,(concat org-directory "health.org")) "* %T %?" :empty-lines 1))
         )
