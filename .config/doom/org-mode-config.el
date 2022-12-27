@@ -116,6 +116,7 @@
        ))
      )
    )
+  (load-library "ox-reveal")
   ;; custom faces
   (custom-set-faces!
     '(org-level-1 :height 1.2 :weight extrabold :slant normal)

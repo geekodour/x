@@ -48,6 +48,8 @@
   - if in cases, intent fucks up, just to SPC-t-i (toggle it back and forth)
   - in a wrong spelling, z= for correcting it.
   - SHIFT-k : for any documentation/signature
+  - SPC-c-d : Go to def
+  - C-/ : company-complete
 
   # treemacs
   - ? : keybindings

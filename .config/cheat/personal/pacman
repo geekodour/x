@@ -23,6 +23,10 @@ pacman -Rs $(pacman -Qqtd) # clean orphaned packages
 paccache -dv # list
 paccache -rv # clean
 
+# updating mirrors
+# prefer france and germany over indian servers
+reflector --country France,Germany --age 12 --protocol https --sort rate --save /etc/pacman.d/mirrorlist
+
 # useful info:
 - no partial upgrades
   - never run pacman -Sy

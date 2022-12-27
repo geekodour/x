@@ -25,6 +25,10 @@
 ;; (package! org-anki :recipe (:host github :repo "geekodour/org-anki" :branch "shell-support"))
 (package! org-anki)
 (package! toc-org)
+(package! org-reveal) ; might not need this here
+(package! ox-reveal)
+;; github.com/hakimel/reveal.js/
+;;
 
 ;; other packages to look for later:
 ;; (package! org-ol-tree) ;; does not seem to be available

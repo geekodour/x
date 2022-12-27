@@ -60,5 +60,11 @@
 ;; loading other private config:
 (load (concat doom-user-dir "org-mode-config.el"))
 
+;; autocomplete
+;; see https://company-mode.github.io/manual/Getting-Started.html
+(with-eval-after-load 'company
+  (define-key company-mode-map (kbd "C-/") 'company-complete)
+  )
+
 ;; environment variables
 (setenv "XDG_SESSION_TYPE" "wayland") ;; for some reason emacs does not pick this up so we set it up manually
