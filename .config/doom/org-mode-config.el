@@ -351,3 +351,8 @@ Example usage in Emacs Lisp: (ox-hugo/export-all \"~/org\")."
 (use-package! org-super-agenda
   :hook (org-agenda-mode . org-super-agenda-mode)
 )
+
+(use-package! org
+  :mode ("\\.org\\'" . org-mode)
+  :config (define-key org-mode-map (kbd "C-c C-r") verb-command-map))
+  (setq verb-auto-kill-response-buffers t)

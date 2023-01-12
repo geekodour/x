@@ -28,6 +28,7 @@
 (package! org-reveal) ; might not need this here
 (package! ox-reveal)
 ;; github.com/hakimel/reveal.js/
+(package! verb)
 ;;
 
 ;; other packages to look for later:

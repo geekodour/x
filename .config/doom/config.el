@@ -13,33 +13,6 @@
  doom-theme 'doom-tokyo-night
  doom-themes-treemacs-theme "doom-colors"
  )
-;; ;; Ligatures support for JetBrains Mono
-;; (let ((alist '((?! . "\\(?:!\\(?:==\\|[!=]\\)\\)")
-;;               (?# . "\\(?:#\\(?:###?\\|_(\\|[!#(:=?[_{]\\)\\)")
-;;               (?$ . "\\(?:\\$>\\)")
-;;               (?& . "\\(?:&&&?\\)")
-;;               (?* . "\\(?:\\*\\(?:\\*\\*\\|[/>]\\)\\)")
-;;               (?+ . "\\(?:\\+\\(?:\\+\\+\\|[+>]\\)\\)")
-;;               (?- . "\\(?:-\\(?:-[>-]\\|<<\\|>>\\|[<>|~-]\\)\\)")
-;;               (?. . "\\(?:\\.\\(?:\\.[.<]\\|[.=?-]\\)\\)")
-;;               (?/ . "\\(?:/\\(?:\\*\\*\\|//\\|==\\|[*/=>]\\)\\)")
-;;               (?: . "\\(?::\\(?:::\\|\\?>\\|[:<-?]\\)\\)")
-;;               (?\; . "\\(?:;;\\)")
-;;               (?< . "\\(?:<\\(?:!--\\|\\$>\\|\\*>\\|\\+>\\|-[<>|]\\|/>\\|<[<=-]\\|=\\(?:=>\\|[<=>|]\\)\\||\\(?:||::=\\|[>|]\\)\\|~[>~]\\|[$*+/:<=>|~-]\\)\\)")
-;;               (?= . "\\(?:=\\(?:!=\\|/=\\|:=\\|=[=>]\\|>>\\|[=>]\\)\\)")
-;;                (?> . "\\(?:>\\(?:=>\\|>[=>-]\\|[]:=-]\\)\\)")
-;;                (?? . "\\(?:\\?[.:=?]\\)")
-;;               (?\[ . "\\(?:\\[\\(?:||]\\|[<|]\\)\\)")
-;;               (?\ . "\\(?:\\\\/?\\)")
-;;               (?\] . "\\(?:]#\\)")
-;;               (?^ . "\\(?:\\^=\\)")
-;;               (?_ . "\\(?:_\\(?:|?_\\)\\)")
-;;               (?{ . "\\(?:{|\\)")
-;;               (?| . "\\(?:|\\(?:->\\|=>\\||\\(?:|>\\|[=>-]\\)\\|[]=>|}-]\\)\\)")
-;;               (?~ . "\\(?:~\\(?:~>\\|[=>@~-]\\)\\)"))))
-;;  (dolist (char-regexp alist)
-;;    (set-char-table-range composition-function-table (car char-regexp)
-;;                          `([,(cdr char-regexp) 0 font-shape-gstring]))));
 
 ;; components:
 (setq
@@ -93,6 +66,31 @@
 (with-eval-after-load 'company
   (define-key company-mode-map (kbd "C-/") 'company-complete)
   )
+
+;; python
+(add-hook 'python-mode-hook
+          (lambda ()
+            (setq-local python-shell-buffer-name
+                        (format "Python %s" (buffer-file-name))
+                        )))
+;; ;; Restart python console before evaluate buffer or region to avoid various
+;; ;; uncanny conflicts, like not reloding modules even when they are changed"
+;; (defun restart-python-console ()
+;;   (interactive)
+;;   (kill-Python "process")
+;;   (sleep-for 0.05)
+;;   (kill-buffer "*Python*")
+;;   (elpy-shell-send-region-or-buffer))
+
+;; Restart python console before evaluate buffer or region to avoid various
+;; uncanny conflicts, like not reloding modules even when they are changed"
+;; (defun my-restart-python-console ()
+;;   (interactive)
+;;   (if (get-buffer (format "Python %s" (buffer-file-name))  )
+;;       (let ((kill-buffer-query-functions nil)) (kill-buffer (format "Python %s" (buffer-file-name)))))
+;;   (elpy-shell-send-region-or-buffer))
+
+(global-set-key (kbd "C-c C-x C-c") 'my-restart-python-console)
 
 ;; environment variables
 (setenv "XDG_SESSION_TYPE" "wayland") ;; for some reason emacs does not pick this up so we set it up manually
