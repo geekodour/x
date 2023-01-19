@@ -12,6 +12,8 @@ $ git stash -- filename.ext
 
 # Remove from added/staged
 $ git reset filename.txt
+$ git restore .
+$ git restore path/to/file/to/revert # for a specific file
 
 # delete all untracked files
 $ git clean -fdx
