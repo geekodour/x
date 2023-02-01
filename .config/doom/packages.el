@@ -29,6 +29,7 @@
 (package! ox-reveal)
 ;; github.com/hakimel/reveal.js/
 (package! verb)
+(package! org-web-tools)
 ;;
 
 ;; other packages to look for later:

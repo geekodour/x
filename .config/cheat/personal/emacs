@@ -105,3 +105,6 @@
   - SPC-f-p : Open dooms private config directory
   - SPC-h-d : Open doom specific help and other shit
   - avoid modifying files in ~/.emacs.d. customizations should be kept in DOOMDIR
+
+  # poetry
+  - disable poetry-tracking-mode by calling the function if things tend to go in infinite loop or something

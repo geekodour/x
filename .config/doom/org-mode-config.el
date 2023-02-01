@@ -334,6 +334,12 @@ Example usage in Emacs Lisp: (ox-hugo/export-all \"~/org\")."
         (insert (format "[[file:./images/%s]]" file-name)))
       )))
 
+;; TODO: https://github.com/alphapapa/org-web-tools/issues/38#issuecomment-1412616933
+;; TODO: Update replace-string with appropriate methods
+(defun org-web-tools-insert-link-on-point ()
+  (interactive)
+  (replace-string (thing-at-point 'url t) (org-web-tools--org-link-for-url (thing-at-point 'url t))))
+
 ;; org-roam ui
 (use-package! websocket
     :after org-roam)
@@ -349,10 +355,16 @@ Example usage in Emacs Lisp: (ox-hugo/export-all \"~/org\")."
 
 ;; minor modes
 (use-package! org-super-agenda
-  :hook (org-agenda-mode . org-super-agenda-mode)
+  :hook (org-agenda-mode . super-org-mode-agenda)
 )
 
 (use-package! org
   :mode ("\\.org\\'" . org-mode)
   :config (define-key org-mode-map (kbd "C-c C-r") verb-command-map))
   (setq verb-auto-kill-response-buffers t)
+
+(use-package! org-web-tools
+  :after org
+  :demand t ; do not lazy load this
+  :config
+  (define-key evil-normal-state-map (kbd "SPC i l") #'org-web-tools-insert-link-on-point))
