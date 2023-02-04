@@ -1,0 +1,6 @@
+# key: dupes
+# name: contains_duplicate
+# --
+from collections import Counter # move this to top
+def contains_duplicate(l):
+    return len([item for item, count in Counter(l).items() if count > 1]) > 0

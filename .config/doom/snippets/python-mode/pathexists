@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: pathexists
+# key: pathexists
+# --
+os.path.exists(os.path.join(os.getcwd(), '$1', '$2'))
