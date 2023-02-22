@@ -91,6 +91,7 @@
 ;;   (elpy-shell-send-region-or-buffer))
 
 (global-set-key (kbd "C-c C-x C-c") 'my-restart-python-console)
+(global-set-key (kbd "C-S-v") #'paste-from-clipboard)
 
 ;; environment variables
 (setenv "XDG_SESSION_TYPE" "wayland") ;; for some reason emacs does not pick this up so we set it up manually

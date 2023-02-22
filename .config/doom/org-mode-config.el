@@ -196,6 +196,12 @@
 ** What do I remember from today?\n%?" :empty-lines 1)
          ("jh" "add health journal entry" entry (file ,(concat org-directory "health.org")) "* %T %?" :empty-lines 1))
         )
+  ;; tangle stuff
+  ;; I needed this when writing leetcode solutions in multiple languages
+  (add-to-list 'org-babel-tangle-lang-exts '("python" . "py"))
+  (add-to-list 'org-babel-tangle-lang-exts '("rust" . "rs"))
+  (add-to-list 'org-babel-tangle-lang-exts '("ocaml" . "ml"))
+  (add-to-list 'org-babel-tangle-lang-exts '("go" . "go"))
   )
 
 ;; org-appear config:

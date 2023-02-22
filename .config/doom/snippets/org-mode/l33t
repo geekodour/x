@@ -1,0 +1,29 @@
+# -*- mode: snippet -*-
+# name: l33t
+# key: l33t
+# --
+
+#+AUTHOR: Hrishikesh Barman
+#+PROPERTY: header-args :tangle yes
+
+* Problem
+- Link: 
+* Python
+#+begin_src python :comments link :tangle no
+1+1
+#+end_src
+
+* Rust
+#+begin_src rust :comments link :tangle no
+1+1
+#+end_src
+
+* Ocaml
+#+begin_src ocaml :comments link :tangle no
+1+1
+#+end_src
+
+* Golang
+#+begin_src go :comments link :tangle no
+1+1
+#+end_src

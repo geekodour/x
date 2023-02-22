@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: homepage_bq
+# key: hbq
+# --
+
++attr_html: :class book-hint warning small-text

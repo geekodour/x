@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: full_tangle
+# key:  ft
+# --
+
+#+AUTHOR: Hrishikesh Barman
+#+PROPERTY: header-args :tangle yes

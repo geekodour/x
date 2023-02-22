@@ -59,6 +59,7 @@ exec mako
   bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -10%
   bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle
   bindsym XF86AudioMicMute exec pactl set-source-mute @DEFAULT_SOURCE@ toggle
+  bindsym XF86Keyboard input type:touchpad events toggle enabled disabled
 
 # moving around
   # move your focus around
