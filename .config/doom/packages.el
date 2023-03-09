@@ -30,6 +30,7 @@
 ;; github.com/hakimel/reveal.js/
 (package! verb)
 (package! org-web-tools)
+(package! rfc-mode)
 
 ;; other packages to look for later:
 ;; (package! org-ol-tree) ;; does not seem to be available

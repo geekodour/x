@@ -1,0 +1,13 @@
+# list rules
+iptables --list-rules or iptables -S # file view
+iptables -nvL -t <table_name> # suitable for CLI viewing
+
+# resetting
+iptables -t <table_name> -F <optional_chain> # delete rules in chain
+iptables -t <table_name> -X <optional_chain> # delete chain itself if non-empty
+
+#
+# editing
+#
+# policy
+iptables -t <table_name> -P <chain> <target> # eg. iptables -t filter -P FORWARD DROP

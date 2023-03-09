@@ -35,6 +35,7 @@
 
 # usage
   # basic
+  - C-g : To get out of fuckups (MOST IMPORTANT)
   - SPC-p-p : list projects
   - ESC/C-g : usually quits the minibuffer
   - M-x <mode-name> : switch major mode

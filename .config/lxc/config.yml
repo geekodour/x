@@ -7,4 +7,6 @@ remotes:
   local:
     addr: unix://
     public: false
-aliases: {}
+aliases:
+  delete: delete -i
+  login: exec @ARGS@ --mode interactive -- bash -xc {exec,login,-p,-f,$USER}
