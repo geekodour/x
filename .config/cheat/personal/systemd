@@ -21,6 +21,8 @@ journalctl _PID=123 # filters by pid
 journalctl _COMM=sshd # filters by command
 journalctl _UID=1000 # filters by specific user id
 journalctl -k # filters only kernal messages
+journalctl -k --grep="IN=.*OUT=.*" # view packets that were logged by iptables since the machine was last booted
+ 
 
 # journalctl listings:
 journalctl -F _SYSTEMD_UNIT # list systemd units logged

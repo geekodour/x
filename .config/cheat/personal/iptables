@@ -1,13 +1,27 @@
+# info
+man iptables-extensions # for details on target extensions such as REJECT
+
 # list rules
 iptables --list-rules or iptables -S # file view
-iptables -nvL -t <table_name> # suitable for CLI viewing
+iptables -nvL --line-numbers -t <table_name> # suitable for CLI viewing (numeric port&addr)
+iptables -vL --line-numbers -t <table_name> # suitable for CLI viewing (non-numeric)
+iptables -L --line-numbers -t <table_name> # suitable for most CLI viewing (simple)
 
 # resetting
 iptables -t <table_name> -F <optional_chain> # delete rules in chain
 iptables -t <table_name> -X <optional_chain> # delete chain itself if non-empty
 
-#
 # editing
-#
+-A # append rule to chain
+-I # insert rule to chain
+-R # replace rule on chain
+-D # delete rule from chain
+
+# match and target
+-m <match_name> # specify match, see man iptables-extensions for options for the match
+-j <target_name> # specify target, see man iptables-extensions for options for the target
+
+
 # policy
 iptables -t <table_name> -P <chain> <target> # eg. iptables -t filter -P FORWARD DROP
+
