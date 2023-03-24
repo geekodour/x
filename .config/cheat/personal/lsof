@@ -1,0 +1,24 @@
+# file by directory
+lsof | rg '/geekodour' # get all files which has the path
+
+# by user
+lsof -u rms,root
+lsof -u ^root # except user
+lsof -a -u geekdour -i # network activity by user
+
+# by program name
+lsof -c apache
+
+# by pid
+lsof -p 450,980,333
+lsof -p 450,980,333 +fg # show show file flags
+lsof <ANY_COMMAND> -t # just gives you the PIDs, so that you can use it on another command
+
+# by fd
+lsof -d <fd_number/range>
+
+
+# network connectons
+lsof -i <optional(tcp/udp)> -P
+lsof -i :25 # find by port no
+lsof -U # unix domain sockets

@@ -18,3 +18,9 @@ systemctl list-units-{files} # add filters if required
 
 # list the dependencies of a unit:
 systemctl list-dependencies <unit> 
+
+# reset failed restart
+sudo systemctl reset-failed endlessh
+
+# reload daemons after unit file changes
+sudo systemctl daemon-reload

@@ -8,5 +8,4 @@ remotes:
     addr: unix://
     public: false
 aliases:
-  delete: delete -i
   login: exec @ARGS@ --mode interactive -- bash -xc {exec,login,-p,-f,$USER}

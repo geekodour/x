@@ -1,0 +1,6 @@
+# ban an ip
+fail2ban-client set sshd banip 10.0.0.1
+
+# status
+fail2ban-client status
+fail2ban-client status sshd

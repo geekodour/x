@@ -2,7 +2,7 @@
 # info
 #
 # instance
-lxc info <instance_name>
+lxc info <instance_name> # shows more info like effective interfaces etc.
 lxc config show <instance_name> -e # existing instance config
 lxc list -f csv -c n | fzf |xargs lxc info
 # global config
@@ -11,7 +11,8 @@ lxc config show
 lxc profile list
 lxc profile show <profile_name>
 # images
-lxc image list images:<search term, eg. ubuntu>
+lxc remote list # lists all image servers
+lxc image list <remote_name>:<search term, eg. ubuntu>
 
 #
 # create
@@ -30,6 +31,7 @@ lxc config edit <instance_name> # NOTE: this also shows readonly keys, changes t
 #
 # instance
 lxc delete <instance_name> # What happens to storage?
+lxc list -f csv -c n | xargs lxc delete --force # delete all containers, including running
 # storage
 lxc profile edit <profile_name> # remove the storage from the profile
 lxc storage delete <storage_name>
@@ -46,3 +48,5 @@ lxc login <instance_name>
 lxc login <instance_name> --env USER=ubuntu 
 
 
+# share file
+lxc file pull <instance>/<path> <path_on_host> # get file from instance

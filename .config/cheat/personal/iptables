@@ -1,11 +1,17 @@
 # info
 man iptables-extensions # for details on target extensions such as REJECT
 
+# save and restore
+iptables-save # just dump ALL(all tables), does not really save anywhere
+iptables-save -f /etc/iptables/iptables.rules # save rules to default location
+iptables-restore /etc/iptables/iptables.rules
+
 # list rules
-iptables --list-rules or iptables -S # file view
+iptables --list-rules or iptables -S # file view, specify -t else 'filter' table
 iptables -nvL --line-numbers -t <table_name> # suitable for CLI viewing (numeric port&addr)
 iptables -vL --line-numbers -t <table_name> # suitable for CLI viewing (non-numeric)
 iptables -L --line-numbers -t <table_name> # suitable for most CLI viewing (simple)
+iptables -L --line-numbers -t <table_name> | column -t # formatted
 
 # resetting
 iptables -t <table_name> -F <optional_chain> # delete rules in chain

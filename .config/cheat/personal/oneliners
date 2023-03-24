@@ -1,8 +1,3 @@
-# formatting usb
-$ dd if=/dev/zero of=/dev/sdX status=progress
-$ fdisk /dev/sdb
-$ mkfs.vfat /dev/sdb1
-
 # rsync a file from server
 $ rsync -avzhP -e "ssh -i path_to_key" /from/dir/ username@host:/to/dir/
 

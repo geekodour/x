@@ -4,6 +4,7 @@
 add_newline = true
 
 # prompt
+# see https://github.com/starship/starship/issues/4953
 right_format = """$all"""
 format = """$character"""
 

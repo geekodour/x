@@ -16,6 +16,10 @@ font:
       family: JetBrains Mono Nerd Font
       style: Bold Italic
     size: 11.0
+# needed for yank
+# See https://github.com/JSteeleIR/dotfiles-public/blob/public/README.md#cross-platform-local--remote-in-and-out-of-terminal-yankput
+selection:
+  save_to_clipboard: true
 # gruvbox material dark
 # colors:
 #   primary:
