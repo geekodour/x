@@ -361,7 +361,7 @@ Example usage in Emacs Lisp: (ox-hugo/export-all \"~/org\")."
 
 ;; minor modes
 (use-package! org-super-agenda
-  :hook (org-agenda-mode . super-org-mode-agenda)
+  :hook (org-agenda-mode . org-super-agenda-mode)
 )
 
 (use-package! org
