@@ -12,8 +12,11 @@
  org-directory "~/notes/org/"
  org-roam-directory "~/notes/org/roam" ; expects the directory to exist
  org-agenda-files '("~/notes/org/tasks.org" "~/notes/org/l.org" "~/projects/o/content-org/anti_lib.org") ; it looks for files with .org extensions
- deft-directory "~/notes"
+ deft-directory "~/notes/org"
  deft-recursive t
+ deft-recursive-ignore-dir-regexp "\\(?:\\.\\|\\.\\.\\|roam\\|journal\\)"
+ deft-use-filename-as-title t
+ deft-strip-summary-regexp "\\(.*\\)"
  )
 
 ;; org mode settings:

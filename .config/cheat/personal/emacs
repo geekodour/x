@@ -96,6 +96,9 @@
   # coding
   - flycheck-consult : This will list all the liniting issues from the buffer in one place.
 
+  # deft
+  In deft buffer, searching and filtering is somewhat cumbersome
+  - Better to use C-c C-f to open the find mini buffer and do all search/select operations from there
   
   # workspace
   - SPC-TAB-TAB : List tabs
