@@ -1,0 +1,2 @@
+# convert to wav at 16Hz
+ffmpeg -i <input_file> -ar 16000 -f wav -ac 2 -ar 16000 <output_file>

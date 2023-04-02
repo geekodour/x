@@ -8,6 +8,7 @@
   # default applications
   set $term alacritty
   set $menu wofi --show=run --lines=5 --prompt=""
+  set $clipboard clipman pick --tool wofi -T'--prompt=""'
 
 # output configuration
   # note: we can also set display specific wallpapers
@@ -16,6 +17,9 @@
   # move workspaces between monitors
   bindsym $mod+p move workspace to output right
   bindsym $mod+q move workspace to output left
+
+# clipboard
+exec wl-paste -t text --watch clipman store --no-persist
 
 # notification daemon
 exec mako
@@ -43,6 +47,8 @@ exec mako
   bindsym $mod+Shift+q kill
   # launcher
   bindsym $mod+d exec $menu
+  # clipboard list
+  bindsym $mod+Shift+d exec $clipboard
   # floating window modifications
   floating_modifier $mod normal
   # reload/restart the configuration file

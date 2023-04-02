@@ -51,6 +51,7 @@
   - SHIFT-k : for any documentation/signature
   - SPC-c-d : Go to def
   - C-/ : company-complete
+  - M-x describe-mode : Documentation for current major and minor modes
 
   # treemacs
   - ? : keybindings
@@ -85,7 +86,7 @@
     - ctrl+return : When inserting immediate node and fuzzy match is happening on new node name
   - babel
     - C-c C-c : Execute
-    - C-c ; : Open code in a buffer
+    - C-c ' : Open code in a buffer
 
   # buffers
   - SPC-b-b or SPC-, : List buffers in workspace
@@ -103,6 +104,18 @@
   # workspace
   - SPC-TAB-TAB : List tabs
   - SPC-TAB-d : Delete current workspace (switches to other existing workspace)
+
+  # snippets
+  - M-x yas-describe-table
+
+  # artist-mode
+  - M-x artist-mode
+  - Toggle evil-emacs-state with C-z, if facing issues
+  - Note: If inside org-mode, use src: artist and then C-c '
+  - Left Mouse: Draw
+  - Middle Mouse: Show context menu
+  - Right Mouse: Erase
+
   
   # doom
   - doom upgrade: Update doom and packages
