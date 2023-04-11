@@ -1,4 +1,4 @@
-function cx --wraps='clipman clear --all' --description 'alias cx=clipman clear --all'
+function cx --wraps='clipman clear --all' --description 'alias Clear Clipboard Manager'
   clipman clear --all $argv
         
 end

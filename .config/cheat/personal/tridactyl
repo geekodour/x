@@ -19,3 +19,6 @@ yy
 
 # ignore
 ctrl + alt + escape
+
+# export config
+:mek ~/filename.rc # needs native installed (see github)

@@ -1,4 +1,4 @@
-function listpackages -d 'list packages installed by pacman' -a source
+function listpackages --description 'alias List packages installed by pacman' -a source
   if test (count $argv) -eq 1
     switch $source
     case all

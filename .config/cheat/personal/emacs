@@ -65,7 +65,9 @@
   SPC-g-B : git blame
     - B : open blame window
 
+  ######
   # org-mode
+  ######
   - SPC-n
   - M-{j,k} : Move headings/listings up or down(re-order)
   - M-{h,l} : Move headings/listings up or down(re-promote)
@@ -76,15 +78,16 @@
     - SPC-m-' : open codeblock in separate buffer (org edit special)
   - when in deft-mode, C-c will open deft options
   - when in calandar buffer, shift+arrow keys will move you in the calandar
-  - todo
+  # todo
     - setting dates: SPC-m-d
     - change todo status: SPC-m-t
     - change priority: SPC-m-p-p
-  - org-roam
+  # org-roam
     - some options are under SPC-n-r and some when in the org file, SPC-m-m
     - z i : toggle images
     - ctrl+return : When inserting immediate node and fuzzy match is happening on new node name
-  - babel
+    - emacsclient -e '(cf/hugo-export-all "~/notes/org/roam")' 
+  # babel
     - C-c C-c : Execute
     - C-c ' : Open code in a buffer
 
@@ -122,6 +125,14 @@
   - SPC-f-p : Open dooms private config directory
   - SPC-h-d : Open doom specific help and other shit
   - avoid modifying files in ~/.emacs.d. customizations should be kept in DOOMDIR
+
+  # ibuffer
+  d : mark for delete(buffer)
+  x : commit changes
+
+  # winner-mode (window)
+  C-w m m : Maximize
+  C-w u : Undo window (back to old window layout)
 
   # poetry
   - disable poetry-tracking-mode by calling the function if things tend to go in infinite loop or something

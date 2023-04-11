@@ -7,7 +7,8 @@
 #+PROPERTY: header-args :tangle yes
 
 * Problem
-- Link: 
+- Link:
+
 * Python
 #+begin_src python :comments link :tangle no
 1+1
@@ -24,6 +25,16 @@
 #+end_src
 
 * Golang
+#+begin_src go :comments link :tangle no
+1+1
+#+end_src
+
+* Ruby
+#+begin_src go :comments link :tangle no
+1+1
+#+end_src
+
+* Typescript
 #+begin_src go :comments link :tangle no
 1+1
 #+end_src

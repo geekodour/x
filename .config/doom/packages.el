@@ -30,7 +30,8 @@
 ;; github.com/hakimel/reveal.js/
 (package! verb)
 (package! org-web-tools)
-(package! rfc-mode)
+(package! chatgpt-shell
+  :recipe (:host github :repo "xenodium/chatgpt-shell"))
 
 ;; other packages to look for later:
 ;; (package! org-ol-tree) ;; does not seem to be available
@@ -57,7 +58,8 @@
 ;; If you'd like to disable a package included with Doom, you can do so here
 ;; with the `:disable' property:
 ;(package! builtin-package :disable t)
-;(package! vertico :disable t)
+(package! rtags :disable t)
+(package! irony-server :disable t)
 
 ;; You can override the recipe of a built in package without having to specify
 ;; all the properties for `:recipe'. These will inherit the rest of its recipe

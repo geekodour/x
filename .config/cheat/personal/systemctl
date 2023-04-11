@@ -24,3 +24,8 @@ sudo systemctl reset-failed endlessh
 
 # reload daemons after unit file changes
 sudo systemctl daemon-reload
+
+# user services
+# user services need to be accessed via --user option
+cat /usr/lib/systemd/user/emacs.service
+systemctl --user status emacs.service

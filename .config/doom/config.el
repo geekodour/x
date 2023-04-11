@@ -90,6 +90,15 @@
 ;;       (let ((kill-buffer-query-functions nil)) (kill-buffer (format "Python %s" (buffer-file-name)))))
 ;;   (elpy-shell-send-region-or-buffer))
 
+;; ChatGPT
+(after! chatgpt-shell
+  (setq chatgpt-shell-openai-key "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"))
+
+;; lsp for c/c++
+;; (after! ccls
+;;   ;; (setq ccls-initialization-options '(:index (:comments 2) :completion (:detailedLabel t)))
+;;   (set-lsp-priority! 'ccls 2)) ; optional as ccls is the default in Doom
+
 (global-set-key (kbd "C-c C-x C-c") 'my-restart-python-console)
 (global-set-key (kbd "C-S-v") #'paste-from-clipboard)
 

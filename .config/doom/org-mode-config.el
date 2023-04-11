@@ -36,6 +36,7 @@
    ; TODO: this has been intentionally defined 2-3 times around the file because
    ; of how doom handles org-download. a better way would be to remove
    ; +dragndrop and install org-download separately
+   ; NOTE: DO NOT USE THIS WITH ORG-ROAM or anything using ox-hugo in general. Use file:imagepath instead.
    org-download-image-dir "~/pictures/org"
    ;; org-agenda
    ;; TODO: learn how to evaluate lisp commands directly and to play with

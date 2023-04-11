@@ -1,3 +1,3 @@
-function c --wraps='cheat -c' --description 'alias c cheat -c'
+function c --wraps='cheat -c' --description 'alias View and edit cheatsheet'
   cheat --all -c $argv; 
 end

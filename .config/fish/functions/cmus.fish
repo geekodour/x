@@ -1,3 +1,3 @@
-function cmus --description 'alias cmus alacritty --title "cmus" --command cmus'
+function cmus --description 'alias Music Player'
   alacritty --class "cmus" --command cmus $argv; 
 end

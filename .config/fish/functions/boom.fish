@@ -1,4 +1,4 @@
-function boom -d 'set default source/sink for sound/mic' -a flow
+function boom --description 'alias Set default source/sink for sound/mic' -a flow
   if test (count $argv) -eq 1
     switch $flow
     case sink

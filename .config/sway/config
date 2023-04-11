@@ -21,9 +21,6 @@
 # clipboard
 exec wl-paste -t text --watch clipman store --no-persist
 
-# notification daemon
-exec mako
-
 # idle configuration
   exec swayidle -w \
     timeout 300 'swaylock -f -c 000000' \
