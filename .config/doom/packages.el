@@ -5,9 +5,6 @@
 (package! nyan-mode)
 ;; lang:
 (package! fish-mode)
-;; treesitter:
-(package! tree-sitter)
-(package! tree-sitter-langs)
 ;; helpful:
 (package! focus) ; dim the font color of text in surrounding paragraphs
 (package! info-colors)
