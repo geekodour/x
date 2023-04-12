@@ -134,5 +134,8 @@
   C-w m m : Maximize
   C-w u : Undo window (back to old window layout)
 
+  # tangle from cli
+  emacs --batch --eval "(require 'org)" --eval '(org-babel-tangle-file "<file_name>.org")'
+
   # poetry
   - disable poetry-tracking-mode by calling the function if things tend to go in infinite loop or something
