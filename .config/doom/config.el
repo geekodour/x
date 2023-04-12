@@ -41,6 +41,10 @@
  deft-strip-summary-regexp "\\(.*\\)"
  )
 
+(setq
+ poetry-tracking-strategy 'projectile
+ )
+
 (setq-default
  ;;x-stretch-cursor t ; stretch cursor to the glyph width
  evil-want-fine-undo t  ; by default while in insert all changes are one big blob. Be more granular
@@ -88,6 +92,10 @@
 (use-package! org-super-agenda
   :hook (org-agenda-mode . org-super-agenda-mode)
 )
+
+(setq
+ eglot-prefer-plaintext t
+ )
 
 (after! org
   (setq
@@ -321,6 +329,9 @@
 (map!
  (:leader :desc "insert node immediate" "n r k" #'cf/org-roam-node-insert-immediate)
  (:leader :desc "node complete" "n r c" #'completion-at-point)
+ (:leader :desc "devdocs" "d")
+ (:leader :desc "Open on point" "d o" #'devdocs-browser-open)
+ (:leader :desc "Open on point for doc" "d i" #'devdocs-browser-open-in)
  )
 
 (with-eval-after-load 'company

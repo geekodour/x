@@ -4,10 +4,30 @@
 
 This config is the definition of anti-pragmatism and idiocrasy.
 
-* Other notes
-- potry-tracking-mode needs to be disabled
-- session should be taken care of for resume
-- Learn how to evaluate lisp commands directly and to play with org-ql, having that will make configuring this much much easier
+* Useful links
+** emacs
+- [[https://docs.doomemacs.org/latest/][Doom Emacs v21.12 documentation]]
+- [[https://emacsdocs.org/][Hello from Emacs Docs | Emacs Docs]]
+** org-mode
+- [[https://www.youtube.com/watch?v=0g9BcZvQbXU][Consistent Technical Documents Using Emacs and Org Mode - YouTube]]
+- [[https://github.com/james-stoup/emacs-org-mode-tutorial][james-stoup/emacs-org-mode-tutorial]]
+- [[https://orgmode.org/worg/org-hacks.html][Org ad hoc code, quick hacks and workarounds]]
+- [[https://orgmode.org/worg/doc.html][Documentation for Org hooks, commands and options]]
+- [[https://olmon.gitlab.io/org-themes/][Org Themes collection]]
+** Others
+- [[https://github.com/noctuid/evil-guide#does-emacs-have-vim-like-tabs-distinct-window-configurations=][noctuid/evil-guide: Draft of a guide for using emacs with evil]]
+- [[https://github.com/chrisdone/elisp-guide][elisp-guide: A quick guide to Emacs Lisp programming]]
+* Fix now
+- [ ] Learn how to properly set keybindings (It's a mess rn)
+- [ ] Learn macros
+- [X] Disable =potery-tracking-mode=
+- [ ] Fix emacs session save and restore. Autosave is werid.
+- [ ] [[https://www.reddit.com/r/DoomEmacs/comments/mfr0ed/how_can_i_disable_format_onsave_on_specific/][Prettier Fix ]]
+- [ ] I want to be able to select a bunch of text and slap a link on it. Currently I do manual =]][[]<paste>][]<forward>][<backward>[]]= kind of shit which kills me a little inside.
+- [ ] Learn 3 way merging, [[https://www.gnu.org/software/emacs/manual/html_node/ediff/Merging-and-diff3.html][Merging and diff3 (Ediff User’s Manual)]]
+* Fix later
+- [ ] Play with org-ql to get more things out of org-mode. I honestly have no need to do so.
+
 * Look and feel
 ** Fonts and Theme
 #+begin_src elisp
@@ -69,6 +89,12 @@ This config is the definition of anti-pragmatism and idiocrasy.
  deft-recursive-ignore-dir-regexp "\\(?:\\.\\|\\.\\.\\|roam\\|journal\\)"
  deft-use-filename-as-title t
  deft-strip-summary-regexp "\\(.*\\)"
+ )
+#+end_src
+*** Misc
+#+begin_src elisp
+(setq
+ poetry-tracking-strategy 'projectile
  )
 #+end_src
 ** Default variables
@@ -134,12 +160,18 @@ These use ~use-package!~. It declares and configures a package.
 ** Package tweaking
 These use ~after!~. It evaluates body after package has loaded.
 *** LSP
-**** C/C++ (disabled)
-This shit is commented out on current config, I am not sure how things are working out so far
-#+begin_src elisp :tangle no
-(after! ccls
-  ;; (setq ccls-initialization-options '(:index (:comments 2) :completion (:detailedLabel t)))
-  (set-lsp-priority! 'ccls 2)) ; optional as ccls is the default in Doom
+I am using [[https://github.com/joaotavora/eglot][eglot]] for lsp.
+- =clangd= : c like languages
+- =pyright= : python
+**** eldoc issues
+- eldoc showing escape sequences (noticed in python, pyright lsp atleast)
+- =pyright= team only guarantee to target the markdown renderer supported by the VSCode LSP client. =eglot-prefer-plaintext= should help w pyright as of the moment. This will show everything in plain text, but that's fine for me.
+- =pyright= will not always show docstrings if they're not in the stub. See [[https://github.com/microsoft/pyright/issues/3632][this]] for more info.
+- But the extra =__= are [[https://github.com/jrblevin/markdown-mode/issues/661][still an issue]] w =clangd=
+#+begin_src elisp
+(setq
+ eglot-prefer-plaintext t
+ )
 #+end_src
 *** org-mode
 **** General
@@ -414,6 +446,7 @@ This mostly works out of the box but apparently the extensions are somewhat fuck
                         )))
 #+end_src
 *** Restart python v1 (disabled)
+Source: [[https://lgmoneda.github.io/2017/02/19/emacs-python-shell-config-eng.html][A solution for the reload modules problem in Emacs Python Shell | lgmoneda]]
 #+begin_src elisp :tangle no
 ;; Restart python console before evaluate buffer or region to avoid various
 ;; uncanny conflicts, like not reloding modules even when they are changed"
@@ -447,8 +480,15 @@ NOTE: I am not sure if I am even using these
 (map!
  (:leader :desc "insert node immediate" "n r k" #'cf/org-roam-node-insert-immediate)
  (:leader :desc "node complete" "n r c" #'completion-at-point)
+ (:leader :desc "devdocs" "d")
+ (:leader :desc "Open on point" "d o" #'devdocs-browser-open)
+ (:leader :desc "Open on point for doc" "d i" #'devdocs-browser-open-in)
  )
 #+end_src
+
+#+RESULTS:
+: devdocs-browser-open
+
 ** Package specific
 This uses =with-eval-after-load=. It executes body after file/feature is loaded. See [[https://company-mode.github.io/manual/Getting-Started.html][Getting Started (Company User Manual)]]
 *** Misc packages
@@ -557,6 +597,7 @@ Source: [[https://ox-hugo.scripter.co/doc/org-capture-setup/][Org Capture Setup 
 #+end_src
 ** org-roam insert image
 - TODO: Probably can make this function more dynamic in the directory selection then I can use it in many more places.
+- Source: [[https://tony-zorman.com/posts/emacs-potpourri.html][A Potpourri of Emacs Tweaks · Tony Zorman]]
 #+begin_src elisp
 (defun slot/org-roam-insert-image ()
   "Select and insert an image at point."

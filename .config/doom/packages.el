@@ -27,6 +27,7 @@
 ;; github.com/hakimel/reveal.js/
 (package! verb)
 (package! org-web-tools)
+(package! devdocs-browser)
 (package! chatgpt-shell
   :recipe (:host github :repo "xenodium/chatgpt-shell"))
 
