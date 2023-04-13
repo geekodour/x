@@ -26,6 +26,7 @@ This config is the definition of anti-pragmatism and idiocrasy.
 - [ ] I want to be able to select a bunch of text and slap a link on it. Currently I do manual =]][[]<paste>][]<forward>][<backward>[]]= kind of shit which kills me a little inside.
 - [ ] Learn 3 way merging, [[https://www.gnu.org/software/emacs/manual/html_node/ediff/Merging-and-diff3.html][Merging and diff3 (Ediff User’s Manual)]]
 * Fix later
+- [ ] Currently the config file is based on emacs semantics, eg. local vars, hooks etc. This way of configuring seems to be a bad choice in hindsight but I do not have the time to reshuffle things atm plus some things are mixed. Come back and fix this shit when you're free.
 - [ ] Play with org-ql to get more things out of org-mode. I honestly have no need to do so.
 
 * Look and feel
@@ -116,6 +117,7 @@ See: [[https://github.com/doomemacs/doomemacs/blob/master/docs/getting_started.o
 ** Package initializations
 These use ~use-package!~. It declares and configures a package.
 *** tree-sitter
+- If ever face issues w =tsx= check [[https://vxlabs.com/2022/06/12/typescript-development-with-emacs-tree-sitter-and-lsp-in-2022/][this]]
 #+begin_src elisp
 (use-package! tree-sitter
   :config
@@ -123,6 +125,31 @@ These use ~use-package!~. It declares and configures a package.
   (require 'tree-sitter-langs)
   (add-hook 'tree-sitter-after-on-hook #'tree-sitter-hl-mode))
 #+end_src
+*** code formatting
+- [[https://github.com/doomemacs/doomemacs/pull/6369][doomemacs/doomemacs#6369 refactor(format): replace with apheleia by elken]]
+#+begin_src elisp
+(use-package! apheleia
+  :config
+  (apheleia-global-mode +1)
+  (setf (alist-get 'python-mode apheleia-mode-alist)
+        '(isort black)))
+#+end_src
+
+*** code checking and grammar
+- I am not using =flycheck=, instead going plain =flaymake= + =eglot= and other =flymake= backends as needed. Nice combo. =SPC-c-x=
+- https://github.com/mohkale/flymake-collection#configurations
+#+begin_src elisp
+(add-hook! prog-mode #'flymake-mode) ; start flymake-mode by default only for programming language
+(setq
+ eglot-stay-out-of nil
+ )
+(map!
+ (:leader :desc "Enable vale" "t V" #'flymake-vale-maybe-load)) ; no way to toggle apparently
+#+end_src
+*** spell checking
+- For spellchecking, emacs has =ispell= (interactive spelling) and =flyspell= (spelling on the fly).
+- I wanted to use =enchant-2= as the middle man but =enchant-2= [[https://bugs.archlinux.org/task/68499][warns about]] optional deps.
+- So it's just =hunspell= for me.
 *** Misc packages inits
 #+begin_src elisp
 (use-package! nyan-mode
@@ -160,8 +187,9 @@ These use ~use-package!~. It declares and configures a package.
 ** Package tweaking
 These use ~after!~. It evaluates body after package has loaded.
 *** LSP
-I am using [[https://github.com/joaotavora/eglot][eglot]] for lsp.
+I am using [[https://github.com/joaotavora/eglot][eglot]] instead of =lsp-mode=, it has less bells and whistles but it's more emacs native.
 - =clangd= : c like languages
+  - [[https://github.com/clangd/clangd/issues/45][clangd/clangd#45 Support non-self-contained files]]
 - =pyright= : python
 **** eldoc issues
 - eldoc showing escape sequences (noticed in python, pyright lsp atleast)
@@ -173,6 +201,13 @@ I am using [[https://github.com/joaotavora/eglot][eglot]] for lsp.
  eglot-prefer-plaintext t
  )
 #+end_src
+****
+**** lsptreemacs
+There's something very neat about symbol trees. I like them but unfortunately I can't have them. Why you may ask.
+- [[https://github.com/joaotavora/eglot/issues/614][Support for call hierarchies · Issue #614 · joaotavora/eglot · GitHub]]
+- [[https://github.com/emacs-lsp/lsp-treemacs][GitHub - emacs-lsp/lsp-treemacs: lsp-mode treemacs]] (lsp-mode only)
+**** dap-mode
+=dap-mode= currently not supported for =eglot=, See [[https://www.reddit.com/r/emacs/comments/y2s13n/eglot_as_lsp_interface_dap/][this]] and [[https://github.com/emacs-lsp/dap-mode/issues/2][this]].
 *** org-mode
 **** General
 #+begin_src elisp
@@ -411,10 +446,11 @@ This mostly works out of the box but apparently the extensions are somewhat fuck
   (add-to-list 'org-babel-tangle-lang-exts '("ocaml" . "ml"))
   (add-to-list 'org-babel-tangle-lang-exts '("go" . "go")))
 #+end_src
-*** ox-reveal
-#+begin_src elisp
-(after! org
-  (load-library "ox-reveal"))
+*** ox-reveal (disabled)
+This is downloaded but I don't make slides daily so I can enable this when I need it. Doesn't slow down things too much but why free load.
+#+begin_src elisp :tangle no
+(eval-after-load 'org-mode
+  '(load-library "ox-reveal"))
 #+end_src
 *** Misc packages tweaks
 #+begin_src elisp
@@ -470,8 +506,8 @@ Source: [[https://lgmoneda.github.io/2017/02/19/emacs-python-shell-config-eng.ht
 
 * Key bindings
 ** Global bindings (disabled)
-NOTE: I am not sure if I am even using these
 #+begin_src elisp :tangle no
+;; NOTE: I am not sure if I am even using these, so no tangle
 (global-set-key (kbd "C-c C-x C-c") 'my-restart-python-console)
 (global-set-key (kbd "C-S-v") #'paste-from-clipboard)
 #+end_src
@@ -485,9 +521,6 @@ NOTE: I am not sure if I am even using these
  (:leader :desc "Open on point for doc" "d i" #'devdocs-browser-open-in)
  )
 #+end_src
-
-#+RESULTS:
-: devdocs-browser-open
 
 ** Package specific
 This uses =with-eval-after-load=. It executes body after file/feature is loaded. See [[https://company-mode.github.io/manual/Getting-Started.html][Getting Started (Company User Manual)]]

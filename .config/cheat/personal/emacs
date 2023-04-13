@@ -130,12 +130,21 @@
   d : mark for delete(buffer)
   x : commit changes
 
+  # i-menu
+  imenu # symbol search
+
+  # spelling
+  ispell # interactive spellchecker
+
   # winner-mode (window)
   C-w m m : Maximize
   C-w u : Undo window (back to old window layout)
 
   # tangle from cli
   emacs --batch --eval "(require 'org)" --eval '(org-babel-tangle-file "<file_name>.org")'
+
+  # terminal
+  SPC-o-t
 
   # poetry
   - disable poetry-tracking-mode by calling the function if things tend to go in infinite loop or something

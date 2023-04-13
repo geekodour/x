@@ -61,6 +61,19 @@
   (require 'tree-sitter-langs)
   (add-hook 'tree-sitter-after-on-hook #'tree-sitter-hl-mode))
 
+(use-package! apheleia
+  :config
+  (apheleia-global-mode +1)
+  (setf (alist-get 'python-mode apheleia-mode-alist)
+        '(isort black)))
+
+(add-hook! prog-mode #'flymake-mode) ; start flymake-mode by default only for programming language
+(setq
+ eglot-stay-out-of nil
+ )
+(map!
+ (:leader :desc "Enable vale" "t V" #'flymake-vale-maybe-load)) ; no way to toggle apparently
+
 (use-package! nyan-mode
   :config
   (nyan-mode))
@@ -299,9 +312,6 @@
   (add-to-list 'org-babel-tangle-lang-exts '("rust" . "rs"))
   (add-to-list 'org-babel-tangle-lang-exts '("ocaml" . "ml"))
   (add-to-list 'org-babel-tangle-lang-exts '("go" . "go")))
-
-(after! org
-  (load-library "ox-reveal"))
 
 (after! projectile
   (setq projectile-project-search-path '("~/projects/" "~/open_source" "~/clientwork"))
