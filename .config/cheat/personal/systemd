@@ -13,7 +13,9 @@ systemd-analyze blame # list running units ordered by time to init
 
 # journalctl filters:
 journalctl -u <unit> -b # for some unit, for the most recent boot
-journalctl -p 3 -b # list errors(see -p flag) for the most recent boot
+journalctl -p 3 -b # list errors(see -p flag) of current boot
+journalctl -rb -1 # Show logs of last boot in reverse order
+journalctl -b # Show logs of last boot in reverse order
 journalctl -f # follow log (like tail -f)
 journalctl --since=2012-10-15 --until="2011-10-16 23:59:59" # To filter by time period:
 journalctl /usr/bin/dbus-daemon # filters by executable name

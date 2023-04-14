@@ -698,3 +698,6 @@ Source: [[https://ox-hugo.scripter.co/doc/org-capture-setup/][Org Capture Setup 
   (replace-string (thing-at-point 'url t) (org-web-tools--org-link-for-url (thing-at-point 'url t))))
 #+end_src
 
+* Other notes
+** Tangle
+- When you tangle things, if you change property ~#+PROPERTY: header-args :tangle <filename.ext>~, You need to =C-C C-c= on that line. Otherwise =C-c C-v t= will keep tangling to the old file. Pretty annoying, yeah.
