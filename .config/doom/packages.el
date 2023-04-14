@@ -34,6 +34,8 @@
   :recipe (:host github :repo "xenodium/chatgpt-shell"))
 (package! flymake-vale
   :recipe (:host github :repo "tpeacock19/flymake-vale"))
+(package! flymake-popon
+  :recipe (:host codeberg :repo "akib/emacs-flymake-popon"))
 
 ;; other packages to look for later:
 ;;(package! org-ol-tree) ;; does not seem to be available

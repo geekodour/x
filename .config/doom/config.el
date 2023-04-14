@@ -66,6 +66,7 @@
   (apheleia-global-mode +1)
   (setf (alist-get 'python-mode apheleia-mode-alist)
         '(isort black)))
+(push '(sh-mode . shfmt) apheleia-mode-alist) ; apheleia for some reason does not already do this
 
 (add-hook! prog-mode #'flymake-mode) ; start flymake-mode by default only for programming language
 (setq
@@ -77,6 +78,10 @@
 (use-package! nyan-mode
   :config
   (nyan-mode))
+
+(use-package! flymake-popon
+  :config
+  (global-flymake-popon-mode))
 
 (use-package! org-appear
   :after org
@@ -314,15 +319,15 @@
   (add-to-list 'org-babel-tangle-lang-exts '("go" . "go")))
 
 (after! projectile
-  (setq projectile-project-search-path '("~/projects/" "~/open_source" "~/clientwork"))
+  (setq
+   projectile-project-search-path '("~/projects" "~/open_source" "~/clientwork")
+   +workspaces-on-switch-project-behavior nil)
+
+  (projectile-add-known-project "~/.config/") ; not a git repo but has a .projectile
   (projectile-add-known-project "~/notes/"))
 
 (after! which-key
   (setq which-key-popup-type 'minibuffer)) ;; default popup does not show full contents sometimes
-
-(after! centaur-tabs
-  (setq centaur-tabs-set-bar 'under) ; see https://github.com/ema2159/centaur-tabs/issues/127
-  (centaur-tabs-group-by-projectile-project)) ; see https://github.com/ema2159/centaur-tabs/issues/181
 
 (after! org-fancy-priorities
   (setq org-fancy-priorities-list '("🌕" "🌗" "🌙" "☕")))
@@ -342,7 +347,8 @@
  (:leader :desc "devdocs" "d")
  (:leader :desc "Open on point" "d o" #'devdocs-browser-open)
  (:leader :desc "Open on point for doc" "d i" #'devdocs-browser-open-in)
- )
+ (:leader :desc "Show available snippets" "m y" #'yas-describe-tables))
+; TODO Need binding for treemacs workspace edit
 
 (with-eval-after-load 'company
   (define-key company-mode-map (kbd "C-/") 'company-complete)

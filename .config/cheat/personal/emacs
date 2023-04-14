@@ -143,6 +143,9 @@
   # tangle from cli
   emacs --batch --eval "(require 'org)" --eval '(org-babel-tangle-file "<file_name>.org")'
 
+  # evil stuff
+  c-i-( : clear inner w parentheses
+
   # terminal
   SPC-o-t
 

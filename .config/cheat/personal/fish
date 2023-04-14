@@ -1,2 +1,10 @@
 https://developerlife.com/2021/01/19/fish-scripting-manual/
 https://nicolas-van.github.io/programming-with-fish-shell
+
+# variables
+See https://github.com/jorgebucaran/cookbook.fish#how-do-i-set-variables-in-fish
+-l, --local: available only to the innermost block
+-g, --global: available outside blocks and by other functions
+-U, --universal: shared between all fish sessions and persisted across restarts of the shell
+-x, --export: available to any child process spawned in the current session
+

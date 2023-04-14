@@ -19,7 +19,10 @@ This config is the definition of anti-pragmatism and idiocrasy.
 - [[https://github.com/chrisdone/elisp-guide][elisp-guide: A quick guide to Emacs Lisp programming]]
 * Fix now
 - [ ] Learn how to properly set keybindings (It's a mess rn)
+- [ ] Learn hooks
+- [ ] Learn sessions
 - [ ] Learn macros
+- [ ] Enable treesitter for all languages
 - [X] Disable =potery-tracking-mode=
 - [ ] Fix emacs session save and restore. Autosave is werid.
 - [ ] [[https://www.reddit.com/r/DoomEmacs/comments/mfr0ed/how_can_i_disable_format_onsave_on_specific/][Prettier Fix ]]
@@ -127,12 +130,14 @@ These use ~use-package!~. It declares and configures a package.
 #+end_src
 *** code formatting
 - [[https://github.com/doomemacs/doomemacs/pull/6369][doomemacs/doomemacs#6369 refactor(format): replace with apheleia by elken]]
+- if formatter is not found it will just quit quietly
 #+begin_src elisp
 (use-package! apheleia
   :config
   (apheleia-global-mode +1)
   (setf (alist-get 'python-mode apheleia-mode-alist)
         '(isort black)))
+(push '(sh-mode . shfmt) apheleia-mode-alist) ; apheleia for some reason does not already do this
 #+end_src
 
 *** code checking and grammar
@@ -155,6 +160,10 @@ These use ~use-package!~. It declares and configures a package.
 (use-package! nyan-mode
   :config
   (nyan-mode))
+
+(use-package! flymake-popon
+  :config
+  (global-flymake-popon-mode))
 
 (use-package! org-appear
   :after org
@@ -452,18 +461,53 @@ This is downloaded but I don't make slides daily so I can enable this when I nee
 (eval-after-load 'org-mode
   '(load-library "ox-reveal"))
 #+end_src
-*** Misc packages tweaks
+*** projectile
+These things are supposed to be emphemeral, not something you want to check in vcs. So work with these w that mindset.
+- =session=
+  - Set of open =workspaces=
+  - =~/.emacs.d/.local/etc/workspaces/autosave= (where auto sessions are stored)
+  - Keybindings: =SPC-q-*=
+  - Will saving a session also save a workspace even if the workspace is not saved?
+- =workspace=
+  - Set of =projects=
+  - emacs add support for =workspaces= via [[https://github.com/Bad-ptr/persp-mode.el][persp-mode]]. So =workspace= same as =perspective=
+  - Keybindings: =SPC-TAB-*=
+  - [[https://docs.doomemacs.org/v21.12/modules/ui/workspaces/][:ui workspaces - Doom Emacs v21.12 documentation]]
+- =project=
+  - Set of files, either signified via =vcs= repo or by including =.projectile= file.
+  - emacs add support for project wide operations via [[https://github.com/bbatsov/projectile][projectile]]
+- Treemacs
+  - A sidebar
+  - Shows =workspaces/prespective= and =projects=
+  - You can add non-projectile projects to treemacs too. (=C-c C-p a= vs =C-c C-p p=)
+  - =~/.emacs.d/.local/etc/workspaces/_workspaces=
+    - When you save workspaces, this is where it gets saved.
+    - Technically since this is a set of workspaces, which means it is a =session=. =SPC-q-*= allows you to load this, which basically loads all your saved workspaces.
+    - This just saves the =workspace/prespective= name, the mapping is stored in =treemacs-persist=
+    - While saving, w =SPC-TAB-s= you might encounter a prompt whether to overwrite existing saved workspaces or add it along.
+  - =~/.emacs.d/.local/cache/treemacs-persist=
+    - The cache for =project= - =workspace= mapping
+    - It's what we get when you do =treemacs-edit-workspaces=
 #+begin_src elisp
 (after! projectile
-  (setq projectile-project-search-path '("~/projects/" "~/open_source" "~/clientwork"))
+  (setq
+   projectile-project-search-path '("~/projects" "~/open_source" "~/clientwork")
+   +workspaces-on-switch-project-behavior nil)
+
+  (projectile-add-known-project "~/.config/") ; not a git repo but has a .projectile
   (projectile-add-known-project "~/notes/"))
-
-(after! which-key
-  (setq which-key-popup-type 'minibuffer)) ;; default popup does not show full contents sometimes
-
+#+end_src
+*** tabs (disabled)
+I no longer use tabs, long live buffers.
+#+begin_src elisp :tangle no
 (after! centaur-tabs
   (setq centaur-tabs-set-bar 'under) ; see https://github.com/ema2159/centaur-tabs/issues/127
   (centaur-tabs-group-by-projectile-project)) ; see https://github.com/ema2159/centaur-tabs/issues/181
+#+end_src
+*** Misc packages tweaks
+#+begin_src elisp
+(after! which-key
+  (setq which-key-popup-type 'minibuffer)) ;; default popup does not show full contents sometimes
 
 (after! org-fancy-priorities
   (setq org-fancy-priorities-list '("🌕" "🌗" "🌙" "☕")))
@@ -471,7 +515,6 @@ This is downloaded but I don't make slides daily so I can enable this when I nee
 (after! chatgpt-shell
   (setq chatgpt-shell-openai-key "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"))
 #+end_src
-
 * Mode hooks
 ** Python quirks
 #+begin_src elisp
@@ -519,7 +562,8 @@ Source: [[https://lgmoneda.github.io/2017/02/19/emacs-python-shell-config-eng.ht
  (:leader :desc "devdocs" "d")
  (:leader :desc "Open on point" "d o" #'devdocs-browser-open)
  (:leader :desc "Open on point for doc" "d i" #'devdocs-browser-open-in)
- )
+ (:leader :desc "Show available snippets" "m y" #'yas-describe-tables))
+; TODO Need binding for treemacs workspace edit
 #+end_src
 
 ** Package specific

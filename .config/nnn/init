@@ -4,9 +4,10 @@ set -l fixname 'f:fixname'
 set -l nmount 'n:nmount'
 set -l fzcd 'c:fzcd'
 set -l upload 'u:upload'
+set -l copy_filename 'y:!echo $PWD/$nnn | wl-copy'
 
 # plugins
-set -gx NNN_PLUG "$preview_ui;$fixname;$fzcd;$upload;$nmount"
+set -gx NNN_PLUG "$preview_ui;$fixname;$fzcd;$upload;$nmount;$copy_filename"
 
 # trash
 set -gx NNN_TRASH 1
