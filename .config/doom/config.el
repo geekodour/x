@@ -392,6 +392,12 @@ Example usage in Emacs Lisp: (ox-hugo/export-all \"~/org\")."
             (setq cnt (1+ cnt))))
         (message "Done!")))))
 
+(defun cf/export-static-html (file_path)
+  (with-current-buffer (find-file-noselect file_path)
+    (org-html-export-to-html)
+    )
+  (message "Done!"))
+
 (defun cf/org-journal-find-location ()
   ;; Open today's journal, but specify a non-nil prefix argument in order to
   ;; inhibit inserting the heading; org-capture will insert the heading.

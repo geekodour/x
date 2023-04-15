@@ -13,9 +13,9 @@ tree -L 2 -I Desktop/ -I Downloads/ -I Books/ -I Zotero/ -I dump/ -I Documents/ 
 │   ├── experiments
 │   └── gig23
 ├── infra
-│   ├── systemfiles
 │   └── workshop
 ├── locus
+│   ├── anki
 │   ├── blog
 │   ├── diary
 │   ├── mogoz
@@ -24,8 +24,7 @@ tree -L 2 -I Desktop/ -I Downloads/ -I Books/ -I Zotero/ -I dump/ -I Documents/ 
 │   └── todayi
 ├── notes
 │   ├── nikitaexplanation.org
-│   ├── org
-│   └── resume
+│   └── org
 ├── projects
 │   ├── gigs
 │   ├── oss
@@ -33,5 +32,5 @@ tree -L 2 -I Desktop/ -I Downloads/ -I Books/ -I Zotero/ -I dump/ -I Documents/ 
 ├── README.org
 └── wallpaper.jpg
 
-21 directories, 4 files
+20 directories, 4 files
 #+end_example

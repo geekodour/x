@@ -31,6 +31,7 @@
   - Idea is not to have really short alias names, idea is to have it infront of you or in your memory when you need it
 
 * New dir for projects
+- MAKE ALL MAKEFILES CONSISTENT!!!!!:
 ** locus (all public)
 - This makefile can live in workshop and we can symlink it here
 - Makefile:
@@ -38,6 +39,11 @@
   - Push: Push all git repos
 - Each project will have its own makefile to generate everything it needs, eg. all export + exports from notes + generating systemfiles stuff for o
 *** o
+- [X] Move resume here
+- [X] Move project_ideas here, change theme
+- [X] Move syllabus.org here under assets and probaby change theme to the new thing
+- [X] Add makefile for export
+- [ ] Maybe move the generation logic inside script here instead of systemfiles
 *** blog
 *** scrap
 *** todayi

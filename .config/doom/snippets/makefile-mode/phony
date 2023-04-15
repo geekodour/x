@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: phony
+# key: ph
+# --
+
+.PHONY: ${1: target name} # ${target description}

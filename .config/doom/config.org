@@ -596,7 +596,10 @@ This uses =with-eval-after-load=. It executes body after file/feature is loaded.
 * Custom functions (cf)
 NOTE: I am very inconsistent with the =cf= prefix. That needs some fixing someday.
 ** Export ox-hugo site
-Source: [[https://github.com/kaushalmodi/ox-hugo/discussions/585#discussioncomment-2335203][How to export all Org files in a directory + How to generate offline navigable HTML files using Hugo?]]
+- Source: [[https://github.com/kaushalmodi/ox-hugo/discussions/585#discussioncomment-2335203][How to export all Org files in a directory + How to generate offline navigable HTML files using Hugo?]]
+- Maybe allow optional single files to be exported
+- Export Takes about 2m for ~200 files.
+- This export exports everything and not only the changed files. Which is what we want sometimes if we commited things without exporting.
 #+begin_src elisp
 (defun cf/hugo-export-all (&optional org-files-root-dir dont-recurse)
   "Export all Org files (including nested) under ORG-FILES-ROOT-DIR.
@@ -623,6 +626,14 @@ Example usage in Emacs Lisp: (ox-hugo/export-all \"~/org\")."
             (org-hugo-export-wim-to-md :all-subtrees)
             (setq cnt (1+ cnt))))
         (message "Done!")))))
+#+end_src
+** Export static stuff
+#+begin_src elisp
+(defun cf/export-static-html (file_path)
+  (with-current-buffer (find-file-noselect file_path)
+    (org-html-export-to-html)
+    )
+  (message "Done!"))
 #+end_src
 ** Journal location
 Source: =jparcill/emacs_config/blob/master/config.el=
