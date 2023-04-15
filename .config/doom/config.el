@@ -23,7 +23,7 @@
 (setq
  org-directory "~/notes/org/"
  org-roam-directory "~/notes/org/roam" ; expects the directory to exist
- org-agenda-files '("~/notes/org/tasks.org" "~/notes/org/l.org" "~/projects/o/content-org/anti_lib.org") ; it looks for files with .org extensions
+ org-agenda-files '("~/notes/org/tasks.org" "~/notes/org/l.org" "~/locus/o/content-org/anti_lib.org") ; it looks for files with .org extensions
  org-roam-mode-sections '(org-roam-backlinks-section org-roam-reflinks-section) ;; TODO: Maybe we don't need this
  ;; journal
  org-journal-date-prefix "#+title: "
@@ -172,10 +172,10 @@
 ;; lv: video list; youtube videos, other short videos etc.
 ;; lr: reading list; book/paper readings etc.
 ("l", "lists")
-("lp" "add post" entry (file+olp "~/projects/o/content-org/anti_lib.org" "Posts" "Un-categorized") "*** TOCONSUME %?" :empty-lines 1)
-("lm" "add movie" entry (file+olp "~/projects/o/content-org/anti_lib.org" "Movies" "Un-categorized") "*** TOCONSUME %?" :empty-lines 1)
-("lv" "add video" entry (file+olp "~/projects/o/content-org/anti_lib.org" "Videos" "Un-categorized") "*** TOCONSUME %?" :empty-lines 1)
-("lr" "add book" entry (file+olp "~/projects/o/content-org/anti_lib.org" "Books" "Un-categorized") "*** TOCONSUME %?" :empty-lines 1)
+("lp" "add post" entry (file+olp "~/locus/o/content-org/anti_lib.org" "Posts" "Un-categorized") "*** TOCONSUME %?" :empty-lines 1)
+("lm" "add movie" entry (file+olp "~/locus/o/content-org/anti_lib.org" "Movies" "Un-categorized") "*** TOCONSUME %?" :empty-lines 1)
+("lv" "add video" entry (file+olp "~/locus/o/content-org/anti_lib.org" "Videos" "Un-categorized") "*** TOCONSUME %?" :empty-lines 1)
+("lr" "add book" entry (file+olp "~/locus/o/content-org/anti_lib.org" "Books" "Un-categorized") "*** TOCONSUME %?" :empty-lines 1)
 
 ;; today i x
 ;; inspiration: https://simonwillison.net/2021/May/2/one-year-of-tils/
@@ -183,8 +183,8 @@
 ;; xf: today i fucked up
 ;; TODO: Remove these, TILs and TIFUs to be fetched from Github issues, idk i kinda like the emacs interface now
 ("x", "todayi")
-("xl" "add til" entry (file ,"~/projects/todayi/content-org/til.org") (function org-hugo-new-subtree-post-capture-template))
-("xf" "add tifu" entry (file ,"~/projects/todayi/content-org/tifu.org") (function org-hugo-new-subtree-post-capture-template))
+("xl" "add til" entry (file ,"~/locus/todayi/content-org/til.org") (function org-hugo-new-subtree-post-capture-template))
+("xf" "add tifu" entry (file ,"~/locus/todayi/content-org/tifu.org") (function org-hugo-new-subtree-post-capture-template))
 
 ;; idea
 ;; il: new idea, can be anything
@@ -320,7 +320,7 @@
 
 (after! projectile
   (setq
-   projectile-project-search-path '("~/projects" "~/open_source" "~/clientwork")
+   projectile-project-search-path '("~/projects" "~/locus" "~/infra" "~/faafo")
    +workspaces-on-switch-project-behavior nil)
 
   (projectile-add-known-project "~/.config/") ; not a git repo but has a .projectile
