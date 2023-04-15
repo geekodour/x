@@ -15,6 +15,8 @@
 - [ ] Uninstall not needed arch packages
 - [ ] Uninstall all asdf packages and virtual envs
 - [ ] Make a script to push all locus projects at once.
+- [ ] Move ASDF
+- [ ] Delete npm
 
 * Keychain
 See [[https://www.funtoo.org/Keychain][Funtoo Keychain Project - Funtoo]]
