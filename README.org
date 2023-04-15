@@ -1,7 +1,7 @@
 #+title: x
 
 * Directory Tree
-#+begin_src fish :dir ~/ :results output verbatim
+#+begin_src fish :dir ~/ :results output verbatim :exports both
 tree -L 2 -I Desktop/ -I Downloads/ -I Books/ -I Zotero/
 #+end_src
 
