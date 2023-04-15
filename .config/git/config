@@ -7,7 +7,7 @@
 [core]
 	editor = nvim
   pager = delta
-	excludesFile = /home/geekodour/.gitignore
+	excludesFile = /home/geekodour/.config/git/global_ignore
 [pull]
 	rebase = true
 [interactive]
