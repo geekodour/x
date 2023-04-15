@@ -21,7 +21,9 @@ This config is the definition of anti-pragmatism and idiocrasy.
 - [ ] Learn how to properly set keybindings (It's a mess rn)
 - [ ] Learn hooks
 - [ ] Learn sessions
+- [ ] Learn emacs code review
 - [ ] Learn macros
+- [ ] oxhugo export/all function is slow. Make it git aware so it only picks org files that are git dirty. Maybe an option.
 - [ ] Enable treesitter for all languages
 - [X] Disable =potery-tracking-mode=
 - [ ] Fix emacs session save and restore. Autosave is werid.
@@ -425,21 +427,23 @@ NOTE: We're using =,= to escape =*= , the =,= will go away when tangled.
 #+end_src
 
 *** org-download
+#+begin_quote
+DO NOT USE THIS WITH =org-roam= or anything using =ox-hugo= in general. Use =file:imagepath= instead.
+#+end_quote
 - This has been pretty much very low ROI package for me. I almost never use =org-download=, might aswell nuke it.
 - This has been intentionally defined 2-3 times around the file because of how doom handles org-download. a better way would be to remove =+dragndrop= and install =org-download= separately
-- NOTE: DO NOT USE THIS WITH =rog-roam= or anything using =ox-hugo= in general. Use =file:imagepath= instead.
 #+begin_src elisp
 (after! org
   (setq
-   org-download-image-dir "~/pictures/org"
+   org-download-image-dir "~/Pictures/org"
    ))
 (after! org-download
   (setq-default
-   org-download-image-dir "~/pictures/org" ; buf local: -*- mode: Org; org-download-image-dir: "~/pictures/foo"; -*-
+   org-download-image-dir "~/Pictures/org" ; buf local: -*- mode: Org; org-download-image-dir: "~/pictures/foo"; -*-
    )
   (setq
    org-download-method 'directory
-   org-download-image-dir "~/pictures/org" ; buf local: -*- mode: Org; org-download-image-dir: "~/pictures/foo"; -*-
+   org-download-image-dir "~/Pictures/org" ; buf local: -*- mode: Org; org-download-image-dir: "~/pictures/foo"; -*-
    org-download-heading-lvl nil ; do not want this categorized by headings
    org-download-timestamp "%Y%m%d-%H%M%S_"
    )

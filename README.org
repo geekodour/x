@@ -1,0 +1,43 @@
+#+title: x
+
+* Directory Tree
+#+begin_src fish :dir ~/ :results output verbatim
+tree -L 2 -I Desktop/ -I Downloads/ -I Books/ -I Zotero/
+#+end_src
+
+#+RESULTS:
+#+begin_example
+.
+├── bw
+├── clientwork
+│   ├── indraneel.org
+│   └── nipam
+├── Documents
+├── dump
+│   ├── rlox
+│   └── wallpaper.jpg
+├── faafo
+├── infra
+├── locus
+├── notes
+│   ├── org
+│   └── resume
+├── open_source
+├── Pictures
+│   └── screenshots
+├── projects
+│   ├── blog
+│   ├── diary
+│   ├── experiments
+│   ├── gig23
+│   ├── mogoz
+│   ├── o
+│   ├── scrap
+│   ├── systemfiles
+│   ├── todayi
+│   └── workshop
+├── README.org
+└── wallpaper.jpg
+
+26 directories, 6 files
+#+end_example

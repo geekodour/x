@@ -298,15 +298,15 @@
 
 (after! org
   (setq
-   org-download-image-dir "~/pictures/org"
+   org-download-image-dir "~/Pictures/org"
    ))
 (after! org-download
   (setq-default
-   org-download-image-dir "~/pictures/org" ; buf local: -*- mode: Org; org-download-image-dir: "~/pictures/foo"; -*-
+   org-download-image-dir "~/Pictures/org" ; buf local: -*- mode: Org; org-download-image-dir: "~/pictures/foo"; -*-
    )
   (setq
    org-download-method 'directory
-   org-download-image-dir "~/pictures/org" ; buf local: -*- mode: Org; org-download-image-dir: "~/pictures/foo"; -*-
+   org-download-image-dir "~/Pictures/org" ; buf local: -*- mode: Org; org-download-image-dir: "~/pictures/foo"; -*-
    org-download-heading-lvl nil ; do not want this categorized by headings
    org-download-timestamp "%Y%m%d-%H%M%S_"
    )
