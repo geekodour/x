@@ -36,6 +36,7 @@ tree -L 2 -I Desktop/ -I Downloads/ -I Books/ -I Zotero/ -I dump/ -I Documents/ 
 #+end_example
 
 
+
 #+begin_src fish :dir ~/ :results output verbatim :tangle ~/.config/fish/functions/push_everything.fish
 function push_everything --description 'push personal repos to gh'
   pushd ~
