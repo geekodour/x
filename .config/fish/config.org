@@ -31,38 +31,19 @@
   - Idea is not to have really short alias names, idea is to have it infront of you or in your memory when you need it
 
 * New dir for projects
-- MAKE ALL MAKEFILES CONSISTENT!!!!!:
 ** locus (all public)
 - This makefile can live in workshop and we can symlink it here
 - Makefile:
-  - Get repos: Goes over each repo, and collects the git remote and stores in a file. Complains if it is not a git repo.
-  - Push: Push all git repos
 - Each project will have its own makefile to generate everything it needs, eg. all export + exports from notes + generating systemfiles stuff for o
 *** o
-- [X] Move resume here
-- [X] Move project_ideas here, change theme
-- [X] Move syllabus.org here under assets and probaby change theme to the new thing
-- [X] Add makefile for export
-- [ ] Maybe move the generation logic inside script here instead of systemfiles
 *** blog
 *** scrap
 *** todayi
 *** diary
 *** mogoz
 *** anki (out of notes)
-** projects (all private by default)
-*** contract
-*** work
-*** open-source
 ** faafo
-- Makefile:
-  - Make the makefile like what promethus project does
-  - Get repos: Goes over each repo, and collects the git remote and stores in a file. Complains if it is not a git repo.
-  - Push: Push all git repos
 *** experiments
-- Each directory is independent ad-hoc experiment. When I am not sure if I should create a repo for a new experiment or no. It goes here. It should be written in a self-contained way so that it's super easy to extract the directory out into its own repo if needed.
-*** archive
-- junk2 (dir)
 *** gig23
 ** infra
 *** workshop

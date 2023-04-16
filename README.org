@@ -1,6 +1,6 @@
 #+title: x
 
-* Directory Tree
+* Whole tree 🌴
 #+begin_src fish :dir ~/ :results output verbatim :exports both
 tree -L 2 -I Desktop/ -I Downloads/ -I Books/ -I Zotero/ -I dump/ -I Documents/ -I Pictures
 #+end_src
@@ -34,3 +34,23 @@ tree -L 2 -I Desktop/ -I Downloads/ -I Books/ -I Zotero/ -I dump/ -I Documents/ 
 
 20 directories, 4 files
 #+end_example
+
+
+#+begin_src fish :dir ~/ :results output verbatim
+set -l trees locus infra faafo
+for t in $trees;
+    echo "pushing repos under ~/$t"
+    pushd $t
+    set -l dirs $(ls)
+    for i in $dirs;
+        echo "pushing ~/$t/$i"
+        pushd $i
+        git add -A
+        git commit -m "automated commit, god bless"
+        git push origin main
+        popd
+        printf "done pushing ~/$t/$i\n\n"
+    end
+    popd
+end
+#+end_src
