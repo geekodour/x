@@ -8,47 +8,19 @@
 #+end_src
 
 * Things to fix
-- [ ] Clean =~/.config= if possible
-- [ ] Use =xdg-ninja= to clean =~=
 - [ ] Figure out a way to easily disable right-prompt for fish, annoying while I need to copy text from terminal
 - [ ] Add GPG, age keys properly.
   - alias exportprivategpg='gpg --export-secret-key -a hrishikeshbman@gmail.com'
   - alias exportpublicgpg='gpg --armor --export hrishikeshbman@gmail.com'
 - [ ] Uninstall not needed arch packages
 - [ ] Uninstall all asdf packages and virtual envs
-- [ ] Make a script to push all locus projects at once.
-- [ ] Move ASDF
-- [ ] Fix Hugo bug that sometimes doesn't let me run my site locally
-- [ ] Rest Poetry and Direnv setups in all projects.
 - [ ] Delete npm
-- [ ] Finalize, ASDF+Poetry+Direnv setup
 - [ ] Get rid of zotero directory
 - [ ] Make a git alias function for =wip=
-- [ ] Dotted files renamed to =x= and will have a README.org which will have tree info and individual repo info about locus, faafo and infra
 - [ ] Have an alias called motivate, which basically uses mpv to play motivational tracks like the rock talking or david goggins talking etc.
 - [ ] Need better git aliases man (grepos, gremotes what. Need to streamline this shit)
   - Make a mix of git alias and fish aliases, wrapper will help in autocomplete
   - Idea is not to have really short alias names, idea is to have it infront of you or in your memory when you need it
-
-* New dir for projects
-** locus (all public)
-- This makefile can live in workshop and we can symlink it here
-- Makefile:
-- Each project will have its own makefile to generate everything it needs, eg. all export + exports from notes + generating systemfiles stuff for o
-*** o
-*** blog
-*** scrap
-*** todayi
-*** diary
-*** mogoz
-*** anki (out of notes)
-** faafo
-*** experiments
-*** gig23
-** infra
-*** workshop
-*** systemfiles
-*** dottedfiles
 
 * Keychain
 See [[https://www.funtoo.org/Keychain][Funtoo Keychain Project - Funtoo]]

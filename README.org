@@ -36,21 +36,25 @@ tree -L 2 -I Desktop/ -I Downloads/ -I Books/ -I Zotero/ -I dump/ -I Documents/ 
 #+end_example
 
 
-#+begin_src fish :dir ~/ :results output verbatim
-set -l trees locus infra faafo
-for t in $trees;
-    echo "pushing repos under ~/$t"
-    pushd $t
-    set -l dirs $(ls)
-    for i in $dirs;
-        echo "pushing ~/$t/$i"
-        pushd $i
-        git add -A
-        git commit -m "automated commit, god bless"
-        git push origin main
-        popd
-        printf "done pushing ~/$t/$i\n\n"
-    end
-    popd
+#+begin_src fish :dir ~/ :results output verbatim :tangle ~/.config/fish/functions/push_everything.fish
+function push_everything --description 'push personal repos to gh'
+  pushd ~
+  set -l trees locus infra faafo
+  for t in $trees;
+      echo "pushing repos under ~/$t"
+      pushd $t
+      set -l dirs $(ls)
+      for i in $dirs;
+          echo "pushing ~/$t/$i"
+          pushd $i
+          git add -A
+          git commit -m "automated commit, god bless"
+          git push origin main
+          popd
+          printf "done pushing ~/$t/$i\n\n"
+      end
+      popd
+  end
+  popd
 end
 #+end_src
