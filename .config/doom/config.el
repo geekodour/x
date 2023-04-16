@@ -191,7 +191,7 @@
 ;; ip: some project idea
 ("i", "ideas")
 ("il" "add idea" entry (file ,(concat org-directory "ideas/ideas.org")) "* %?" :empty-lines 1)
-("ip" "add project idea" entry (file ,(concat org-directory "ideas/project_ideas.org"))
+("ip" "add project idea" entry (file "~/locus/o/assets/pages/project_ideas.org")
 "* SEED %? %^g
 ** Description:
 ** References:" :empty-lines 1)

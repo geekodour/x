@@ -18,6 +18,7 @@ This config is the definition of anti-pragmatism and idiocrasy.
 - [[https://github.com/noctuid/evil-guide#does-emacs-have-vim-like-tabs-distinct-window-configurations=][noctuid/evil-guide: Draft of a guide for using emacs with evil]]
 - [[https://github.com/chrisdone/elisp-guide][elisp-guide: A quick guide to Emacs Lisp programming]]
 * Fix now
+- [ ] Create workspaces for locus, for config etc.
 - [ ] Learn how to properly set keybindings (It's a mess rn)
 - [ ] Learn hooks
 - [ ] Learn sessions
@@ -313,7 +314,7 @@ NOTE: We're using =,= to escape =*= , the =,= will go away when tangled.
 ;; ip: some project idea
 ("i", "ideas")
 ("il" "add idea" entry (file ,(concat org-directory "ideas/ideas.org")) "* %?" :empty-lines 1)
-("ip" "add project idea" entry (file ,(concat org-directory "ideas/project_ideas.org"))
+("ip" "add project idea" entry (file "~/locus/o/assets/pages/project_ideas.org")
 "* SEED %? %^g
 ,** Description:
 ,** References:" :empty-lines 1)

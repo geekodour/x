@@ -8,19 +8,9 @@
 #+end_src
 
 * Things to fix
-- [ ] Figure out a way to easily disable right-prompt for fish, annoying while I need to copy text from terminal
-- [ ] Add GPG, age keys properly.
-  - alias exportprivategpg='gpg --export-secret-key -a hrishikeshbman@gmail.com'
-  - alias exportpublicgpg='gpg --armor --export hrishikeshbman@gmail.com'
-- [ ] Uninstall not needed arch packages
-- [ ] Uninstall all asdf packages and virtual envs
-- [ ] Delete npm
-- [ ] Get rid of zotero directory
-- [ ] Make a git alias function for =wip=
-- [ ] Have an alias called motivate, which basically uses mpv to play motivational tracks like the rock talking or david goggins talking etc.
-- [ ] Need better git aliases man (grepos, gremotes what. Need to streamline this shit)
-  - Make a mix of git alias and fish aliases, wrapper will help in autocomplete
-  - Idea is not to have really short alias names, idea is to have it infront of you or in your memory when you need it
+- [ ] Mix git aliases and fish git aliases
+- [ ] Figure out a way to easily disable right-prompt for fish
+- [ ] Really need media management soon
 
 * Keychain
 See [[https://www.funtoo.org/Keychain][Funtoo Keychain Project - Funtoo]]
@@ -30,6 +20,9 @@ See [[https://www.funtoo.org/Keychain][Funtoo Keychain Project - Funtoo]]
 - Usually there will be only one key per =SEC_PROTOCOL=, but if they have the same password, they can be included in the same variable via append.
 - Since during login, =fish_variables= is loaded before =config.fish= is executed, =config.fish= will have access to variables defined in =fish_variables=.
 - Change in exported universal variable is only possible if =set -Ux= is run before login shell is executed. It can be modified via =export= command for that specific shell but that's not specific to fish anyway. If you make a change with =set -Ux= changes to other programs to that environment variable will only show after boot.
+- [ ] Add GPG, age keys properly. & AGE
+  - alias exportprivategpg='gpg --export-secret-key -a hrishikeshbman@gmail.com'
+  - alias exportpublicgpg='gpg --armor --export hrishikeshbman@gmail.com'
 #+begin_src fish
 if status is-interactive
     keychain --eval --quiet --quick --nogui $SSH_KEYS_TO_AUTOLOAD | source # ssh

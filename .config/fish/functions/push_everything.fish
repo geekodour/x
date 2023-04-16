@@ -8,10 +8,9 @@ function push_everything --description 'push personal repos to gh'
       for i in $dirs;
           echo "pushing ~/$t/$i"
           pushd $i
-          ls
-          # git add -A
-          # git commit -m "automated commit, god bless"
-          # git push origin main
+          git add -A
+          git commit -m "automated commit, god bless"
+          git push origin main
           popd
           printf "done pushing ~/$t/$i\n\n"
       end
