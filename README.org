@@ -59,3 +59,17 @@ function push_everything --description 'push personal repos to gh'
   popd
 end
 #+end_src
+
+#+begin_src org-mode :tangle ~/.emacs.d/.local/cache/treemacs-persist
+,* Perspective wick
+,** o
+ - path :: ~/locus/o
+,** blog
+ - path :: ~/locus/blog
+,** notes
+ - path :: ~/notes
+,** anki
+ - path :: ~/locus/anki
+,** .config
+ - path :: ~/.config
+#+end_src

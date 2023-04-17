@@ -12,7 +12,8 @@
 - [ ] Figure out a way to easily disable right-prompt for fish
 - [ ] Really need media management soon
 
-* Keychain
+* Security
+** Keychain
 See [[https://www.funtoo.org/Keychain][Funtoo Keychain Project - Funtoo]]
 - Add a key: =set -Ua <SEC_PROTOCOL>_KEYS_TO_AUTOLOAD keypath=
   - Not exported, executed outside of =config.fish=
@@ -20,14 +21,32 @@ See [[https://www.funtoo.org/Keychain][Funtoo Keychain Project - Funtoo]]
 - Usually there will be only one key per =SEC_PROTOCOL=, but if they have the same password, they can be included in the same variable via append.
 - Since during login, =fish_variables= is loaded before =config.fish= is executed, =config.fish= will have access to variables defined in =fish_variables=.
 - Change in exported universal variable is only possible if =set -Ux= is run before login shell is executed. It can be modified via =export= command for that specific shell but that's not specific to fish anyway. If you make a change with =set -Ux= changes to other programs to that environment variable will only show after boot.
-- [ ] Add GPG, age keys properly. & AGE
-  - alias exportprivategpg='gpg --export-secret-key -a hrishikeshbman@gmail.com'
-  - alias exportpublicgpg='gpg --armor --export hrishikeshbman@gmail.com'
 #+begin_src fish
 if status is-interactive
     keychain --eval --quiet --quick --nogui $SSH_KEYS_TO_AUTOLOAD | source # ssh
 end
 #+end_src
+** SSH
+- Generating keys
+- Deleting keys
+- Rotating keys
+- Backing up keys
+- [[https://github.com/moul/assh][GitHub - moul/assh: make your ssh client smarter]]
+- [[https://github.com/charmbracelet/melt][GitHub - charmbracelet/melt: 🧊 Backup and restore Ed25519 SSH keys with seed ...]]
+** GPG
+- =gpgconf=
+- signing stuff
+- encrypting stuff
+- [ ] Add GPG, age keys properly. & AGE
+  - alias exportprivategpg='gpg --export-secret-key -a hrishikeshbman@gmail.com'
+  - alias exportpublicgpg='gpg --armor --export hrishikeshbman@gmail.com'
+** Age
+- This is good for anonymous stuff, because gpg can have email linked. w age, i'll never know.
+- I think on start it should ask me keys for all 3, age, gpg, ssh (if needed, we'll see.)
+** Encrypting and Signing
+This is very usecase specific.
+- signify https://www.openbsd.org/papers/bsdcan-signify.html
+- mkcert when?
 
 * Integrations
 ** Sway
