@@ -24,6 +24,7 @@ See [[https://www.funtoo.org/Keychain][Funtoo Keychain Project - Funtoo]]
 #+begin_src fish
 if status is-interactive
     keychain --eval --quiet --quick --nogui $SSH_KEYS_TO_AUTOLOAD | source # ssh
+    keychain --eval --quiet --quick --nogui --agents gpg "$GPG_FP_TO_AUTOLOAD" | source # gpg
 end
 #+end_src
 ** SSH
@@ -34,12 +35,10 @@ end
 - [[https://github.com/moul/assh][GitHub - moul/assh: make your ssh client smarter]]
 - [[https://github.com/charmbracelet/melt][GitHub - charmbracelet/melt: 🧊 Backup and restore Ed25519 SSH keys with seed ...]]
 ** GPG
-- =gpgconf=
-- signing stuff
-- encrypting stuff
-- [ ] Add GPG, age keys properly. & AGE
-  - alias exportprivategpg='gpg --export-secret-key -a hrishikeshbman@gmail.com'
-  - alias exportpublicgpg='gpg --armor --export hrishikeshbman@gmail.com'
+#+begin_src fish
+# see https://stackoverflow.com/questions/51504367/gpg-agent-forwarding-inappropriate-ioctl-for-device
+set -x GPG_TTY $(tty)
+#+end_src
 ** Age
 - This is good for anonymous stuff, because gpg can have email linked. w age, i'll never know.
 - I think on start it should ask me keys for all 3, age, gpg, ssh (if needed, we'll see.)

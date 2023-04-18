@@ -1,17 +1,22 @@
 # see https://batsov.com/articles/2020/11/22/basic-git-setup/
 [user]
-	email = hrishikeshbman@gmail.com
-	name = Hrishikesh Barman
+    email = oss@geekodour.org
+    name = Hrishikesh Barman
+    signingKey = B1E5E45875CB0661!
+[tag]
+    forceSignAnnotated = true
+[commit]
+    gpgSign = false
 [init]
-	defaultBranch = main
+    defaultBranch = main
 [core]
-	editor = nvim
-  pager = delta
-	excludesFile = /home/geekodour/.config/git/global_ignore
+    editor = nvim
+    pager = delta
+    excludesFile = /home/geekodour/.config/git/global_ignore
 [pull]
-	rebase = true
+    rebase = true
 [interactive]
-  diffFilter = delta --color-only --features=interactive
+    diffFilter = delta --color-only --features=interactive
 [delta]
     dark = true
     side-by-side = true
@@ -47,4 +52,4 @@
 [diff]
     colorMoved = default
 [github]
-	user = geekodour
+    user = geekodour

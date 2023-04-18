@@ -3,7 +3,11 @@
 
 if status is-interactive
     keychain --eval --quiet --quick --nogui $SSH_KEYS_TO_AUTOLOAD | source # ssh
+    keychain --eval --quiet --quick --nogui --agents gpg "$GPG_FP_TO_AUTOLOAD" | source # gpg
 end
+
+# see https://stackoverflow.com/questions/51504367/gpg-agent-forwarding-inappropriate-ioctl-for-device
+set -x GPG_TTY $(tty)
 
 if test (tty) = /dev/tty1
     sway
