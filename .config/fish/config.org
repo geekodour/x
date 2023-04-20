@@ -32,6 +32,7 @@ end
 - Deleting keys
 - Rotating keys
 - Backing up keys
+- https://github.com/dolmen/github-keygen (For github this is useful)
 - [[https://github.com/moul/assh][GitHub - moul/assh: make your ssh client smarter]]
 - [[https://github.com/charmbracelet/melt][GitHub - charmbracelet/melt: 🧊 Backup and restore Ed25519 SSH keys with seed ...]]
 ** GPG
