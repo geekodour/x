@@ -35,8 +35,23 @@ tree -L 2 -I Desktop/ -I Downloads/ -I Books/ -I Zotero/ -I dump/ -I Documents/ 
 20 directories, 4 files
 #+end_example
 
+** Export locus
+#+begin_src fish :dir ~/ :results output verbatim :tangle ~/.config/fish/functions/export_locus.fish
+function export_locus --description 'export most of locus'
+  pushd ~/locus
+  set -l repos_to_export blog diary mogoz o scrap todayi
+  for r in $repos_to_export;
+      pushd $r
+      echo "exporting repos ~/locus/$r"
+      make export
+      echo "done exporting repos ~/locus/$r"
+      popd
+  end
+  popd
+end
+#+end_src
 
-
+** Push things
 #+begin_src fish :dir ~/ :results output verbatim :tangle ~/.config/fish/functions/push_everything.fish
 function push_everything --description 'push personal repos to gh'
   pushd ~
@@ -60,6 +75,7 @@ function push_everything --description 'push personal repos to gh'
 end
 #+end_src
 
+** Workspace
 #+begin_src org-mode :tangle ~/.emacs.d/.local/cache/treemacs-persist
 ,* Perspective wick
 ,** o
