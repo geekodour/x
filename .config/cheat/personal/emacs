@@ -35,6 +35,7 @@
 
 # usage
   # basic
+  - h-RET-i : Open emacs offline manual and open index
   - C-g : To get out of fuckups (MOST IMPORTANT)
   - SPC-p-p : list projects
   - ESC/C-g : usually quits the minibuffer

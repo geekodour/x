@@ -10,7 +10,12 @@
 #      --domains yoursite.com \ # Do not follow links outside this domain.
 #      --no-parent \ # Don't follow links outside the directory you pass in.
 #          yoursite.com/whatever/path # The URL to download
+#
+# httrack can also be used.
+# Example:
+# Download a whole site without external links at 2 depth
+# httrack <site_name>  -O "<output_dir>" --mirrorlinks  --display -r2 --stay-on-same-address
 function offlinesavesite --wraps='wget -np -r -k' --description 'alias Download site for offline viewing, no external links'
-  wget -np -r -k $argv
-        
+    wget -np -r -k $argv
+
 end

@@ -30,8 +30,8 @@
 ;; others
 (package! verb)
 (package! devdocs-browser)
-(package! chatgpt-shell
-  :recipe (:host github :repo "xenodium/chatgpt-shell"))
+;; (package! chatgpt-shell
+;;   :recipe (:host github :repo "xenodium/chatgpt-shell"))
 (package! flymake-vale
   :recipe (:host github :repo "tpeacock19/flymake-vale"))
 (package! flymake-popon

@@ -2,13 +2,12 @@
 
 * Whole tree 🌴
 #+begin_src fish :dir ~/ :results output verbatim :exports both
-tree -L 2 -I Desktop/ -I Downloads/ -I Books/ -I Zotero/ -I dump/ -I Documents/ -I Pictures
+tree -L 2 -I Desktop/ -I Downloads/ -I Books/ -I Zotero/ -I dump/ -I Documents/ -I Pictures -I papers
 #+end_src
 
 #+RESULTS:
 #+begin_example
 .
-├── bw
 ├── faafo
 │   ├── experiments
 │   └── gig23
@@ -17,13 +16,13 @@ tree -L 2 -I Desktop/ -I Downloads/ -I Books/ -I Zotero/ -I dump/ -I Documents/ 
 ├── locus
 │   ├── anki
 │   ├── blog
+│   ├── cheat
 │   ├── diary
 │   ├── mogoz
 │   ├── o
 │   ├── scrap
 │   └── todayi
 ├── notes
-│   ├── nikitaexplanation.org
 │   └── org
 ├── projects
 │   ├── gigs
@@ -32,7 +31,7 @@ tree -L 2 -I Desktop/ -I Downloads/ -I Books/ -I Zotero/ -I dump/ -I Documents/ 
 ├── README.org
 └── wallpaper.jpg
 
-20 directories, 4 files
+21 directories, 2 files
 #+end_example
 
 ** Export locus
