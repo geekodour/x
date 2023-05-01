@@ -37,9 +37,6 @@ function c --description 'alias view and edit cheatsheet' -a opt
 
     if set -q _flag_edit
         if not set -q argv[1]
-            # # we can show fzf here
-            # echo "error: missing file"
-            # return 1
             pushd $cheat_dir
             set -l cheats (ls |  xargs basename -s ".org")
             set argv (string split " " $cheats | fzf)
@@ -67,6 +64,18 @@ function c --description 'alias view and edit cheatsheet' -a opt
     end
 
     if set -q argv[1]
-        pandoc --wrap=none --from=org --to=markdown $cheat_dir/$argv.org | glow -p
+        set -l final_cheat_path "$cheat_dir/$argv.org"
+        if not test -e $final_cheat_path
+            read -l -P 'no cheat available locally, fetch from internets? [y/N] ' confirm
+            switch $confirm
+                case Y y
+                    curl cheat.sh/$argv | bat --style=plain
+                    return 0
+                case '' N n
+                    return 1
+            end
+        end
+        pandoc --wrap=none --from=org --to=markdown $final_cheat_path | glow -p
+        return 0
     end
 end
