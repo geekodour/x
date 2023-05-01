@@ -1,7 +1,8 @@
 set -g cheat_dir "$HOME/locus/cheat/c"
 
 # editor command
-set -g editor_command "emacs -nw"
+set -g editor_command emacs
+# set -g editor_command "emacs -nw"
 # set -g editor_command $EDITOR
 set -g ed (echo $editor_command | string split ' ')[1]
 set -g ed_opts (echo $editor_command | string split ' ')[2..]

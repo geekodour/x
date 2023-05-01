@@ -20,7 +20,6 @@ tree -L 2 -I Desktop/ -I Downloads/ -I Books/ -I Zotero/ -I dump/ -I Documents/ 
 │   ├── diary
 │   ├── mogoz
 │   ├── o
-│   ├── scrap
 │   └── todayi
 ├── notes
 │   └── org
@@ -31,14 +30,14 @@ tree -L 2 -I Desktop/ -I Downloads/ -I Books/ -I Zotero/ -I dump/ -I Documents/ 
 ├── README.org
 └── wallpaper.jpg
 
-21 directories, 2 files
+20 directories, 2 files
 #+end_example
 
 ** Export locus
 #+begin_src fish :dir ~/ :results output verbatim :tangle ~/.config/fish/functions/export_locus.fish
 function export_locus --description 'export most of locus'
   pushd ~/locus
-  set -l repos_to_export blog diary mogoz o scrap todayi
+  set -l repos_to_export blog diary mogoz o todayi cheat
   for r in $repos_to_export;
       pushd $r
       echo "exporting repos ~/locus/$r"
