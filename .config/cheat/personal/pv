@@ -1,7 +1,0 @@
-pv access.log | gzip > access.log.gz # pv acts as cat here
-# show both disk io speed and compression speed
-pv -cN source access.log | gzip | pv -cN gzip > access.log.gz # -N: Named, -c: Formatting
-# tar progress
-tar -czf - . | pv > out.tgz
-# for fun
-pv /dev/zero > /dev/null

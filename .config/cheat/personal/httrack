@@ -1,3 +1,0 @@
-# download a whole site without external links at 2 depth
-httrack <site_name>  -O "<output_dir>" --mirrorlinks  --display -r2 --stay-on-same-address
-

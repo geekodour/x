@@ -1,3 +1,0 @@
-# readable output
-ip -br -c <object> # brief and colorized output
--s # get stats

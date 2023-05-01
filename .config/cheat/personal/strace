@@ -1,1 +1,0 @@
-strace -c ./exe # show syscall freq
