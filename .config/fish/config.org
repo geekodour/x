@@ -131,7 +131,6 @@ set -x ASDF_DATA_DIR $XDG_DATA_HOME/asdf
 * Sourcing
 #+begin_src fish
 source ~/.config/nnn/init # nnn
-source ~/.config/cheat/init # cheat
 source ~/.config/starship/init # starship
 source /opt/asdf-vm/asdf.fish # asdf
 source ~/.config/zoxide/init # zoxide

@@ -31,7 +31,6 @@ set -x NODE_REPL_HISTORY $XDG_DATA_HOME/node_repl_history
 set -x LESSHISTFILE $XDG_STATE_HOME/less/history
 
 source ~/.config/nnn/init # nnn
-source ~/.config/cheat/init # cheat
 source ~/.config/starship/init # starship
 source /opt/asdf-vm/asdf.fish # asdf
 source ~/.config/zoxide/init # zoxide
