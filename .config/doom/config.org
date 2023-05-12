@@ -315,9 +315,7 @@ NOTE: We're using =,= to escape =*= , the =,= will go away when tangled.
 ("i", "ideas")
 ("il" "add idea" entry (file ,(concat org-directory "ideas/ideas.org")) "* %?" :empty-lines 1)
 ("ip" "add project idea" entry (file "~/locus/o/assets/pages/project_ideas.org")
-"* SEED %? %^g
-,** Description:
-,** References:" :empty-lines 1)
+"* SEED %? %^g" :empty-lines 1)
 #+end_src
 **** Journal
 #+begin_src elisp

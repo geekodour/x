@@ -192,9 +192,7 @@
 ("i", "ideas")
 ("il" "add idea" entry (file ,(concat org-directory "ideas/ideas.org")) "* %?" :empty-lines 1)
 ("ip" "add project idea" entry (file "~/locus/o/assets/pages/project_ideas.org")
-"* SEED %? %^g
-** Description:
-** References:" :empty-lines 1)
+"* SEED %? %^g" :empty-lines 1)
 
 ;; journal
 ;; jj: journal entry, custom journal entry template attempts to emulate org-journal insertion.

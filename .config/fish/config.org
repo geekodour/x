@@ -38,6 +38,7 @@ set -x GPG_TTY $(tty)
 ** Encrypting and Signing
 This is very usecase specific.
 - signify https://www.openbsd.org/papers/bsdcan-signify.html
+- https://github.com/jedisct1/minisign
 - mkcert when?
 
 * Integrations
