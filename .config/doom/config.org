@@ -205,13 +205,15 @@ I am using [[https://github.com/joaotavora/eglot][eglot]] instead of =lsp-mode=,
 - =pyright= : python
 **** eldoc issues
 - eldoc showing escape sequences (noticed in python, pyright lsp atleast)
-- =pyright= team only guarantee to target the markdown renderer supported by the VSCode LSP client. =eglot-prefer-plaintext= should help w pyright as of the moment. This will show everything in plain text, but that's fine for me.
-- =pyright= will not always show docstrings if they're not in the stub. See [[https://github.com/microsoft/pyright/issues/3632][this]] for more info.
-- But the extra =__= are [[https://github.com/jrblevin/markdown-mode/issues/661][still an issue]] w =clangd=
+  - =pyright= team only guarantee to target the markdown renderer supported by the VSCode LSP client. =eglot-prefer-plaintext= should help w pyright as of the moment. This will show everything in plain text, but that's fine for me.
+  - =pyright= will not always show docstrings if they're not in the stub. See [[https://github.com/microsoft/pyright/issues/3632][this]] for more info.
+  - But the extra =__= are [[https://github.com/jrblevin/markdown-mode/issues/661][still an issue]] w =clangd=
+- eglot messes w yasnippet. fix added as suggested [[https://stackoverflow.com/questions/72601990/how-to-show-suggestions-for-yasnippets-when-using-eglot][here]]. works fine!
 #+begin_src elisp
-(setq
- eglot-prefer-plaintext t
- )
+(setq eglot-prefer-plaintext t)
+(setq-default eglot-workspace-configuration '((:gopls . ((gofumpt . t)))))
+
+(add-hook 'eglot-managed-mode-hook (lambda ()(add-to-list 'company-backends '(company-capf :with company-yasnippet))))
 #+end_src
 ****
 **** lsptreemacs

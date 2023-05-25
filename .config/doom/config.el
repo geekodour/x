@@ -115,6 +115,8 @@
  eglot-prefer-plaintext t
  )
 
+(add-hook 'eglot-managed-mode-hook (lambda ()(add-to-list 'company-backends '(company-capf :with company-yasnippet))))
+
 (after! org
   (setq
    org-tags-column 0
