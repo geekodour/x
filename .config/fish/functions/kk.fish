@@ -13,5 +13,5 @@ function kk --description 'alias kk conventional commits'
     echo '2. "!" after type is breaking change. Eg. fix!: some description'
     printf "\n"
     echo "https://conventionalcommits.org"
-    wl-copy "<type>(optional scope): <description>"
+    wl-copy "T(S): D"
 end
