@@ -111,9 +111,8 @@
   :hook (org-agenda-mode . org-super-agenda-mode)
 )
 
-(setq
- eglot-prefer-plaintext t
- )
+(setq eglot-prefer-plaintext t)
+(setq-default eglot-workspace-configuration '((:gopls . ((gofumpt . t)))))
 
 (add-hook 'eglot-managed-mode-hook (lambda ()(add-to-list 'company-backends '(company-capf :with company-yasnippet))))
 
@@ -320,7 +319,7 @@
 
 (after! projectile
   (setq
-   projectile-project-search-path '("~/projects" "~/locus" "~/infra" "~/faafo")
+   projectile-project-search-path '("~/projects" "~/locus" "~/infra" "~/faafo" "~/infra/templates")
    +workspaces-on-switch-project-behavior nil)
 
   (projectile-add-known-project "~/.config/") ; not a git repo but has a .projectile
