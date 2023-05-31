@@ -34,5 +34,6 @@ source ~/.config/nnn/init # nnn
 source ~/.config/starship/init # starship
 source /opt/asdf-vm/asdf.fish # asdf
 source ~/.config/zoxide/init # zoxide
+source ~/.opam/opam-init/init.fish > /dev/null 2>&1; or true # ocaml opam
 
 alias cd z

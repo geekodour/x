@@ -75,7 +75,7 @@ function c --description 'alias view and edit cheatsheet' -a opt
                     return 1
             end
         end
-        pandoc --wrap=none --from=org --to=markdown $final_cheat_path | glow -p
+        pandoc --wrap=none --from=org --to=gfm $final_cheat_path | glow -p
         return 0
     end
 end

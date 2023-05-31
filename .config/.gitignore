@@ -32,3 +32,6 @@ GIMP
 dlv
 gdlv.*
 gdlv
+glow
+irb
+pudb

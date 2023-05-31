@@ -12,6 +12,9 @@ tree -L 2 -I Desktop/ -I Downloads/ -I Books/ -I Zotero/ -I dump/ -I Documents/ 
 │   ├── experiments
 │   └── gig23
 ├── infra
+│   ├── t
+│   ├── t-base-go
+│   ├── t-base-python
 │   └── workshop
 ├── locus
 │   ├── anki
@@ -30,7 +33,7 @@ tree -L 2 -I Desktop/ -I Downloads/ -I Books/ -I Zotero/ -I dump/ -I Documents/ 
 ├── README.org
 └── wallpaper.jpg
 
-20 directories, 2 files
+23 directories, 2 files
 #+end_example
 
 ** Export locus
