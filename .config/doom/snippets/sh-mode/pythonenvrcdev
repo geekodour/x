@@ -1,7 +1,0 @@
-# -*- mode: snippet -*-
-# name: pythonenvrcdev
-# key: trigger-key
-# condition: t
-# --
-export PYTHONDONTWRITEBYTECODE=1
-export PYTHONBREAKPOINT="pudb.set_trace"

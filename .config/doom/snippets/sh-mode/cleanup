@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: cleanup
+# key: cleanup
+# --
+
+function cleanup {
+  # do cleanup
+}
+
+trap cleanup EXIT

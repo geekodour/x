@@ -6,6 +6,7 @@
 [tag]
     forceSignAnnotated = true
 [commit]
+    template = /home/geekodour/.config/git/gitmessage
     gpgSign = false
 [init]
     defaultBranch = main
