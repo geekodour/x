@@ -15,6 +15,7 @@ in
     users.zuck = {pkgs, ... }: {
       home.stateVersion = "23.05";
 
+      # various configs from arch
       home.file.".config/git".source = "${x}/.config/git/";
       home.file.".config/waybar".source = "${x}/.config/waybar/";
       home.file.".config/sway/config".source = "${x}/.config/sway/config_for_hq";
@@ -24,10 +25,13 @@ in
       home.file.".config/zoxide".source = "${x}/.config/zoxide";
       home.file.".config/nnn/init".source = "${x}/.config/nnn/init";
       home.file.".config/starship".source = "${x}/.config/starship";
+
       # fish
+      # not using arch's fish config directly
       programs.fish = {
         enable = true;
         interactiveShellInit = ''
+          keychain --eval --quiet --quick --nogui ${h}/.ssh/id_ed25519 | source
           source ~/.config/nnn/init # nnn
           source ~/.config/starship/init # starship
           source ~/.config/zoxide/init # zoxide
@@ -37,7 +41,13 @@ in
       home.file.".config/fish/functions".source = "${x}/.config/fish/functions";
       home.file.".config/fish/conf.d/gitaliases.fish".source = "${x}/.config/fish/conf.d/gitaliases.fish";
 
+      # NOTE: this doesn't seem to work, will come back someday later
+      # programs.keychain = {
+      #   agents = ["ssh"];
+      #   keys = ["${h}/.ssh/id_ed25519"];
+      # };
 
+      # packages
       home.packages = with pkgs; [
           tmux
           sway
@@ -127,6 +137,7 @@ in
           vulkan-loader
           vulkan-validation-layers
           ];
+
       home.sessionVariables = {
         # sway
         XWAYLAND_NO_GLAMOR = "1";
