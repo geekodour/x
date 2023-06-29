@@ -8,7 +8,7 @@ in
   imports = [
     (import "${home-manager}/nixos")
   ];
-
+  programs.fish.enable = true; # need to enable it outside of hm aswell
   home-manager = {
     useUserPackages = true;
     useGlobalPkgs = true;
@@ -23,8 +23,17 @@ in
       home.file.".config/wofi".source = "${x}/.config/wofi";
       home.file.".config/zoxide".source = "${x}/.config/zoxide";
       home.file.".config/nnn/init".source = "${x}/.config/nnn/init";
+      home.file.".config/starship".source = "${x}/.config/starship";
       # fish
-      programs.fish.enable = true; # maybe remove this later
+      programs.fish = {
+        enable = true;
+        interactiveShellInit = ''
+          source ~/.config/nnn/init # nnn
+          source ~/.config/starship/init # starship
+          source ~/.config/zoxide/init # zoxide
+          alias cd z
+        ''; 
+      };
       home.file.".config/fish/functions".source = "${x}/.config/fish/functions";
       home.file.".config/fish/conf.d/gitaliases.fish".source = "${x}/.config/fish/conf.d/gitaliases.fish";
 
