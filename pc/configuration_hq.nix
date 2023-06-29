@@ -70,6 +70,29 @@
     (nerdfonts.override { fonts = [ "FiraCode" "JetBrainsMono" ]; })
   ];
 
+  services.interception-tools = {
+    enable = true;
+    udevmonConfig = let
+      dfkconfig = builtins.toFile "ducky.yaml" ''
+        TIMING:
+          TAP_MILLISEC: 200
+          DOUBLE_TAP_MILLISEC: 150
+        MAPPINGS:
+          - KEY: KEY_CAPSLOCK
+            TAP: KEY_ESC
+            HOLD: KEY_LEFTCTRL
+      '';
+    in ''
+      - JOB: |
+          ${pkgs.interception-tools}/bin/intercept -g $DEVNODE \
+            | ${pkgs.interception-tools-plugins.dual-function-keys}/bin/dual-function-keys -c ${dfkconfig} \
+            | ${pkgs.interception-tools}/bin/uinput -d $DEVNODE
+        DEVICE:
+          EVENTS:
+            EV_KEY: [KEY_CAPSLOCK]
+    '';
+  };
+
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
