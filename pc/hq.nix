@@ -35,9 +35,72 @@ in
           firefox
           alacritty
           fzf
-          zoxide
-          bat
           nnn
+          fd
+          mpv
+
+          # misc
+          bat
+          feh
+          exa
+          zoxide
+          catimg
+          chafa
+          glow
+          imv
+          mediainfo
+          neofetch
+          onefetch
+          cpufetch
+          pdfarranger
+          starship
+          trash-cli
+          sysz
+          tridactyl-native
+          grim
+          maim
+          slurp
+          swappy
+          unzip
+          anki-bin
+          libsForQt5.okular
+          eva
+          gfold
+          entr
+          delta
+          podman
+
+          # inspection/debugging tools
+          netcat-gnu
+          lsof
+          dig
+          evtest
+          htop
+          man
+          man-pages
+          wev
+          dua
+          duf
+
+          # editor
+          nodePackages.bash-language-server
+          nodePackages.typescript-language-server
+          gopls
+          nodePackages.pyright
+          isort
+          shellcheck
+          shfmt
+          shellharden
+
+          # system tweaks
+          earlyoom
+          hunspellDicts.en-us
+          keychain
+          linux-firmware
+          mako
+          pmount
+          qemu
+          virt-manager
 
           # display
           wl-clipboard
