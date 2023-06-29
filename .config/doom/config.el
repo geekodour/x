@@ -335,7 +335,7 @@
 
 (after! projectile
   (setq
-   projectile-project-search-path '("~/projects" "~/locus" ("~/infra" . 2) ("~/faafo" . 2) "~/dump")
+   projectile-project-search-path '(("~/projects" . 2) "~/locus" ("~/infra" . 2) ("~/faafo" . 2) "~/dump")
    +workspaces-on-switch-project-behavior nil)
 
   (projectile-add-known-project "~/.config/") ; not a git repo but has a .projectile

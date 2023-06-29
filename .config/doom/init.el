@@ -151,7 +151,7 @@
        ;;lua               ; one-based indices? one-based indices
        markdown          ; writing docs for people to ignore
        ;;nim               ; python + lisp at the speed of c
-       ;;nix               ; I hereby declare "nix geht mehr!"
+       nix               ; I hereby declare "nix geht mehr!"
        (ocaml +lsp)             ; an objective camel
        (org +dragndrop +pretty +journal +roam2 +hugo)       ; organize your plain life in plain text
        ;;php               ; perl's insecure younger brother
