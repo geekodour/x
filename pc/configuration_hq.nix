@@ -49,7 +49,6 @@
   };
 
   # system packages
-  programs.fish.enable = true; # for fish completion
   environment.systemPackages = with pkgs; [
       neovim
       wget
