@@ -42,7 +42,9 @@ in
           source ~/.config/starship/init # starship
           source ~/.config/zoxide/init # zoxide
           alias cd z
-          sway --unsupported-gpu
+          if test (tty) = /dev/tty1
+              sway --unsupported-gpu
+          end
         ''; 
       };
       home.file.".config/fish/functions".source = "${x}/.config/fish/functions";
