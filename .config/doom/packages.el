@@ -22,6 +22,7 @@
 ;; anki
 (package! org-anki)
 (package! toc-org)
+(package! annalist)
 
 ;; org-reveal
 ;; (package! org-reveal) ; might not need this here
