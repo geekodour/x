@@ -79,9 +79,9 @@
   :config
   (nyan-mode))
 
-(use-package! flymake-popon
-  :config
-  (global-flymake-popon-mode))
+;; (use-package! flymake-popon
+;;   :config
+;;   (global-flymake-popon-mode))
 
 (use-package! org-appear
   :after org
@@ -89,13 +89,13 @@
   :config (setq
            org-appear-autolinks t
            org-appear-autoentities t
-           org-appear-autosubmarkers t
-           ))
+           org-appear-autosubmarkers t))
+
 
 ;; TODO: This needs to be configured properly
 (use-package! org-transclusion
-  :after org-roam
-  )
+  :after org-roam)
+
 
 (use-package! websocket
     :after org-roam) ;; Needed for org-roam-ui
@@ -108,8 +108,7 @@
           org-roam-ui-open-on-start t))
 
 (use-package! org-super-agenda
-  :hook (org-agenda-mode . org-super-agenda-mode)
-)
+  :hook (org-agenda-mode . org-super-agenda-mode))
 
 (setq eglot-prefer-plaintext t)
 (setq-default eglot-workspace-configuration '((:gopls . ((gofumpt . t)))))
