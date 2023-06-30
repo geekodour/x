@@ -14,6 +14,13 @@
   ];
 
   nixpkgs.config.allowUnfree = true;
+  #nixpkgs.overlays = [
+  #  (import (builtins.fetchTarball {
+  #    url = https://github.com/nix-community/emacs-overlay/archive/master.tar.gz;
+  #  }))
+  #];
+  
+
   hardware.opengl = {
     enable = true;
     driSupport = true;
@@ -63,6 +70,7 @@
       ripgrep
       git
       htop
+      gcc
       iwd
   ];
 
@@ -70,11 +78,14 @@
     noto-fonts
     noto-fonts-cjk
     noto-fonts-emoji
+    inter
     fira-code
     fira-code-symbols
     jetbrains-mono
     (nerdfonts.override { fonts = [ "FiraCode" "JetBrainsMono" ]; })
   ];
+
+
 
   services.interception-tools = {
     enable = true;
