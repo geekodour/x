@@ -9,6 +9,7 @@ in
     (import "${home-manager}/nixos")
   ];
   programs.fish.enable = true; # need to enable it outside of hm aswell
+  #xdg.portal.wlr.enable = true; # screen share, disabled for now because causes startup slow
   home-manager = {
     useUserPackages = true;
     useGlobalPkgs = true;
@@ -25,6 +26,11 @@ in
       home.file.".config/zoxide".source = "${x}/.config/zoxide";
       home.file.".config/nnn/init".source = "${x}/.config/nnn/init";
       home.file.".config/starship".source = "${x}/.config/starship";
+      home.file.".tmux.conf".source = "${x}/.tmux.conf";
+
+
+      # sway tips
+      # swaymsg -t get_outputs
 
       # fish
       # not using arch's fish config directly
@@ -36,6 +42,7 @@ in
           source ~/.config/starship/init # starship
           source ~/.config/zoxide/init # zoxide
           alias cd z
+          sway --unsupported-gpu
         ''; 
       };
       home.file.".config/fish/functions".source = "${x}/.config/fish/functions";
@@ -57,6 +64,8 @@ in
           nnn
           fd
           mpv
+          wdisplays
+          #way-displays
 
           # misc
           bat
@@ -69,8 +78,10 @@ in
           imv
           mediainfo
           neofetch
+          pandoc
           onefetch
           cpufetch
+          gomi
           pdfarranger
           starship
           trash-cli
@@ -94,6 +105,7 @@ in
           lsof
           dig
           evtest
+          iptables
           htop
           man
           man-pages
@@ -141,9 +153,10 @@ in
       home.sessionVariables = {
         # sway
         XWAYLAND_NO_GLAMOR = "1";
+        XDG_SESSION_TYPE = "wayland";
+        # sway and nvdia
         WLR_NO_HARDWARE_CURSORS = "1";
         LIBVA_DRIVER_NAME = "nvidia";
-        XDG_SESSION_TYPE = "wayland";
         GBM_BACKEND = "nvidia-drm"; # remove if issue w ff
         __GLX_VENDOR_LIBRARY_NAME = "nvidia"; # remove if issues w discord
         WLR_RENDERER = "vulkan";
