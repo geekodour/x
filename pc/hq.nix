@@ -3,13 +3,6 @@ let
   home-manager = builtins.fetchTarball "https://github.com/nix-community/home-manager/archive/release-23.05.tar.gz";
   h = "/home/zuck";
   x = "/home/zuck/x";
-
-  # doom emacs
-  doom-emacs = pkgs.callPackage (builtins.fetchTarball {
-    url = https://github.com/nix-community/nix-doom-emacs/archive/master.tar.gz;
-  }) {
-    doomPrivateDir = /home/zuck/x/.config/doom;
-  };
 in
 {
   imports = [
@@ -33,15 +26,10 @@ in
       home.file.".config/zoxide".source = "${x}/.config/zoxide";
       home.file.".config/nnn/init".source = "${x}/.config/nnn/init";
       home.file.".config/starship".source = "${x}/.config/starship";
+      home.file.".config/doom".source = "${x}/.config/doom";
       home.file.".tmux.conf".source = "${x}/.tmux.conf";
-      # home.file.".config/doom".source = "${x}/.config/doom";
-
-
-      # sway tips
-      # swaymsg -t get_outputs
 
       # fish
-      # not using arch's fish config directly
       programs.fish = {
         enable = true;
         interactiveShellInit = ''
@@ -65,11 +53,16 @@ in
         };
       };
 
-      # NOTE: this doesn't seem to work, will come back someday later
-      # programs.keychain = {
-      #   agents = ["ssh"];
-      #   keys = ["${h}/.ssh/id_ed25519"];
-      # };
+      programs.direnv = {
+        enable = true;
+        nix-direnv= {
+          enable = true;
+        };
+      };
+
+      programs.emacs = {
+        enable = true;
+      };
 
       # packages
       home.packages = with pkgs; [
@@ -77,6 +70,7 @@ in
           sway
           alacritty
           fzf
+          gtk3
           nnn
           fd
           mpv
@@ -136,6 +130,22 @@ in
           shellcheck
           shfmt
           shellharden
+          gnumake
+          cmake
+          nodejs
+          gomodifytags
+          gotests
+          gore
+          nixfmt
+          graphviz
+          ruby
+          rust-analyzer
+          cargo
+          rustc
+          zls
+          zig
+          python3
+          poetry
 
           # system tweaks
           earlyoom
@@ -162,7 +172,7 @@ in
           vulkan-headers
           vulkan-loader
           vulkan-validation-layers
-          ] ++ [doom-emacs];
+          ];
 
       home.sessionVariables = {
         # sway
