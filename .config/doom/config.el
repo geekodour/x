@@ -50,7 +50,7 @@
  evil-want-fine-undo t  ; by default while in insert all changes are one big blob. Be more granular
  auto-save-default nil ; auto save creates a lot of issues for me.
  truncate-string-ellipsis "…"  ; unicode ellispis are nicer than "..."
- shell-file-name "/bin/bash" ; org-anki has issues with fish shell because of no heredoc support, for now I don't really need fish
+ shell-file-name "/bin/sh" ; org-anki has issues with fish shell because of no heredoc support, for now I don't really need fish
  )
 
 (setenv "XDG_SESSION_TYPE" "wayland") ;; for some reason emacs does not pick this up so we set it up manually
