@@ -79,9 +79,9 @@
   :config
   (nyan-mode))
 
-;; (use-package! flymake-popon
-;;   :config
-;;   (global-flymake-popon-mode))
+(use-package! flymake-popon
+  :config
+  (global-flymake-popon-mode))
 
 (use-package! org-appear
   :after org
