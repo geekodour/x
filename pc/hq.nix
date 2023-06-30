@@ -3,6 +3,13 @@ let
   home-manager = builtins.fetchTarball "https://github.com/nix-community/home-manager/archive/release-23.05.tar.gz";
   h = "/home/zuck";
   x = "/home/zuck/x";
+
+  # doom emacs
+  doom-emacs = pkgs.callPackage (builtins.fetchTarball {
+    url = https://github.com/nix-community/nix-doom-emacs/archive/master.tar.gz;
+  }) {
+    doomPrivateDir = /home/zuck/x/.config/doom;
+  };
 in
 {
   imports = [
@@ -27,6 +34,7 @@ in
       home.file.".config/nnn/init".source = "${x}/.config/nnn/init";
       home.file.".config/starship".source = "${x}/.config/starship";
       home.file.".tmux.conf".source = "${x}/.tmux.conf";
+      # home.file.".config/doom".source = "${x}/.config/doom";
 
 
       # sway tips
@@ -154,7 +162,7 @@ in
           vulkan-headers
           vulkan-loader
           vulkan-validation-layers
-          ];
+          ] ++ [doom-emacs];
 
       home.sessionVariables = {
         # sway
@@ -173,7 +181,7 @@ in
         XDG_STATE_HOME = "${h}/.local/state";
         # misc
         MANPAGER = "sh -c 'col -bx | bat -l man -p'";
-        DOOMDIR = "${h}/.config/doom";
+        # DOOMDIR = "${h}/.config/doom";
         EDITOR = "nvim";
       };
     };
