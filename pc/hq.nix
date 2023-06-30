@@ -29,6 +29,29 @@ in
       home.file.".config/doom".source = "${x}/.config/doom";
       home.file.".tmux.conf".source = "${x}/.tmux.conf";
 
+
+      # cursor
+      home.file.".icons/default".source = "${pkgs.vanilla-dmz}/share/icons/Vanilla-DMZ";
+      # home.pointerCursor = 
+      #   let 
+      #   getFrom = url: hash: name: {
+      #     gtk.enable = true;
+      #     x11.enable = true;
+      #     name = name;
+      #     size = 48;
+      #     package = 
+      #       pkgs.runCommand "moveUp" {} ''
+      #       mkdir -p $out/share/icons
+      #       ln -s ${pkgs.fetchzip {
+      #         url = url;
+      #       }} $out/share/icons/${name}
+      #     '';
+      #   };
+      # in
+      #   getFrom 
+      #   "https://github.com/phisch/phinger-cursors/releases/latest/download/phinger-cursors-variants.tar.bz2"
+      #   "Phinger";
+
       # fish
       programs.fish = {
         enable = true;
@@ -78,10 +101,13 @@ in
 
           # misc
           bat
+          ffmpeg
+          handbrake
           feh
           exa
           zoxide
           catimg
+          telegram-desktop
           chafa
           glow
           imv
