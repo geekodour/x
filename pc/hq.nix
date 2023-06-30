@@ -50,6 +50,13 @@ in
       home.file.".config/fish/functions".source = "${x}/.config/fish/functions";
       home.file.".config/fish/conf.d/gitaliases.fish".source = "${x}/.config/fish/conf.d/gitaliases.fish";
 
+      programs.firefox = {
+        enable = true;
+        package = pkgs.firefox.override {
+          cfg = { enableTridactylNative = true; };
+        };
+      };
+
       # NOTE: this doesn't seem to work, will come back someday later
       # programs.keychain = {
       #   agents = ["ssh"];
@@ -60,14 +67,12 @@ in
       home.packages = with pkgs; [
           tmux
           sway
-          firefox
           alacritty
           fzf
           nnn
           fd
           mpv
           wdisplays
-          #way-displays
 
           # misc
           bat
@@ -88,7 +93,6 @@ in
           starship
           trash-cli
           sysz
-          tridactyl-native
           grim
           maim
           slurp
