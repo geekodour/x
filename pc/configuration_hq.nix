@@ -1,4 +1,8 @@
-# Help: configuration.nix(5), nixos-help
+# Help
+# - configuration.nix(5)
+# - nixos-help
+# - nixos-option
+# - home-manager options: https://mipmip.github.io/home-manager-option-search/
 
 { config, pkgs, ... }:
 
@@ -17,6 +21,8 @@
   };
   services.xserver.videoDrivers = ["nvidia"]; # needed for wayland too
   hardware.nvidia = {
+     # powerManagement.enable = true; # hoping this fixes hibernation, conclusion: does not work
+     # nvidiaPersistenced = true; # does not make any diff
      modesetting.enable = true;
      open = true; # open source kernel module 515.43.04+
      nvidiaSettings = true;
@@ -25,6 +31,7 @@
 
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
+  boot.loader.systemd-boot.configurationLimit = 3;
   boot.loader.efi.canTouchEfiVariables = true;
 
   networking.hostName = "hq";
@@ -44,7 +51,7 @@
 
   users.users.zuck = {
     isNormalUser = true;
-    extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
+    extraGroups = [ "wheel" "input" ]; # Enable ‘sudo’ for the user.
     shell = pkgs.fish;
   };
 
@@ -105,10 +112,10 @@
   services.openssh.enable = true;
 
   # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [ ... ];
+  networking.firewall.allowedTCPPorts = [ 22 ];
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
-  networking.firewall.enable = false;
+  # networking.firewall.enable = false;
 
   system.stateVersion = "23.05";
 }
