@@ -6,14 +6,13 @@
 [tag]
     forceSignAnnotated = true
 [commit]
-    template = /home/geekodour/.config/git/gitmessage
+    template = ~/.config/git/gitmessage
     gpgSign = false
 [init]
     defaultBranch = main
 [core]
     editor = nvim
     pager = delta
-    excludesFile = /home/geekodour/.config/git/global_ignore
 [pull]
     rebase = true
 [interactive]

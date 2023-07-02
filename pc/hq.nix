@@ -27,30 +27,15 @@ in
       home.file.".config/nnn/init".source = "${x}/.config/nnn/init";
       home.file.".config/starship".source = "${x}/.config/starship";
       home.file.".config/doom".source = "${x}/.config/doom";
+      home.file.".config/mpv".source = "${x}/.config/mpv";
+      home.file.".config/pudb".source = "${x}/.config/pudb";
+      home.file.".config/swappy".source = "${x}/.config/swappy";
+      home.file.".config/pypoetry".source = "${x}/.config/pypoetry";
       home.file.".tmux.conf".source = "${x}/.tmux.conf";
 
 
       # cursor
       home.file.".icons/default".source = "${pkgs.vanilla-dmz}/share/icons/Vanilla-DMZ";
-      # home.pointerCursor = 
-      #   let 
-      #   getFrom = url: hash: name: {
-      #     gtk.enable = true;
-      #     x11.enable = true;
-      #     name = name;
-      #     size = 48;
-      #     package = 
-      #       pkgs.runCommand "moveUp" {} ''
-      #       mkdir -p $out/share/icons
-      #       ln -s ${pkgs.fetchzip {
-      #         url = url;
-      #       }} $out/share/icons/${name}
-      #     '';
-      #   };
-      # in
-      #   getFrom 
-      #   "https://github.com/phisch/phinger-cursors/releases/latest/download/phinger-cursors-variants.tar.bz2"
-      #   "Phinger";
 
       # fish
       programs.fish = {
@@ -97,6 +82,8 @@ in
           nnn
           fd
           mpv
+          ispell
+          yt-dlp
           wdisplays
 
           # misc
