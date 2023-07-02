@@ -460,7 +460,7 @@ Example usage in Emacs Lisp: (ox-hugo/export-all \"~/org\")."
                             (file-name-sans-extension (buffer-name))
                             (cl-random (expt 2 31))))
          (path (format "%s/%s/%s" org-roam-directory "images" file-name)))
-    (let ((grim-exit (call-process "/usr/bin/fish" nil t nil "-c" (format "grim -g \"$(slurp)\" - | swappy -f - -o %s" path))))
+    (let ((grim-exit (call-process "/bin/sh" nil t nil "-c" (format "grim -g \"$(slurp)\" - | swappy -f - -o %s" path))))
       (when (= grim-exit 0)
         ;; ox-hugo needs the file prefix to properly set the path for the image when exported
         (insert (format "[[file:./images/%s]]" file-name)))
