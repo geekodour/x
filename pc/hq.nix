@@ -128,6 +128,7 @@ in
           evtest
           iptables
           htop
+          nvtop
           man
           man-pages
           wev
