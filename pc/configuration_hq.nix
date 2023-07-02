@@ -9,10 +9,12 @@
 
 {
   imports = [
+      ./cachix.nix
       ./hardware-configuration.nix
       /home/zuck/x/pc/hq.nix
   ];
 
+  nix.settings.experimental-features = [ "nix-command" ];
   nixpkgs.config.allowUnfree = true;
   #nixpkgs.overlays = [
   #  (import (builtins.fetchTarball {
@@ -71,7 +73,14 @@
       git
       htop
       gcc
+      stdenv
+      pkgconfig
       iwd
+      # nvidia
+      cachix
+      cudaPackages.cudatoolkit
+      #cudaPackages.cudnn
+      #cudaPackages.cutensor
   ];
 
   fonts.fonts = with pkgs; [
@@ -109,6 +118,13 @@
             EV_KEY: [KEY_CAPSLOCK]
     '';
   };
+
+   environment.sessionVariables = rec {
+    #CUDA_PATH = "${pkgs.cudatoolkit}/lib64";
+    LD_LIBRARY_PATH = "${pkgs.linuxPackages.nvidia_x11}/lib:${pkgs.cudatoolkit}/lib64:${pkgs.stdenv.cc.cc.lib}/lib";
+    #EXTRA_LDFLAGS = "-L${pkgs.linuxPackages.nvidia_x11}/lib";
+    NIX_SHELL_PRESERVE_PROMPT = "1";
+   };
 
 
   # Some programs need SUID wrappers, can be configured further or are
