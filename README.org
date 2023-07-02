@@ -10,14 +10,16 @@ tree -L 2 -I Desktop/ -I Downloads/ -I Books/ -I Zotero/ -I dump/ -I Documents/ 
 .
 ├── faafo
 │   ├── experiments
-│   └── gig23
+│   ├── gig23
+│   ├── katas
+│   ├── roml
+│   └── rox
 ├── infra
-│   ├── t
-│   ├── t-base-go
-│   ├── t-base-python
+│   ├── cookies
 │   └── workshop
 ├── locus
 │   ├── anki
+│   ├── bad_repo
 │   ├── blog
 │   ├── cheat
 │   ├── diary
@@ -26,6 +28,9 @@ tree -L 2 -I Desktop/ -I Downloads/ -I Books/ -I Zotero/ -I dump/ -I Documents/ 
 │   └── todayi
 ├── notes
 │   └── org
+├── pc
+│   ├── configuration_hq.nix
+│   └── hq.nix
 ├── projects
 │   ├── gigs
 │   ├── oss
@@ -33,7 +38,7 @@ tree -L 2 -I Desktop/ -I Downloads/ -I Books/ -I Zotero/ -I dump/ -I Documents/ 
 ├── README.org
 └── wallpaper.jpg
 
-23 directories, 2 files
+26 directories, 5 files
 #+end_example
 
 ** Export locus
