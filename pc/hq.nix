@@ -91,7 +91,9 @@ in
           ffmpeg
           handbrake
           feh
+          go
           exa
+          wlsunset
           zoxide
           catimg
           telegram-desktop
@@ -138,6 +140,8 @@ in
           # editor
           nodePackages.bash-language-server
           nodePackages.typescript-language-server
+          #llvmPackages_latest.llvm
+          clang-tools # clangd
           gopls
           nodePackages.pyright
           isort

@@ -18,6 +18,7 @@
 (setq
  user-full-name "Hrishikesh Barman"
  user-mail-address "hrishikeshbman@gmail.com"
+ auth-sources '("~/.authinfo") ; we are not encrypting shit for now, token is readonly anyway
  )
 
 (setq
@@ -63,7 +64,7 @@
 
 (use-package! apheleia
   :config
-  (apheleia-global-mode +1)
+  ;; (apheleia-global-mode +1) ;; don't format by default/automatically
   (setf (alist-get 'python-mode apheleia-mode-alist)
         '(isort black)))
 (push '(sh-mode . shfmt) apheleia-mode-alist) ; apheleia for some reason does not already do this
@@ -334,7 +335,7 @@
 
 (after! projectile
   (setq
-   projectile-project-search-path '(("~/projects" . 2) "~/locus" ("~/infra" . 2) ("~/faafo" . 2) "~/dump")
+   projectile-project-search-path '(("~/projects" . 3) "~/locus" ("~/infra" . 2) ("~/faafo" . 2) "~/dump")
    +workspaces-on-switch-project-behavior nil)
 
   (projectile-add-known-project "~/.config/") ; not a git repo but has a .projectile
