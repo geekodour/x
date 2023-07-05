@@ -70,6 +70,7 @@
       wget
       pciutils
       ripgrep
+      zlib
       git
       htop
       gcc
@@ -79,7 +80,7 @@
       # nvidia
       cachix
       cudaPackages.cudatoolkit
-      #cudaPackages.cudnn
+      cudaPackages.cudnn
       #cudaPackages.cutensor
   ];
 
@@ -121,7 +122,7 @@
 
    environment.sessionVariables = rec {
     #CUDA_PATH = "${pkgs.cudatoolkit}/lib64";
-    LD_LIBRARY_PATH = "${pkgs.linuxPackages.nvidia_x11}/lib:${pkgs.cudatoolkit}/lib64:${pkgs.stdenv.cc.cc.lib}/lib";
+    LD_LIBRARY_PATH = "${pkgs.linuxPackages.nvidia_x11}/lib:${pkgs.cudaPackages.cudatoolkit}/lib64:${pkgs.stdenv.cc.cc.lib}/lib:${pkgs.zlib}/lib:${pkgs.cudaPackages.cudnn}/lib";
     #EXTRA_LDFLAGS = "-L${pkgs.linuxPackages.nvidia_x11}/lib";
     NIX_SHELL_PRESERVE_PROMPT = "1";
    };
