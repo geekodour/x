@@ -8,6 +8,10 @@ in
   imports = [
     (import "${home-manager}/nixos")
   ];
+  services.emacs = {
+    enable = true;
+    package = pkgs.emacs;
+  };
   programs.fish.enable = true; # need to enable it outside of hm aswell
   #xdg.portal.wlr.enable = true; # screen share, disabled for now because causes startup slow
   home-manager = {
