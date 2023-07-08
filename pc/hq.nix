@@ -103,6 +103,7 @@ in
           telegram-desktop
           chafa
           glow
+          libtree
           imv
           mediainfo
           neofetch
@@ -123,6 +124,7 @@ in
           libsForQt5.okular
           eva
           gfold
+          hugo
           entr
           delta
           podman
@@ -147,6 +149,11 @@ in
           #llvmPackages_latest.llvm
           clang-tools # clangd
           gopls
+          delve
+          gdb
+          gotestsum
+          gofumpt
+          golangci-lint
           nodePackages.pyright
           isort
           shellcheck
@@ -173,6 +180,8 @@ in
           earlyoom
           hunspellDicts.en-us
           keychain
+          libvterm
+          libtool
           linux-firmware
           mako
           pmount
