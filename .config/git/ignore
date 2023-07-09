@@ -1,3 +1,4 @@
 .envrc
 .venv
 node_modules
+.direnv
