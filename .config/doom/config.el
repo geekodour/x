@@ -117,9 +117,15 @@
 (add-hook 'eglot-managed-mode-hook (lambda ()(add-to-list 'company-backends '(company-capf :with company-yasnippet))))
 
 (define-derived-mode typescriptreact-mode web-mode "TypescriptReact" "A major mode for tsx.")
+;; (define-derived-mode svelte-mode web-mode "Svelte" "A major mode for sveltejs.")
 (use-package! typescript-mode
   :mode (("\\.ts\\'" . typescript-mode)
          ("\\.tsx\\'" . typescriptreact-mode)))
+
+(use-package! svelte-mode
+  :mode (("\\.svelte\\'" . svelte-mode))) ;; for some reason this does not work. it should work
+  ;; :mode (("\\.svelte\\'" . typescript-mode))) ;; this works surprisingly
+
 (use-package! eglot
   :ensure t
   :defer 3
@@ -128,6 +134,7 @@
     typescript-mode
     typescriptreact-mode) . eglot-ensure)
   :config
+  (add-to-list 'eglot-server-programs '(svelte-mode . ("svelteserver" "--stdio")))
   (cl-pushnew '((js-mode typescript-mode typescriptreact-mode) . ("typescript-language-server" "--stdio"))
               eglot-server-programs
               :test #'equal))

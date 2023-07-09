@@ -31,6 +31,7 @@
 (package! verb)
 (package! devdocs-browser)
 (package! go-dlv)
+(package! svelte-mode)
 ;; (package! chatgpt-shell
 ;;   :recipe (:host github :repo "xenodium/chatgpt-shell"))
 (package! flymake-vale
