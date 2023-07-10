@@ -83,6 +83,8 @@ in
           alacritty
           fzf
           gtk3
+          ungoogled-chromium
+          sfz
           nnn
           fd
           mpv
@@ -98,6 +100,8 @@ in
           go
           exa
           wlsunset
+          handlr
+          xdg-utils
           zoxide
           catimg
           telegram-desktop
