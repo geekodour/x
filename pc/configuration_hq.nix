@@ -74,6 +74,8 @@
       wget
       pciutils
       ripgrep
+      file
+      exiftool
       zlib
       git
       htop
