@@ -20,5 +20,5 @@ set -gx NNN_BMS 'd:~/dump;c:~/.config'
 set -gx NNN_ARCHIVE '\.(7z|a|ace|alz|arc|arj|bz|bz2|cab|cpio|deb|gz|jar|lha|lz|lzh|lzma|lzo|rar|rpm|rz|t7z|tar|tbz|tbz2|tgz|tlz|txz|tZ|tzo|war|xpi|xz|Z|zip)$'
 
 # opener
-set -gx NNN_OPENER /home/geekodour/.config/nnn/plugins/nuke
+set -gx NNN_OPENER "$HOME/.config/nnn/plugins/nuke"
 set -gx GUI 1 # see nuke for why we need to set this

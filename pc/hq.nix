@@ -58,6 +58,11 @@ in
       home.file.".config/fish/functions".source = "${x}/.config/fish/functions";
       home.file.".config/fish/conf.d/gitaliases.fish".source = "${x}/.config/fish/conf.d/gitaliases.fish";
 
+      services.syncthing = {
+        enable = true;
+        tray.enable = true;
+      };
+
       programs.firefox = {
         enable = true;
         package = pkgs.firefox.override {
@@ -76,6 +81,8 @@ in
         enable = true;
       };
 
+
+
       # packages
       home.packages = with pkgs; [
           tmux
@@ -83,7 +90,8 @@ in
           alacritty
           fzf
           gtk3
-          ungoogled-chromium
+          zathura
+          #ungoogled-chromium
           sfz
           nnn
           fd
