@@ -103,8 +103,10 @@ in
           # misc
           bat
           ffmpeg
+          parallel
           handbrake
           feh
+          #discord
           go
           exa
           wlsunset
@@ -122,6 +124,7 @@ in
           pandoc
           onefetch
           cpufetch
+          qbittorrent
           gomi
           pdfarranger
           starship
