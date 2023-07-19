@@ -30,7 +30,7 @@
   hardware.opengl = {
     enable = true;
     driSupport = true;
-    driSupport32Bit = true;
+    #driSupport32Bit = true;
   };
   services.xserver.videoDrivers = ["nvidia"]; # needed for wayland too
   hardware.nvidia = {
@@ -83,10 +83,15 @@
       stdenv
       pkgconfig
       iwd
+      #mesa
+      #libGL
+      #libGLU
+      #libglvnd
       # nvidia
       cachix
       cudaPackages.cudatoolkit
       cudaPackages.cudnn
+      cudaPackages.libcublas
       #cudaPackages.cutensor
   ];
 
@@ -127,8 +132,10 @@
   };
 
    environment.sessionVariables = rec {
-    #CUDA_PATH = "${pkgs.cudatoolkit}/lib64";
+    #LD_LIBRARY_PATH = "${pkgs.linuxPackages.nvidia_x11}/lib:${pkgs.cudaPackages.cudatoolkit}/lib64:${pkgs.stdenv.cc.cc.lib}/lib:${pkgs.zlib}/lib:${pkgs.cudaPackages.cudnn}/lib:/run/opengl-driver/lib:/run/opengl-driver-32/lib";
+    #LD_LIBRARY_PATH = "${pkgs.linuxPackages.nvidia_x11}/lib:${pkgs.cudaPackages.cudatoolkit}/lib64:${pkgs.stdenv.cc.cc.lib}/lib:${pkgs.zlib}/lib:${pkgs.cudaPackages.cudnn}/lib:${pkgs.libglvnd}/lib";
     LD_LIBRARY_PATH = "${pkgs.linuxPackages.nvidia_x11}/lib:${pkgs.cudaPackages.cudatoolkit}/lib64:${pkgs.stdenv.cc.cc.lib}/lib:${pkgs.zlib}/lib:${pkgs.cudaPackages.cudnn}/lib";
+    CUDA_PATH = "${pkgs.cudatoolkit}/lib64";
     #EXTRA_LDFLAGS = "-L${pkgs.linuxPackages.nvidia_x11}/lib";
     NIX_SHELL_PRESERVE_PROMPT = "1";
    };
