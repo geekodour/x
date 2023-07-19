@@ -118,9 +118,12 @@ in
           chafa
           glow
           libtree
+          nix-index
           imv
           mediainfo
           neofetch
+          # sniffnet
+          # libcap
           pandoc
           onefetch
           cpufetch
@@ -161,7 +164,8 @@ in
           # editor
           nodePackages.bash-language-server
           nodePackages.typescript-language-server
-          #llvmPackages_latest.llvm
+          # llvmPackages_latest.llvm
+          # llvmPackages.bintools
           clang-tools # clangd
           gopls
           delve
@@ -188,7 +192,8 @@ in
           rustc
           zls
           zig
-          python3
+          git-lfs
+          python310
           poetry
 
           # system tweaks
