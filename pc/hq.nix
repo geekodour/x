@@ -36,6 +36,7 @@ in
       home.file.".config/swappy".source = "${x}/.config/swappy";
       home.file.".config/pypoetry".source = "${x}/.config/pypoetry";
       home.file.".tmux.conf".source = "${x}/.tmux.conf";
+      home.file.".ssh/config".source = "${x}/.ssh/config";
 
 
       # cursor
