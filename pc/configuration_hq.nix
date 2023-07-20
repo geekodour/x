@@ -51,6 +51,10 @@
   networking.nameservers = [ "1.1.1.1" "8.8.8.8" ];
   networking.wireless.iwd.enable = true;  
   networking.wireless.userControlled.enable = true;
+  networking.extraHosts = ''
+    192.168.1.69 pi
+    #23.137.249.79 archive.is
+  '';
   security.polkit.enable = true;
   security.pam.services.swaylock = {
     text = "auth include login";
