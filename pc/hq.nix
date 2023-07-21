@@ -130,6 +130,7 @@ in
           cpufetch
           qbittorrent
           gomi
+          hyperfine
           pdfarranger
           starship
           trash-cli
