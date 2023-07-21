@@ -83,7 +83,7 @@
       zlib
       git
       htop
-      gcc
+      gcc11
       stdenv
       pkgconfig
       iwd
@@ -96,6 +96,7 @@
       cudaPackages.cudatoolkit
       cudaPackages.cudnn
       cudaPackages.libcublas
+      cudaPackages.cuda_cudart
       #cudaPackages.cutensor
   ];
 
@@ -138,8 +139,9 @@
    environment.sessionVariables = rec {
     #LD_LIBRARY_PATH = "${pkgs.linuxPackages.nvidia_x11}/lib:${pkgs.cudaPackages.cudatoolkit}/lib64:${pkgs.stdenv.cc.cc.lib}/lib:${pkgs.zlib}/lib:${pkgs.cudaPackages.cudnn}/lib:/run/opengl-driver/lib:/run/opengl-driver-32/lib";
     #LD_LIBRARY_PATH = "${pkgs.linuxPackages.nvidia_x11}/lib:${pkgs.cudaPackages.cudatoolkit}/lib64:${pkgs.stdenv.cc.cc.lib}/lib:${pkgs.zlib}/lib:${pkgs.cudaPackages.cudnn}/lib:${pkgs.libglvnd}/lib";
-    LD_LIBRARY_PATH = "${pkgs.linuxPackages.nvidia_x11}/lib:${pkgs.cudaPackages.cudatoolkit}/lib64:${pkgs.stdenv.cc.cc.lib}/lib:${pkgs.zlib}/lib:${pkgs.cudaPackages.cudnn}/lib";
-    CUDA_PATH = "${pkgs.cudatoolkit}/lib64";
+    LD_LIBRARY_PATH = "${pkgs.linuxPackages.nvidia_x11}/lib:${pkgs.cudaPackages.cudatoolkit}/lib64:${pkgs.cudaPackages.cudatoolkit}/include:${pkgs.stdenv.cc.cc.lib}/lib:${pkgs.zlib}/lib:${pkgs.cudaPackages.cudnn}/lib";
+    CUDA_PATH = "${pkgs.cudaPackages.cudatoolkit}";
+    CUDART_PATH = "${pkgs.cudaPackages.cuda_cudart}";
     #EXTRA_LDFLAGS = "-L${pkgs.linuxPackages.nvidia_x11}/lib";
     NIX_SHELL_PRESERVE_PROMPT = "1";
    };
