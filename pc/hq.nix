@@ -32,9 +32,9 @@ in
       home.file.".config/starship".source = "${x}/.config/starship";
       home.file.".config/doom".source = "${x}/.config/doom";
       home.file.".config/mpv".source = "${x}/.config/mpv";
-      home.file.".config/pudb".source = "${x}/.config/pudb";
+      # home.file.".config/pudb".source = "${x}/.config/pudb";
       home.file.".config/swappy".source = "${x}/.config/swappy";
-      home.file.".config/pypoetry".source = "${x}/.config/pypoetry";
+      home.file.".config/pypoetry/config.toml".source = "${x}/.config/pypoetry/config.toml";
       home.file.".tmux.conf".source = "${x}/.tmux.conf";
       home.file.".ssh/config".source = "${x}/.ssh/config";
 
@@ -122,6 +122,7 @@ in
           nix-index
           imv
           mediainfo
+          grex
           neofetch
           # sniffnet
           # libcap
