@@ -24,6 +24,7 @@ systemd
 typiskt
 user-dirs.dirs
 user-dirs.locale
+pypoetry/auth.toml
 wireshark
 yadm
 pdfarranger
