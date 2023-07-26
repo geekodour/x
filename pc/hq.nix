@@ -107,6 +107,7 @@ in
           parallel
           handbrake
           feh
+          act # gh actions local, installed docker for this
           #discord
           go
           exa
@@ -121,13 +122,16 @@ in
           libtree
           nix-index
           imv
+          krita
           mediainfo
+          losslesscut-bin
           grex
           neofetch
-          # sniffnet
+          #sniffnet
           # libcap
           pandoc
           onefetch
+          lazydocker
           cpufetch
           qbittorrent
           gomi
@@ -144,6 +148,7 @@ in
           anki-bin
           libsForQt5.okular
           eva
+          jq
           gfold
           hugo
           entr
