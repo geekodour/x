@@ -14,6 +14,14 @@
       /home/zuck/x/pc/hq.nix
   ];
 
+  virtualisation.docker.enable = true;
+  virtualisation.docker.rootless = {
+	  enable = true;
+	  setSocketVariable = true;
+  };
+  virtualisation.docker.storageDriver = "btrfs";
+
+
   nix.settings.experimental-features = [ "nix-command" ];
   nixpkgs.config.allowUnfree = true;
   nix.extraOptions = ''
@@ -68,7 +76,7 @@
 
   users.users.zuck = {
     isNormalUser = true;
-    extraGroups = [ "wheel" "input" ]; # Enable ‘sudo’ for the user.
+    extraGroups = [ "wheel" "input" "docker" ]; # Enable ‘sudo’ for the user.
     shell = pkgs.fish;
   };
 
