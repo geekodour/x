@@ -171,6 +171,7 @@ in
 
           # editor
           nodePackages.bash-language-server
+          nodePackages.svelte-language-server
           nodePackages.typescript-language-server
           # llvmPackages_latest.llvm
           # llvmPackages.bintools
