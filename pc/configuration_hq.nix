@@ -108,10 +108,12 @@
       #cudaPackages.cutensor
   ];
 
+
   fonts.fonts = with pkgs; [
     noto-fonts
     noto-fonts-cjk
     noto-fonts-emoji
+    noto-fonts-extra
     inter
     fira-code
     fira-code-symbols

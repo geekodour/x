@@ -71,6 +71,10 @@ in
         };
       };
 
+      programs.chromium = {
+        enable = true;
+      };
+
       programs.direnv = {
         enable = true;
         nix-direnv= {
@@ -113,6 +117,7 @@ in
           exa
           wlsunset
           handlr
+          spotify
           xdg-utils
           zoxide
           catimg
