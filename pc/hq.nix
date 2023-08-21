@@ -64,6 +64,7 @@ in
         tray.enable = true;
       };
 
+
       programs.firefox = {
         enable = true;
         package = pkgs.firefox.override {
@@ -87,6 +88,10 @@ in
       };
 
 
+      # pkgs.discord.override {
+      #   withOpenASAR = true;
+      #   withVencord = true;
+      # };
 
       # packages
       home.packages = with pkgs; [
@@ -112,7 +117,9 @@ in
           handbrake
           feh
           act # gh actions local, installed docker for this
-          #discord
+          discord
+          betterdiscordctl
+          tesseract
           go
           exa
           wlsunset
@@ -122,6 +129,7 @@ in
           zoxide
           catimg
           telegram-desktop
+          thunderbird
           chafa
           glow
           libtree
@@ -247,7 +255,7 @@ in
         WLR_NO_HARDWARE_CURSORS = "1";
         LIBVA_DRIVER_NAME = "nvidia";
         GBM_BACKEND = "nvidia-drm"; # remove if issue w ff
-        __GLX_VENDOR_LIBRARY_NAME = "nvidia"; # remove if issues w discord
+        #__GLX_VENDOR_LIBRARY_NAME = "nvidia"; # remove if issues w discord
         WLR_RENDERER = "vulkan";
         # xdg
         XDG_CACHE_HOME = "${h}/.cache";
