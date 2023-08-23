@@ -122,6 +122,7 @@ in
           tesseract
           go
           exa
+          emscripten
           wlsunset
           handlr
           spotify
