@@ -122,7 +122,7 @@ in
           tesseract
           go
           exa
-          unstable.wrangler
+          #unstable.wrangler
           emscripten
           wlsunset
           handlr
