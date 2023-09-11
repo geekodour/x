@@ -99,6 +99,7 @@ in
           sway
           alacritty
           fzf
+          tectonic
           gtk3
           zathura
           #ungoogled-chromium
@@ -118,6 +119,8 @@ in
           feh
           act # gh actions local, installed docker for this
           discord
+          slack
+          element-desktop
           betterdiscordctl
           tesseract
           go
@@ -228,7 +231,8 @@ in
           libtool
           linux-firmware
           mako
-          pmount
+          pmount # nnn
+          udisks # nnn
           qemu
           virt-manager
 
