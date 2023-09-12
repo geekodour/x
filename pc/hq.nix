@@ -197,6 +197,7 @@ in
           gopls
           delve
           gdb
+          rr
           gotestsum
           gofumpt
           golangci-lint
