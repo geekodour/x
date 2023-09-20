@@ -124,7 +124,7 @@
 
 (use-package! svelte-mode
   :mode (("\\.svelte\\'" . svelte-mode))) ;; for some reason this does not work. it should work
-  ;; :mode (("\\.svelte\\'" . typescript-mode))) ;; this works surprisingly
+;; :mode (("\\.svelte\\'" . typescript-mode))) ;; this works surprisingly
 
 (use-package! eglot
   :ensure t
@@ -135,6 +135,7 @@
     typescriptreact-mode) . eglot-ensure)
   :config
   (add-to-list 'eglot-server-programs '(svelte-mode . ("svelteserver" "--stdio")))
+  (add-to-list 'eglot-server-programs '(tuareg-mode . ("ocamllsp" "--stdio")))
   (cl-pushnew '((js-mode typescript-mode typescriptreact-mode) . ("typescript-language-server" "--stdio"))
               eglot-server-programs
               :test #'equal))
