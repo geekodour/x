@@ -12,6 +12,14 @@ in
     enable = true;
     package = pkgs.emacs;
   };
+
+  # security.wrappers.pmount = {
+  #   setuid = true;
+  #   setgid = true;
+  #   owner = "root";
+  #   group = "root";
+  #   source = "${pkgs.pmount}/bin/pmount";
+  # };
   programs.fish.enable = true; # need to enable it outside of hm aswell
   #xdg.portal.wlr.enable = true; # screen share, disabled for now because causes startup slow
   home-manager = {
@@ -87,7 +95,6 @@ in
         enable = true;
       };
 
-
       # pkgs.discord.override {
       #   withOpenASAR = true;
       #   withVencord = true;
@@ -117,7 +124,8 @@ in
           parallel
           handbrake
           feh
-          act # gh actions local, installed docker for this
+          # act # gh actions local, installed docker for this
+          # docker-compose
           discord
           slack
           element-desktop
@@ -191,6 +199,14 @@ in
           nodePackages.bash-language-server
           nodePackages.svelte-language-server
           nodePackages.typescript-language-server
+
+          # following isn't even helping
+          # ocamlPackages.ocaml-lsp
+          # ocamlPackages.dune_3
+          # ocamlPackages.merlin
+          # ocamlPackages.ocp-indent
+          # ocamlPackages.ocaml
+
           # llvmPackages_latest.llvm
           # llvmPackages.bintools
           clang-tools # clangd
