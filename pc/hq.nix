@@ -125,7 +125,7 @@ in
           handbrake
           feh
           # act # gh actions local, installed docker for this
-          # docker-compose
+          #docker-compose
           discord
           slack
           element-desktop
@@ -147,6 +147,7 @@ in
           glow
           libtree
           nix-index
+          dbeaver
           imv
           krita
           mediainfo
@@ -173,7 +174,8 @@ in
           unzip
           anki-bin
           libsForQt5.okular
-          eva
+          eva # calculator
+          programmer-calculator # calc
           jq
           gfold
           hugo

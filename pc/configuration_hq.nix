@@ -95,7 +95,8 @@ in
       ripgrep
       file
       exiftool
-      tailscale
+      #tailscale
+      unstable.tailscale
       zlib
       git
       htop
@@ -182,9 +183,10 @@ in
   };
 
   services.tailscale.enable = true;
+  services.tailscale.package = pkgs.unstable.tailscale;
 
   # Open ports in the firewall.
-  networking.firewall.allowedTCPPorts = [ 22 8384 22000 ];
+  networking.firewall.allowedTCPPorts = [ 22 8384 22000 5000 7860 ];
   networking.firewall.allowedUDPPorts = [ 22000 21027 ];
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
