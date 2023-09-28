@@ -13,13 +13,14 @@ tree -L 2 -I Desktop/ -I Downloads/ -I Books/ -I Zotero/ -I dump/ -I Documents/ 
 │   ├── gig23
 │   ├── katas
 │   ├── roml
-│   └── rox
+│   ├── wscribe
+│   └── wscribe-editor
 ├── infra
 │   ├── cookies
 │   └── workshop
+├── Kay1977.pdf
 ├── locus
 │   ├── anki
-│   ├── bad_repo
 │   ├── blog
 │   ├── cheat
 │   ├── diary
@@ -36,9 +37,11 @@ tree -L 2 -I Desktop/ -I Downloads/ -I Books/ -I Zotero/ -I dump/ -I Documents/ 
 │   ├── oss
 │   └── work
 ├── README.org
+├── remotes
+│   └── zuckfafo
 └── wallpaper.jpg
 
-26 directories, 5 files
+28 directories, 5 files
 #+end_example
 
 ** Export locus
@@ -107,7 +110,7 @@ function traverse_and_pull
         set_color normal;
         git pull
     else
-       set -l dirs $(ls)
+       set -l dirs $(ls -1 --color=never)
        traverse_and_pull $dirs
     end
     popd
@@ -119,7 +122,7 @@ function pull_everything --description 'pull personal repos from gh'
     set -l trees locus infra faafo
     for t in $trees;
         pushd $t
-        set -l dirs $(ls)
+        set -l dirs $(ls -1 --color=never)
         traverse_and_pull $dirs
         popd
     end

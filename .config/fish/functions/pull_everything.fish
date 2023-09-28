@@ -10,7 +10,7 @@ function traverse_and_pull
         set_color normal;
         git pull
     else
-       set -l dirs $(ls)
+       set -l dirs $(ls -1 --color=never)
        traverse_and_pull $dirs
     end
     popd
@@ -22,7 +22,7 @@ function pull_everything --description 'pull personal repos from gh'
     set -l trees locus infra faafo
     for t in $trees;
         pushd $t
-        set -l dirs $(ls)
+        set -l dirs $(ls -1 --color=never)
         traverse_and_pull $dirs
         popd
     end
