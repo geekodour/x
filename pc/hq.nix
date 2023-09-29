@@ -132,7 +132,8 @@ in
           betterdiscordctl
           tesseract
           go
-          exa
+          # exa
+          unstable.eza
           unstable.ollama
           emscripten
           wlsunset
