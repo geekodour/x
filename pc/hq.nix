@@ -133,7 +133,7 @@ in
           tesseract
           go
           exa
-          #unstable.wrangler
+          unstable.ollama
           emscripten
           wlsunset
           handlr
