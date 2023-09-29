@@ -252,7 +252,7 @@ in
           linux-firmware
           mako
           pmount # nnn
-          udisks # nnn
+          unstable.udisks # nnn
           qemu
           virt-manager
 

@@ -48,6 +48,7 @@ in
     #driSupport32Bit = true;
   };
   services.xserver.videoDrivers = ["nvidia"]; # needed for wayland too
+  services.udisks2.enable = true;
   hardware.nvidia = {
      # powerManagement.enable = true; # hoping this fixes hibernation, conclusion: does not work
      # nvidiaPersistenced = true; # does not make any diff
