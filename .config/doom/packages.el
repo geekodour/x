@@ -18,6 +18,7 @@
 (package! org-super-agenda)
 (unpin! org-roam)
 (package! org-roam-ui)
+(package! plstore)
 
 ;; anki
 (package! org-anki)

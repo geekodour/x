@@ -55,6 +55,7 @@
  )
 
 (setenv "XDG_SESSION_TYPE" "wayland") ;; for some reason emacs does not pick this up so we set it up manually
+(setenv "GPG_AGENT_INFO")
 
 (use-package! tree-sitter
   :config
@@ -239,8 +240,11 @@
    org-agenda-current-time-string "⭠ now ─────────────────────────────────────────────────"
    org-agenda-skip-scheduled-if-done t
    org-agenda-skip-deadline-if-done t
-   org-agenda-block-separator "────────────────"
-   ))
+   org-agenda-block-separator "────────────────"))
+
+
+;; (after! ox-icalendar (setq org-icalendar-use-deadline '(todo-due)))
+(after! org (setq org-icalendar-use-deadline '(todo-due)))
 
 (after! org
   (setq
@@ -254,14 +258,15 @@
                    (org-agenda-start-day nil)
                    (org-agenda-skip-scheduled-if-done nil)
                    (org-agenda-skip-deadline-if-done nil)
+                   (org-agenda-include-inactive-timestamps t)
                    (org-agenda-include-deadlines t)
                    (org-super-agenda-groups '(
                                               (:name "" :time-grid t :order 1)
-                                              (:discard (:anything))
-                                              ))
-                   ))
-       ) nil ("~/daily.html" "daily.txt")
-      )
+                                              (:discard (:anything)))))))
+
+
+      nil ("~/daily.html" "daily.txt"))
+
      ("d" "daily agenda 🏃"
       (
        ;; unscheduled shit
@@ -272,9 +277,9 @@
                                                   (:name "waits ⏰" :and (:scheduled nil :deadline nil :todo "WAITING" :priority "A") :order 1)
                                                   (:name "consuption 🔖" :and (:scheduled nil :deadline nil :todo "TOCONSUME" :priority "A") :order 2)
                                                   (:name "consuming 🐄" :and (:scheduled nil :deadline nil :todo "CONSUMING" :priority "A") :order 2)
-                                                  (:discard (:anything))
-                                                  ))
-                       ))
+                                                  (:discard (:anything))))))
+
+
        ;; today
        (agenda "" (
                    (org-agenda-overriding-header "\n👊 Today's Agenda")
@@ -285,17 +290,17 @@
                    (org-agenda-include-deadlines t)
                    (org-super-agenda-groups '(
                                               (:name "" :time-grid t :order 1)
-                                              (:discard (:anything))
-                                              ))
-                   ))
+                                              (:discard (:anything))))))
+
+
        ;; next 3 days
        (agenda "" (
                    (org-agenda-overriding-header "\n📅 Next three days")
                    (org-agenda-time-grid nil)
                    (org-agenda-show-all-dates nil)
                    (org-agenda-span 3)
-                   (org-agenda-start-day "+1d")
-                   ))
+                   (org-agenda-start-day "+1d")))
+
        ;; deadlines for next 14 days
        (agenda "" ((org-agenda-overriding-header "\n🗡 Upcoming deadlines (+14d)")
                    (org-agenda-time-grid nil)
@@ -304,20 +309,24 @@
                    (org-agenda-span 14)
                    (org-agenda-show-all-dates nil)
                    (org-deadline-warning-days 0)
-                   (org-agenda-entry-types '(:deadline))
-                   ))
+                   (org-agenda-entry-types '(:deadline))))
+
        ;; dues
-       (alltodo "" (
+       (tags "*" (
                     (org-agenda-overriding-header "\n🔥 Overdue")
                     (org-super-agenda-groups '(
                                                (:name "deadlines 💀" :deadline past)
                                                (:name "schedules ♻" :scheduled past)
-                                               (:discard (:anything))
-                                               ))
-                    ))
-       ))
-     )
-   ))
+                                               (:discard (:anything)))))))))))
+
+(setq org-gcal-client-id "846127778336-jvfk3olcu1ec37242neqkdepbie6k9eq.apps.googleusercontent.com"
+      org-gcal-client-secret "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"
+      org-gcal-fetch-file-alist '(("269715bbdb60815127d11a80b3eb406fcb6d5d13631cfd8f08d3b65ab56196b3@group.calendar.google.com" .  "~/notes/org/tasks.org")))
+(require 'plstore)
+;; (setq plstore-cache-passphrase-for-symmetric-encryption t) ;; using gpg so don't need this
+;; NOTE: the file "oauth2-auto.plist" (whatever is set for oauth2-auto-plstore)
+;;   needs to exist before, so manually create it
+(add-to-list 'plstore-encrypt-to "CB46502EA121F97D") ;; GPG doesn't seem to be working, it hangs when tries to do plstoore write of the token
 
 (after! org
   (setq

@@ -13,7 +13,8 @@
 # output configuration
   # note: we can also set display specific wallpapers
   # swaymsg -t get_outputs
-  output * bg ~/wallpaper.jpg fill
+  # output * bg ~/wallpaper.jpg fill
+  output * bg ~/xp.jpg fill
   # move workspaces between monitors
   bindsym $mod+p move workspace to output right
   bindsym $mod+q move workspace to output left
