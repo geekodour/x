@@ -17,6 +17,7 @@ end
 set -g direnv_fish_mode eval_on_arrow # sourced direnv hook
 
 set -x MANPAGER "sh -c 'col -bx | bat -l man -p'"
+set -x MANROFFOPT "-c" 
 set -x DOOMDIR "~/.config/doom"
 set -x EDITOR nvim
 
