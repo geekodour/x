@@ -40,7 +40,16 @@ in
   #    url = https://github.com/nix-community/emacs-overlay/archive/master.tar.gz;
   #  }))
   #];
-  
+
+  # postgres
+  services.postgresql = {
+    enable = true;
+    ensureDatabases = [ "zuckdb" ];
+    authentication = pkgs.lib.mkOverride 10 ''
+      #type database  DBuser  auth-method
+      local all       all     trust
+    '';
+  };
 
   hardware.opengl = {
     enable = true;

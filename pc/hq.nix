@@ -124,6 +124,7 @@ in
           parallel
           handbrake
           feh
+          sqlite-interactive
           # act # gh actions local, installed docker for this
           #docker-compose
           discord
@@ -202,6 +203,7 @@ in
           nodePackages.bash-language-server
           nodePackages.svelte-language-server
           nodePackages.typescript-language-server
+          pgformatter
 
           # following isn't even helping
           # ocamlPackages.ocaml-lsp
