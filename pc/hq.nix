@@ -138,6 +138,7 @@ in
           unstable.ollama
           emscripten
           wlsunset
+          zotero
           handlr
           spotify
           xdg-utils
