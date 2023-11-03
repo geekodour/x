@@ -3,7 +3,7 @@ set -g cheat_dir "$HOME/locus/cheat/c"
 # editor command
 set -g editor_command emacs
 # set -g editor_command "emacs -nw"
-# set -g editor_command $EDITOR
+# set -g editor_command $EDITOR, we can do this once we add org-mode thing for nvim and fix tf comes when i do $editor now
 set -g ed (echo $editor_command | string split ' ')[1]
 set -g ed_opts (echo $editor_command | string split ' ')[2..]
 
@@ -51,7 +51,7 @@ function c --description 'alias view and edit cheatsheet' -a opt
 
     if set -q _flag_search
         pushd $cheat_dir
-        rg -g "*.org" $argv
+        rg -i -g "*.org" $argv
         popd
         return 0
     end
