@@ -204,6 +204,7 @@ in
           nodePackages.bash-language-server
           nodePackages.svelte-language-server
           nodePackages.typescript-language-server
+          nodePackages_latest.yaml-language-server
           pgformatter
 
           # following isn't even helping
@@ -232,6 +233,7 @@ in
           cmake
           nodejs
           gomodifytags
+          visidata
           gotests
           gore
           nixfmt
