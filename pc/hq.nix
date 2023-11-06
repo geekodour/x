@@ -3,6 +3,7 @@ let
   home-manager = builtins.fetchTarball "https://github.com/nix-community/home-manager/archive/release-23.05.tar.gz";
   h = "/home/zuck";
   x = "/home/zuck/x";
+  ollamagpu = pkgs.unstable.ollama.override { llama-cpp = (pkgs.unstable.llama-cpp.override {cudaSupport = true; openblasSupport = false; }); };
 in
 {
   imports = [
@@ -100,6 +101,7 @@ in
       #   withVencord = true;
       # };
 
+
       # packages
       home.packages = with pkgs; [
           tmux
@@ -135,7 +137,6 @@ in
           go
           # exa
           unstable.eza
-          unstable.ollama
           emscripten
           wlsunset
           zotero
@@ -161,10 +162,13 @@ in
           # libcap
           pandoc
           onefetch
+          # unstable.ollama
+          ollamagpu
           lazydocker
           cpufetch
           qbittorrent
           gomi
+          nix-tree # nice
           hyperfine
           pdfarranger
           starship

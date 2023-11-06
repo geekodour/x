@@ -26,6 +26,8 @@ in
 
   nix.settings.experimental-features = [ "nix-command" ];
   nixpkgs.config.allowUnfree = true;
+  # see https://discourse.nixos.org/t/where-are-options-like-config-cudasupport-documented/17806/9
+  # nixpkgs.config.cudaSupport = true; # ollama
   nixpkgs.config.packageOverrides = pkgs: {
     unstable = import unstableTarball {
         config = config.nixpkgs.config;
@@ -62,9 +64,10 @@ in
      # powerManagement.enable = true; # hoping this fixes hibernation, conclusion: does not work
      # nvidiaPersistenced = true; # does not make any diff
      modesetting.enable = true;
-     open = true; # open source kernel module 515.43.04+
+     open = false; # open source kernel module 515.43.04+
      nvidiaSettings = true;
      package = config.boot.kernelPackages.nvidiaPackages.stable;
+     # package = config.boot.kernelPackages.nvidiaPackages.beta;
    };
 
   # Use the systemd-boot EFI boot loader.
@@ -118,13 +121,20 @@ in
       #libGL
       #libGLU
       #libglvnd
+
       # nvidia
+      # unstable.cachix
+      # unstable.cudaPackages.cudatoolkit
+      # unstable.cudaPackages.cudnn
+      # unstable.cudaPackages.libcublas
+      # unstable.cudaPackages.cuda_cudart
+
       cachix
       cudaPackages.cudatoolkit
       cudaPackages.cudnn
       cudaPackages.libcublas
       cudaPackages.cuda_cudart
-      #cudaPackages.cutensor
+      # cudaPackages.cutensor
   ];
 
 
@@ -166,11 +176,14 @@ in
   };
 
    environment.sessionVariables = rec {
-    #LD_LIBRARY_PATH = "${pkgs.linuxPackages.nvidia_x11}/lib:${pkgs.cudaPackages.cudatoolkit}/lib64:${pkgs.stdenv.cc.cc.lib}/lib:${pkgs.zlib}/lib:${pkgs.cudaPackages.cudnn}/lib:/run/opengl-driver/lib:/run/opengl-driver-32/lib";
-    #LD_LIBRARY_PATH = "${pkgs.linuxPackages.nvidia_x11}/lib:${pkgs.cudaPackages.cudatoolkit}/lib64:${pkgs.stdenv.cc.cc.lib}/lib:${pkgs.zlib}/lib:${pkgs.cudaPackages.cudnn}/lib:${pkgs.libglvnd}/lib";
     LD_LIBRARY_PATH = "${pkgs.linuxPackages.nvidia_x11}/lib:${pkgs.cudaPackages.cudatoolkit}/lib64:${pkgs.cudaPackages.cudatoolkit}/include:${pkgs.stdenv.cc.cc.lib}/lib:${pkgs.zlib}/lib:${pkgs.cudaPackages.cudnn}/lib";
     CUDA_PATH = "${pkgs.cudaPackages.cudatoolkit}";
     CUDART_PATH = "${pkgs.cudaPackages.cuda_cudart}";
+
+    # LD_LIBRARY_PATH = "${pkgs.unstable.linuxPackages.nvidia_x11}/lib:${pkgs.unstable.cudaPackages.cudatoolkit}/lib64:${pkgs.unstable.cudaPackages.cudatoolkit}/include:${pkgs.stdenv.cc.cc.lib}/lib:${pkgs.zlib}/lib:${pkgs.unstable.cudaPackages.cudnn}/lib";
+    # CUDA_PATH = "${pkgs.unstable.cudaPackages.cudatoolkit}";
+    # CUDART_PATH = "${pkgs.unstable.cudaPackages.cuda_cudart}";
+
     #EXTRA_LDFLAGS = "-L${pkgs.linuxPackages.nvidia_x11}/lib";
     NIX_SHELL_PRESERVE_PROMPT = "1";
    };
