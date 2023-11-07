@@ -386,14 +386,24 @@
                   ;;  :port "6969"
 		  ;;  :chat-model "zephyr:7b" :embedding-model "zephyr:7b")))
 
-(defun ellama-make-flash-card ()
+(defun ellama-make-flash-cards ()
   "Create flash cards from active region or current buffer."
   (interactive)
   (let ((text (if (region-active-p)
-		  (buffer-substring-no-properties (region-beginning) (region-end))
-		(buffer-substring-no-properties (point-min) (point-max)))))
-  (ellama-chat (format "Text:\n%s\nCreate anki flash card for the above text. It should be focused, clear, precise and consistent. Try adding info about Attributes and tendencies, Similarities and differences (Parts and wholes), Causes and effects, Significance and implications\nFormat:\nCreate anki flashcards in this 2 line format:\n- First line: Front of the card (question), put an asterisk symbol and a space character infront as a prefix.\n- Second line: Back of the card (answer), keep the answer short and precise\nExample:\n* What is an apple?\nA fruit" text))))
-
+      (buffer-substring-no-properties (region-beginning) (region-end))
+    (buffer-substring-no-properties (point-min) (point-max)))))
+    (ellama-chat (concat (format "Text:\n%s\n" text)
+                         "Instructions:\n"
+                         "Create anki flash cards for the above text. Break the text down into different flashcards.\n"
+                         "Each flashcard should be clear, precise and consistent. Try extracting info about attributes/tendencies, similarities/differences,causes/effects, significance/implications etc and mention them in the flashcards wherever relevant."
+                         "If there is a link in markdown format, you can skip it.\n\n"
+                         "Format for flashcards (2 lines):\n"
+                         "- First line: Front of the card (question), put an asterisk symbol and a space character infront as a prefix.\n"
+                         "- Second line: Back of the card (answer), keep the answer short and precise\n\n"
+                         "Example:\n"
+                         "* What is an apple?\n"
+                         "A fruit"
+                         ))))
 
 ;; (after! chatgpt-shell
 ;;   (setq chatgpt-shell-openai-key "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"))
