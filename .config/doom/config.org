@@ -580,7 +580,7 @@ I no longer use tabs, long live buffers.
   (let ((text (if (region-active-p)
 		  (buffer-substring-no-properties (region-beginning) (region-end))
 		(buffer-substring-no-properties (point-min) (point-max)))))
-  (ellama-instant "Text:\n%s\nCreate anki flash card for the above text. It should be focused, clear, precise and consistent. Try adding info about Attributes and tendencies, Similarities and differences (Parts and wholes), Causes and effects, Significance and implications\nFormat:\nCreate anki flashcards in this 2 line format:\n- First line: Front of the card (question), put an asterisk symbol and a space character infront as a prefix.\n- Second line: Back of the card (answer), keep the answer short and precise\nExample:\n* What is an apple?\nA fruit")))
+  (ellama-instant format("Text:\n%s\nCreate anki flash card for the above text. It should be focused, clear, precise and consistent. Try adding info about Attributes and tendencies, Similarities and differences (Parts and wholes), Causes and effects, Significance and implications\nFormat:\nCreate anki flashcards in this 2 line format:\n- First line: Front of the card (question), put an asterisk symbol and a space character infront as a prefix.\n- Second line: Back of the card (answer), keep the answer short and precise\nExample:\n* What is an apple?\nA fruit" text))))
 
 ;; (after! chatgpt-shell
 ;;   (setq chatgpt-shell-openai-key "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"))
