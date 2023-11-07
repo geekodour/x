@@ -19,6 +19,7 @@
 (unpin! org-roam)
 (package! org-roam-ui)
 (package! plstore)
+(package! ellama)
 
 ;; anki
 (package! org-anki)

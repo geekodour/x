@@ -371,8 +371,16 @@
 (after! org-fancy-priorities
   (setq org-fancy-priorities-list '("🌕" "🌗" "🌙" "☕")))
 
-(after! chatgpt-shell
-  (setq chatgpt-shell-openai-key "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"))
+(after! ellama
+  (setq ellama-user-nick "🐥")
+  (setq ellama-assistant-nick "🦉")
+  (setq ellama-provider
+		  (make-llm-ollama
+		   :chat-model "zephyr:7b" :embedding-model "zephyr:7b")))
+		   ;; :chat-model "zephyr:7b-alpha-q5_K_M" :embedding-model "zephyr:7b-alpha-q5_K_M")))
+
+;; (after! chatgpt-shell
+;;   (setq chatgpt-shell-openai-key "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"))
 
 (add-hook 'python-mode-hook
           (lambda ()
