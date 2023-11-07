@@ -376,8 +376,13 @@
   (setq ellama-assistant-nick "🦉")
   (setq ellama-provider
 		  (make-llm-ollama
-		   :chat-model "zephyr:7b" :embedding-model "zephyr:7b")))
-		   ;; :chat-model "zephyr:7b-alpha-q5_K_M" :embedding-model "zephyr:7b-alpha-q5_K_M")))
+		   :chat-model "zephyr:7b-alpha-q5_K_M" :embedding-model "zephyr:7b-alpha-q5_K_M")))
+		   ;; :chat-model "zephyr:7b" :embedding-model "zephyr:7b")))
+
+(defun ellama-make-flash-card ()
+  "Create flash cards from active region or current buffer."
+  (interactive)
+  (ellama-render "anki flash card. It should be focused, clear, precise and consistent. Try adding info about Attributes and tendencies, Similarities and differences (Parts and wholes), Causes and effects, Significance and implications\nFormat:\nCreate anki flashcards in this 2 line format:\n- First line: Front of the card (question), put an asterisk symbol and a space character infront as a prefix.\n- Second line: Back of the card (answer), keep the answer short and precise\nExample:\n* What is an apple?\nA fruit"))
 
 ;; (after! chatgpt-shell
 ;;   (setq chatgpt-shell-openai-key "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"))
