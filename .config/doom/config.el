@@ -379,6 +379,13 @@
 		   :chat-model "zephyr:7b" :embedding-model "zephyr:7b")))
 		   ;; :chat-model "zephyr:7b-alpha-q5_K_M" :embedding-model "zephyr:7b-alpha-q5_K_M")))
 
+                  ;; This DID NOT WORK, shall try later
+		  ;; (make-llm-ollama
+                  ;;  :scheme "http"
+                  ;;  :host "hq"
+                  ;;  :port "6969"
+		  ;;  :chat-model "zephyr:7b" :embedding-model "zephyr:7b")))
+
 (defun ellama-make-flash-card ()
   "Create flash cards from active region or current buffer."
   (interactive)
