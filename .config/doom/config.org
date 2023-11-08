@@ -795,6 +795,8 @@ Source: [[https://ox-hugo.scripter.co/doc/org-capture-setup/][Org Capture Setup 
 (defun org-web-tools-insert-link-on-point ()
   (interactive)
   (replace-string (thing-at-point 'url t) (org-web-tools--org-link-for-url (thing-at-point 'url t))))
+  ;; (replace-string (thing-at-point 'url t) (org-web-tools--org-link-for-url (thing-at-point-url-at-point))))
+
 #+end_src
 
 * Other notes

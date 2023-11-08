@@ -528,3 +528,4 @@ Example usage in Emacs Lisp: (ox-hugo/export-all \"~/org\")."
 (defun org-web-tools-insert-link-on-point ()
   (interactive)
   (replace-string (thing-at-point 'url t) (org-web-tools--org-link-for-url (thing-at-point 'url t))))
+  ;; (replace-string (thing-at-point 'url t) (org-web-tools--org-link-for-url (thing-at-point-url-at-point))))
