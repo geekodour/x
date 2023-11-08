@@ -166,6 +166,7 @@ in
           ollamagpu
           lazydocker
           cpufetch
+          obs-studio
           qbittorrent
           gomi
           nix-tree # nice
@@ -301,6 +302,10 @@ in
         MANPAGER = "sh -c 'col -bx | bat -l man -p'";
         # DOOMDIR = "${h}/.config/doom";
         EDITOR = "nvim";
+        # idk wtf this is
+        # MOZ_ENABLE_WAYLAND = "1";
+        # WLR_BACKEND = "vulkan";
+        # CLUTTER_BACKEND = "wayland";
       };
     };
   };

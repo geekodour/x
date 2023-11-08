@@ -24,6 +24,15 @@ in
   virtualisation.docker.storageDriver = "btrfs";
 
 
+  security.rtkit.enable = true;
+  services.pipewire = {
+    enable = true;
+    alsa.enable = true;
+    alsa.support32Bit = true;
+    pulse.enable = true;
+  };
+
+
   nix.settings.experimental-features = [ "nix-command" ];
   nixpkgs.config.allowUnfree = true;
   # see https://discourse.nixos.org/t/where-are-options-like-config-cudasupport-documented/17806/9
@@ -75,6 +84,18 @@ in
   boot.loader.systemd-boot.configurationLimit = 3;
   boot.loader.efi.canTouchEfiVariables = true;
 
+  # boot.extraModulePackages = with config.boot.kernelPackages; [ v4l2loopback.out ];
+  # boot.kernelModules = [ "v4l2loopback" "snd-aloop" ];
+
+  # boot.kernelPackages = pkgs.linuxPackages_zen;
+  # boot.extraModulePackages = [ pkgs.linuxKernel.packages.linux_zen.v4l2loopback ];
+  boot.kernelModules = [ "v4l2loopback" ];
+  boot.extraModulePackages = with config.boot.kernelPackages; [ v4l2loopback.out ];
+  # boot.extraModprobeConfig =
+  #   ''
+  #   options v4l2loopback nr_devices=2 exclusive_caps=1,1 video_nr=0,1 card_label=v4l2lo0,v4l2lo1
+  #   '';
+
   networking.hostName = "hq";
   networking.nameservers = [ "1.1.1.1" "8.8.8.8" ];
   networking.wireless.iwd.enable = true;  
@@ -92,7 +113,13 @@ in
 
   # Enable sound.
   sound.enable = true;
-  hardware.pulseaudio.enable = true;
+  # hardware.pulseaudio.enable = true;
+  # xdg portal is required for screenshare
+  xdg.portal = {
+    enable = true;
+    wlr.enable = true;
+    extraPortals = [pkgs.xdg-desktop-portal-gtk];
+  };
 
   users.users.zuck = {
     isNormalUser = true;
