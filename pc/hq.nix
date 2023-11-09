@@ -145,6 +145,7 @@ in
           xdg-utils
           zoxide
           catimg
+          zoom-us
           telegram-desktop
           thunderbird
           chafa
