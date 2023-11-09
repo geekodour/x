@@ -594,7 +594,7 @@ I no longer use tabs, long live buffers.
                          "If there is a link in markdown format, you can skip it.\n\n"
                          "Format for flashcards (2 lines):\n"
                          "- First line: Front of the card (question), put an asterisk symbol and a space character infront as a prefix.\n"
-                         "- Second line: Back of the card (answer), keep the answer short and precise\n\n"
+                         "- Second line: Back of the card (answer), keep the answer short and precise. If the answer is longer than one line, prefer breaking the answer into bullet points\n\n"
                          "Example:\n"
                          "* What is an apple?\n"
                          "A fruit"
