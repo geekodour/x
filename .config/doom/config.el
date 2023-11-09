@@ -386,7 +386,10 @@
                   ;;  :port "6969"
 		  ;;  :chat-model "zephyr:7b" :embedding-model "zephyr:7b")))
 
-;;;###autoload
+(use-package! ellama
+  :commands (ellama-instant))
+  ;; :commands (ellama-make-flash-cards))
+
 (defun ellama-make-flash-cards ()
   "Create flash cards from active region or current buffer."
   (interactive)
