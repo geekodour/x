@@ -402,7 +402,7 @@
                          "- Second line: Back of the card (answer), keep the answer short use bullet points. Don't forget to use bullet points.\n\n"
                          "Example:\n"
                          "* What is an apple?\n"
-                         "A fruit"
+                         "- A fruit\n- A food that humans eat"
                          ))))
 
 ;; (after! chatgpt-shell
