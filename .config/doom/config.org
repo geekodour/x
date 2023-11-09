@@ -581,13 +581,14 @@ I no longer use tabs, long live buffers.
                   ;;  :port "6969"
 		  ;;  :chat-model "zephyr:7b" :embedding-model "zephyr:7b")))
 
+;;;###autoload
 (defun ellama-make-flash-cards ()
   "Create flash cards from active region or current buffer."
   (interactive)
   (let ((text (if (region-active-p)
       (buffer-substring-no-properties (region-beginning) (region-end))
     (buffer-substring-no-properties (point-min) (point-max)))))
-    (ellama-chat (concat (format "Text:\n%s\n" text)
+    (ellama-instant (concat (format "Text:\n%s\n" text)
                          "Instructions:\n"
                          "Create anki flash cards for the above text. Break the text down into different flashcards.\n"
                          "Each flashcard should be clear, precise and consistent. Try extracting info about attributes/tendencies, similarities/differences,causes/effects, significance/implications etc and mention them in the flashcards wherever relevant."
