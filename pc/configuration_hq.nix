@@ -33,7 +33,7 @@ in
   };
 
 
-  nix.settings.experimental-features = [ "nix-command" ];
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
   nixpkgs.config.allowUnfree = true;
   # see https://discourse.nixos.org/t/where-are-options-like-config-cudasupport-documented/17806/9
   # nixpkgs.config.cudaSupport = true; # ollama
@@ -64,6 +64,11 @@ in
 
   hardware.opengl = {
     enable = true;
+    extraPackages = with pkgs; [
+      vaapiIntel         # LIBVA_DRIVER_NAME=i965 (older but works better for Firefox/Chromium)
+      vaapiVdpau
+      libvdpau-va-gl
+    ];
     #driSupport = true;
     #driSupport32Bit = true;
   };
