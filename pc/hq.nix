@@ -83,6 +83,9 @@ in
 
       programs.chromium = {
         enable = true;
+        package = pkgs.chromium.override {
+          commandLineArgs = [ "--ozone-platform=wayland" "--enable-features=VaapiVideoDecoder" "--use-gl=egl"];
+        };
       };
 
       programs.direnv = {
@@ -119,11 +122,13 @@ in
           ispell
           yt-dlp
           wdisplays
+          vscode-fhs
 
           # misc
           bat
           ffmpeg
           parallel
+          unstable.swayosd # is not working as expected at the moment
           handbrake
           feh
           sqlite-interactive
@@ -141,6 +146,7 @@ in
           wlsunset
           zotero
           handlr
+          duckdb
           spotify
           xdg-utils
           zoxide
@@ -150,6 +156,7 @@ in
           thunderbird
           chafa
           glow
+          google-chrome
           libtree
           nix-index
           dbeaver
@@ -173,6 +180,7 @@ in
           nix-tree # nice
           hyperfine
           pdfarranger
+          ocrmypdf
           starship
           trash-cli
           sysz
