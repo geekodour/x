@@ -1,6 +1,6 @@
 { config, pkgs, ... }:
 let
-  home-manager = builtins.fetchTarball "https://github.com/nix-community/home-manager/archive/release-23.05.tar.gz";
+  home-manager = builtins.fetchTarball "https://github.com/nix-community/home-manager/archive/release-23.11.tar.gz";
   h = "/home/zuck";
   x = "/home/zuck/x";
   ollamagpu = pkgs.unstable.ollama.override { llama-cpp = (pkgs.unstable.llama-cpp.override {cudaSupport = true; openblasSupport = false; }); };
@@ -11,7 +11,7 @@ in
   ];
   services.emacs = {
     enable = true;
-    package = pkgs.emacs;
+    package = pkgs.emacs29;
   };
 
   # security.wrappers.pmount = {
@@ -97,6 +97,7 @@ in
 
       programs.emacs = {
         enable = true;
+        package = pkgs.emacs29;
       };
 
       # pkgs.discord.override {
