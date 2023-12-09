@@ -1,5 +1,5 @@
 (setq
- doom-font (font-spec :family "JetBrains Mono Nerd Font" :size 13)
+ doom-font (font-spec :family "JetBrains Mono NF" :size 13)
  ;; doom-font (font-spec :family "FiraCode Nerd Font Mono" :size 13)
  doom-theme 'doom-tokyo-night
  doom-themes-treemacs-theme "doom-colors"
@@ -331,10 +331,28 @@
 ("27c4fd043369bc02c5a058d6dcfb4a87c03551a32c4d58532ce411d6811c2293@group.calendar.google.com" .  "~/notes/org/hacking.org")
 ("5e1acb6fd626ef21c9ab0a5b302f4c890f24bdd9048ce22261524b3015a20824@group.calendar.google.com" .  "~/notes/org/meetings.org")))
 (require 'plstore)
-;; (setq plstore-cache-passphrase-for-symmetric-encryption t) ;; using gpg so don't need this
+;; for some reason following is needed for gcal to work in emacs29
+(require 'tramp) ;; temp
+(require 'gnutls) ;; temp
+(require 'url-gw) ;; temp
+(require 'url-cache) ;; temp
+(require 'nsm) ;; temp
+;; see https://discourse.doomemacs.org/t/recentf-cleanup-logs-a-lot-of-error-messages/3273/5
+(setq network-stream-use-client-certificates nil) ;; temp
+(setq network-security-protocol-checks nil) ;; temp
+(after! tramp (advice-add 'doom--recentf-file-truename-fn :override
+                          (defun my-recent-truename (file &rest _args)
+                            (if (or (not (file-remote-p file)) (equal "sudo" (file-remote-p file 'method)))
+                                (abbreviate-file-name (file-truename (tramp-file-local-name file)))
+                              file))))
+(fset 'epg-wait-for-status 'ignore)
+;; end of patch for emacs29 gcal
+
 ;; NOTE: the file "oauth2-auto.plist" (whatever is set for oauth2-auto-plstore)
 ;;   needs to exist before, so manually create it
-(add-to-list 'plstore-encrypt-to "CB46502EA121F97D") ;; GPG doesn't seem to be working, it hangs when tries to do plstoore write of the token
+(add-to-list 'plstore-encrypt-to "CB46502EA121F97D")
+
+;; oauth2-auto-plstore
 
 (after! org
   (setq
