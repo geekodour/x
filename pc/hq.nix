@@ -79,6 +79,7 @@ in
         package = pkgs.firefox.override {
           cfg = { enableTridactylNative = true; };
         };
+        # nativeMessagingHosts.packages = with pkgs; [tridactyl-native];
       };
 
       programs.chromium = {
