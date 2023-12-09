@@ -262,8 +262,8 @@ in
           zls
           zig
           git-lfs
-          python310
-          poetry
+          python3
+          # poetry
 
           # system tweaks
           earlyoom
