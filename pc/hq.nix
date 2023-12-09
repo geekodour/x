@@ -181,6 +181,7 @@ in
           hyperfine
           pdfarranger
           ocrmypdf
+          pgcli
           starship
           trash-cli
           sysz
