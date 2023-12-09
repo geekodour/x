@@ -147,7 +147,7 @@ in
       htop
       gcc11
       stdenv
-      pkgconfig
+      pkg-config
       iwd
       #mesa
       #libGL
