@@ -3,7 +3,7 @@ let
   home-manager = builtins.fetchTarball "https://github.com/nix-community/home-manager/archive/release-23.11.tar.gz";
   h = "/home/zuck";
   x = "/home/zuck/x";
-  ollamagpu = pkgs.unstable.ollama.override { llama-cpp = (pkgs.unstable.llama-cpp.override {cudaSupport = true; openblasSupport = false; }); };
+  # ollamagpu = pkgs.unstable.ollama.override { llama-cpp = (pkgs.unstable.llama-cpp.override {cudaSupport = true; openblasSupport = false; }); };
 in
 {
   imports = [
@@ -173,7 +173,7 @@ in
           pandoc
           onefetch
           # unstable.ollama
-          ollamagpu
+          # ollamagpu
           lazydocker
           cpufetch
           obs-studio
@@ -312,6 +312,7 @@ in
         XDG_STATE_HOME = "${h}/.local/state";
         # misc
         MANPAGER = "sh -c 'col -bx | bat -l man -p'";
+        MANROFFOPT = "-c";
         # DOOMDIR = "${h}/.config/doom";
         EDITOR = "nvim";
         # idk wtf this is
