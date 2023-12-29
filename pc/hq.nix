@@ -121,6 +121,7 @@ in
           nnn
           fd
           mpv
+          gimp
           ispell
           yt-dlp
           wdisplays
@@ -128,7 +129,7 @@ in
 
           # misc
           bat
-          ffmpeg
+          unstable.ffmpeg
           parallel
           unstable.swayosd # is not working as expected at the moment
           handbrake
@@ -175,6 +176,7 @@ in
           # unstable.ollama
           # ollamagpu
           lazydocker
+          xfce.tumbler
           cpufetch
           obs-studio
           qbittorrent

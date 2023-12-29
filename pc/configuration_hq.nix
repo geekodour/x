@@ -88,6 +88,7 @@ in
   boot.loader.systemd-boot.enable = true;
   boot.loader.systemd-boot.configurationLimit = 3;
   boot.loader.efi.canTouchEfiVariables = true;
+  programs.thunar.enable = true;
 
   # boot.extraModulePackages = with config.boot.kernelPackages; [ v4l2loopback.out ];
   # boot.kernelModules = [ "v4l2loopback" "snd-aloop" ];
