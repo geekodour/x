@@ -145,6 +145,7 @@ in
           go
           # exa
           unstable.eza
+          brightnessctl
           emscripten
           wlsunset
           zotero
