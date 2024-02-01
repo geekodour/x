@@ -3,7 +3,7 @@ let
   home-manager = builtins.fetchTarball "https://github.com/nix-community/home-manager/archive/release-23.11.tar.gz";
   h = "/home/zuck";
   x = "/home/zuck/x";
-  # ollamagpu = pkgs.unstable.ollama.override { llama-cpp = (pkgs.unstable.llama-cpp.override {cudaSupport = true; openblasSupport = false; }); };
+  ollamagpu = pkgs.unstable.ollama.override { llama-cpp = (pkgs.unstable.llama-cpp.override {cudaSupport = true; }); };
 in
 {
   imports = [
@@ -129,7 +129,8 @@ in
 
           # misc
           bat
-          unstable.ffmpeg
+          ffmpeg
+          handbrake
           parallel
           unstable.swayosd # is not working as expected at the moment
           handbrake
@@ -145,6 +146,7 @@ in
           go
           # exa
           unstable.eza
+          zip
           emscripten
           wlsunset
           zotero
@@ -174,10 +176,12 @@ in
           pandoc
           onefetch
           # unstable.ollama
-          # ollamagpu
+          ollamagpu
           lazydocker
           xfce.tumbler
+          vulnix
           cpufetch
+          unstable.awscli2
           obs-studio
           qbittorrent
           gomi
