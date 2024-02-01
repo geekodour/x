@@ -129,7 +129,7 @@ in
 
   users.users.zuck = {
     isNormalUser = true;
-    extraGroups = [ "wheel" "input" "docker" ]; # Enable ‘sudo’ for the user.
+    extraGroups = [ "wheel" "input" "docker" "postgres" ]; # Enable ‘sudo’ for the user.
     shell = pkgs.fish;
   };
 
@@ -167,6 +167,7 @@ in
       cudaPackages.cudnn
       cudaPackages.libcublas
       cudaPackages.cuda_cudart
+
       # cudaPackages.cutensor
   ];
 
