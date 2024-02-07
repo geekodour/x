@@ -125,6 +125,7 @@ in
           ispell
           yt-dlp
           wdisplays
+          wl-mirror
           vscode-fhs
 
           # misc
@@ -146,6 +147,7 @@ in
           # exa
           unstable.eza
           brightnessctl
+          bluez
           emscripten
           wlsunset
           zotero

@@ -12,7 +12,7 @@ in
 {
   imports = [
       ./hardware-configuration.nix
-      /home/geekodour/x/pc/nft.nix
+      /home/geekodour/x/nft/nft.nix
   ];
 
 #  virtualisation.docker.enable = true;
