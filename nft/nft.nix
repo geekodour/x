@@ -30,25 +30,12 @@ in
   };
   programs.fish.enable = true; # need to enable it outside of hm aswell
 
-
-  # https://discourse.nixos.org/t/cant-get-gnupg-to-work-no-pinentry/15373
-  # https://github.com/NixOS/nixpkgs/issues/35464
-  # services.pcscd.enable = true;
-  # programs.gnupg.agent = {
-  #   enable = true;
-  #   pinentryFlavor = "curses";
-  #   settings = {
-  #     default-cache-ttl = 84000;
-  #     max-cache-ttl = 84000;
-  #   };
-  #   enableSSHSupport = false;
-  # };
-
   programs.firefox = {
     enable = true;
     nativeMessagingHosts.packages = [pkgs.tridactyl-native];
   };
   #xdg.portal.wlr.enable = true; # screen share, disabled for now because causes startup slow
+
   home-manager = {
     useUserPackages = true;
     useGlobalPkgs = true;
@@ -73,9 +60,6 @@ in
       home.file.".tmux.conf".source = "${x}/.tmux.conf";
       # security
       home.file.".ssh/config".source = "${x}/.ssh/config";
-      # home.file.".gnupg/gpg.conf".source = "${x}/.gnupg/gpg.conf";
-      # home.file.".gnupg/gpg-agent.conf".source = "${x}/.gnupg/gpg-agent.conf";
-
 
       # cursor
       home.file.".icons/default".source = "${pkgs.vanilla-dmz}/share/icons/Vanilla-DMZ";
@@ -84,9 +68,6 @@ in
       programs.fish = {
         enable = true;
         interactiveShellInit = ''
-          set -x GPG_TTY $(tty)
-          keychain --eval --quiet --quick --nogui ${h}/.ssh/id_ed25519 | source
-          #keychain --eval --quiet --quick --nogui --agents gpg "8963 3907 AE52 C5B4 72A1  ABF3 CB46 502E A121 F97D" | source # gpg
           source ~/.config/nnn/init # nnn
           source ~/.config/starship/init # starship
           source ~/.config/zoxide/init # zoxide
@@ -104,7 +85,30 @@ in
         tray.enable = true;
       };
 
+      programs.keychain = {
+        enable = true;
+        enableFishIntegration = true;
+        agents = ["ssh" "gpg"];
+        keys = [
+          "${h}/.ssh/id_ed25519"
+          "CB46502EA121F97D"
+        ];
+      };
 
+      # gpgconf --list-options gpg-agent| rg pine 
+      programs.gpg.enable = true;
+      programs.gpg.homedir = "${h}/.gnupg";
+
+      services.gpg-agent = {
+        enable = true;
+        enableSshSupport = false;
+        enableExtraSocket = true;
+        enableFishIntegration = true;
+        #extraConfig = '' '';
+        pinentryFlavor = "curses";
+        defaultCacheTtl = 34560000;
+        maxCacheTtl = 34560000;
+      };
 
       # cfg.nativeMessagingHosts.packages = with pkgs; [tridactyl-native];
 
@@ -178,7 +182,6 @@ in
           wlsunset
           zbar
           paperkey
-          #gnupg1
           zotero
           handlr
           duckdb
@@ -303,7 +306,7 @@ in
           # system tweaks
           earlyoom
           hunspellDicts.en-us
-          keychain
+          #keychain
           # pinentry-curses
           libvterm
           libtool

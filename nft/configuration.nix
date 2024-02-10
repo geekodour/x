@@ -112,10 +112,11 @@ in
   sound.enable = true;
   # hardware.pulseaudio.enable = true;
   # xdg portal is required for screenshare
+  xdg.portal.config.common.default = "*";
   xdg.portal = {
     enable = true;
     wlr.enable = true;
-    extraPortals = [pkgs.xdg-desktop-portal-gtk];
+    #extraPortals = [pkgs.xdg-desktop-portal-gtk];
   };
 
   users.users.geekodour = {
