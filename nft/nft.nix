@@ -14,14 +14,35 @@ in
     package = pkgs.emacs29;
   };
 
-  # security.wrappers.pmount = {
-  #   setuid = true;
-  #   setgid = true;
-  #   owner = "root";
-  #   group = "root";
-  #   source = "${pkgs.pmount}/bin/pmount";
-  # };
+  security.wrappers.pmount = {
+    setuid = true;
+    setgid = true;
+    owner = "root";
+    group = "root";
+    source = "${pkgs.pmount}/bin/pmount";
+  };
+  security.wrappers.pumount = {
+    setuid = true;
+    setgid = true;
+    owner = "root";
+    group = "root";
+    source = "${pkgs.pmount}/bin/pumount";
+  };
   programs.fish.enable = true; # need to enable it outside of hm aswell
+
+
+  # https://discourse.nixos.org/t/cant-get-gnupg-to-work-no-pinentry/15373
+  # https://github.com/NixOS/nixpkgs/issues/35464
+  # services.pcscd.enable = true;
+  # programs.gnupg.agent = {
+  #   enable = true;
+  #   pinentryFlavor = "curses";
+  #   settings = {
+  #     default-cache-ttl = 84000;
+  #     max-cache-ttl = 84000;
+  #   };
+  #   enableSSHSupport = false;
+  # };
 
   programs.firefox = {
     enable = true;
@@ -50,7 +71,10 @@ in
       home.file.".config/swappy".source = "${x}/.config/swappy";
       home.file.".config/pypoetry/config.toml".source = "${x}/.config/pypoetry/config.toml";
       home.file.".tmux.conf".source = "${x}/.tmux.conf";
+      # security
       home.file.".ssh/config".source = "${x}/.ssh/config";
+      # home.file.".gnupg/gpg.conf".source = "${x}/.gnupg/gpg.conf";
+      # home.file.".gnupg/gpg-agent.conf".source = "${x}/.gnupg/gpg-agent.conf";
 
 
       # cursor
@@ -60,7 +84,9 @@ in
       programs.fish = {
         enable = true;
         interactiveShellInit = ''
+          set -x GPG_TTY $(tty)
           keychain --eval --quiet --quick --nogui ${h}/.ssh/id_ed25519 | source
+          #keychain --eval --quiet --quick --nogui --agents gpg "8963 3907 AE52 C5B4 72A1  ABF3 CB46 502E A121 F97D" | source # gpg
           source ~/.config/nnn/init # nnn
           source ~/.config/starship/init # starship
           source ~/.config/zoxide/init # zoxide
@@ -150,6 +176,9 @@ in
           bluez
           emscripten
           wlsunset
+          zbar
+          paperkey
+          #gnupg1
           zotero
           handlr
           duckdb
@@ -183,6 +212,7 @@ in
           cpufetch
           obs-studio
           qbittorrent
+          unstable.advcpmv
           gomi
           nix-tree # nice
           hyperfine
@@ -274,11 +304,12 @@ in
           earlyoom
           hunspellDicts.en-us
           keychain
+          # pinentry-curses
           libvterm
           libtool
           linux-firmware
           mako
-          pmount # nnn
+          # pmount # nnn
           unstable.udisks # nnn
           qemu
           virt-manager
