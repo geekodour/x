@@ -326,6 +326,7 @@
 
 (setq org-gcal-client-id "846127778336-jvfk3olcu1ec37242neqkdepbie6k9eq.apps.googleusercontent.com"
       org-gcal-client-secret "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"
+      org-gcal-auto-archive nil
       org-gcal-fetch-file-alist '(
 ("269715bbdb60815127d11a80b3eb406fcb6d5d13631cfd8f08d3b65ab56196b3@group.calendar.google.com" .  "~/notes/org/tasks.org")
 ("27c4fd043369bc02c5a058d6dcfb4a87c03551a32c4d58532ce411d6811c2293@group.calendar.google.com" .  "~/notes/org/hacking.org")

@@ -85,6 +85,16 @@ in
         tray.enable = true;
       };
 
+      # NOTES about gpg
+      # 1. Restore/Create GPG keys
+      # 2. Make sure gpg-agent can access it
+      # 3. Make sure keychain and gpg-agent are in the same page
+      # 4. Make sure other programs are able to use gpg
+      # Restoring notes
+      # 1. Copy the private keys
+      # 2. Copy pubring.kbx
+      # 3. Remove cert key by running keygrip to see filename
+
       programs.keychain = {
         enable = true;
         enableFishIntegration = true;
@@ -99,12 +109,53 @@ in
       programs.gpg.enable = true;
       programs.gpg.homedir = "${h}/.gnupg";
 
+      programs.gpg.settings = {
+
+  # https://github.com/drduh/config/blob/master/gpg.conf
+        personal-cipher-preferences = "AES256 AES192 AES";
+        personal-digest-preferences = "SHA512 SHA384 SHA256";
+        personal-compress-preferences = "ZLIB BZIP2 ZIP Uncompressed";
+        default-preference-list = "SHA512 SHA384 SHA256 AES256 AES192 AES ZLIB BZIP2 ZIP Uncompressed";
+        cert-digest-algo = "SHA512";
+        s2k-digest-algo = "SHA512";
+        s2k-cipher-algo = "AES256";
+
+        charset = "utf-8";
+        fixed-list-mode = true; # unix timestamps
+        no-comments = true; # No comments in signature
+        no-emit-version = true; # No version in signature
+        no-greeting = true; # No banner
+        keyid-format = "0xlong";
+
+        list-options = "show-uid-validity";
+        verify-options = "show-uid-validity";
+        with-fingerprint = true; # display fingerprints
+        require-cross-certification = true;
+
+        no-symkey-cache = true;
+
+        #use-agent = true; Enable smartcard
+
+        # disable recipient key ID in messages
+        # this probably does notwork properly with OpenKeyChain
+        throw-keyids = true;
+        # default key needed for pass password manager, it's the key used to
+        # pass init
+        default-key = "0x73FA9A445D1ADBFC";
+        # keyserver = "hkp://keyserver.ubuntu.com";
+        # ignore-time-conflict = true;
+        # allow-freeform-uid = true;
+      };
+
       services.gpg-agent = {
         enable = true;
         enableSshSupport = false;
         enableExtraSocket = true;
         enableFishIntegration = true;
-        #extraConfig = '' '';
+        extraConfig = ''
+          disable-scdaemon
+          allow-emacs-pinentry
+        '';
         pinentryFlavor = "curses";
         defaultCacheTtl = 34560000;
         maxCacheTtl = 34560000;
