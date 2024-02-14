@@ -84,6 +84,18 @@ in
      # package = config.boot.kernelPackages.nvidiaPackages.beta;
    };
 
+   # KDE
+   services.xserver.enable = true;
+   services.xserver.displayManager.sddm.enable = true;
+   services.xserver.desktopManager.plasma5.enable = true;
+   environment.plasma5.excludePackages = with pkgs.libsForQt5; [
+     plasma-browser-integration
+     konsole
+     oxygen
+   ];
+
+
+
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.systemd-boot.configurationLimit = 3;
