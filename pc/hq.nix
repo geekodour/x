@@ -181,7 +181,6 @@ in
           xfce.tumbler
           vulnix
           cpufetch
-          unstable.awscli2
           obs-studio
           qbittorrent
           gomi
@@ -208,6 +207,11 @@ in
           entr
           delta
           podman
+
+          # aws
+          unstable.awscli2
+          unstable.copilot-cli
+          unstable.ssm-session-manager-plugin
 
           # inspection/debugging tools
           netcat-gnu
@@ -247,6 +251,7 @@ in
           gotestsum
           gofumpt
           golangci-lint
+          cloudflared
           nodePackages.pyright
           isort
           shellcheck
