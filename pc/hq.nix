@@ -251,7 +251,7 @@ in
           gotestsum
           gofumpt
           golangci-lint
-          cloudflared
+          unstable.cloudflared
           nodePackages.pyright
           isort
           shellcheck
