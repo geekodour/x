@@ -61,7 +61,17 @@ in
           source ~/.config/zoxide/init # zoxide
           alias cd z
           if test (tty) = /dev/tty1
-              sway --unsupported-gpu
+              while true
+                read -l -P 'Sway or KDE little indian man? [k/s]' wm
+                switch $wm
+                  case s S
+                    sway --unsupported-gpu
+                    return 0
+                  case k K
+                    startplasma-x11
+                    return 0
+                end
+              end
           end
         ''; 
       };
