@@ -17,9 +17,11 @@ in
   ];
 
   virtualisation.docker.enable = true;
+  # NOTE: not using rootless for the firewall issue debugging
+  # TODO: Enable this and check if we can still access port on some service form container to host
   virtualisation.docker.rootless = {
-	  enable = true;
-	  setSocketVariable = true;
+	  enable = false;
+	  setSocketVariable = false;
   };
   virtualisation.docker.storageDriver = "btrfs";
 
@@ -87,6 +89,7 @@ in
    # KDE
    services.xserver.enable = true;
    services.xserver.displayManager.sddm.enable = false;
+   # services.xserver.displayManager.sddm.enable = true;
    services.xserver.displayManager.startx.enable = true;
    services.xserver.desktopManager.plasma5.enable = true;
    environment.plasma5.excludePackages = with pkgs.libsForQt5; [
@@ -256,11 +259,20 @@ in
   services.tailscale.package = pkgs.unstable.tailscale;
 
   # Open ports in the firewall.
-  networking.firewall.allowedTCPPorts = [ 22 8384 22000 5000 7860 ];
-  networking.firewall.allowedUDPPorts = [ 22000 21027 ];
+  # networking.firewall.rejectPackets = true; # debug
+  # networking.firewall.logRefusedPackets = true; # debug
+  # networking.firewall.logReversePathDrops = true; # debug
+  networking.firewall.interfaces.docker0.allowedTCPPorts = [ 3000 53 ];
+  networking.firewall.interfaces.docker0.allowedUDPPorts = [ 3000 53 ];
+  # networking.firewall.interfaces."docker0".allowedTCPPorts = [ 3000 8000 8080 ];
+  # NOTE: This is not working as expected
+  # able to ping host from docker but not able to send http req etc
+  networking.firewall.extraCommands = ''
+    iptables -A INPUT -i docker0 -j ACCEPT
+  '';
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
-  # networking.firewall.enable = false;
+  networking.firewall.enable = true;
 
   system.stateVersion = "23.05";
 }
