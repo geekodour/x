@@ -3,7 +3,7 @@ let
   home-manager = builtins.fetchTarball "https://github.com/nix-community/home-manager/archive/release-23.11.tar.gz";
   h = "/home/zuck";
   x = "/home/zuck/x";
-  ollamagpu = pkgs.unstable.ollama.override { llama-cpp = (pkgs.unstable.llama-cpp.override {cudaSupport = true; }); };
+  # ollamagpu = pkgs.unstable.ollama.override { llama-cpp = (pkgs.unstable.llama-cpp.override {cudaSupport = true; }); };
 in
 {
   imports = [
@@ -12,6 +12,13 @@ in
   services.emacs = {
     enable = true;
     package = pkgs.emacs29;
+  };
+
+  services.openvpn.servers = {
+    officeVPN  = {
+      config = '' config ${h}/infra/hw_dev.ovpn ''; 
+      updateResolvConf = true;
+    };
   };
 
   # security.wrappers.pmount = {
@@ -186,10 +193,11 @@ in
           pandoc
           onefetch
           # unstable.ollama
-          ollamagpu
+          # ollamagpu
           lazydocker
           xfce.tumbler
           vulnix
+          mkcert
           cpufetch
           obs-studio
           qbittorrent
