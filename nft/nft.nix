@@ -228,7 +228,6 @@ in
           # exa
           unstable.eza
           brightnessctl
-          bluez
           emscripten
           wlsunset
           zbar
