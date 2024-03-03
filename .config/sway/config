@@ -14,7 +14,7 @@
   # note: we can also set display specific wallpapers
   # swaymsg -t get_outputs
   # output * bg ~/wallpaper.jpg fill
-  output * bg ~/xp.jpg fill
+  output * bg ~/wallpaper.jpg fill
   # move workspaces between monitors
   bindsym $mod+p move workspace to output right
   bindsym $mod+q move workspace to output left
@@ -31,7 +31,7 @@ exec wl-paste -t text --watch clipman store --no-persist
 # input configuration
   # inputs: swaymsg -t get_inputs
   # info: man 5 sway-input
-  input "1739:0:Synaptics_TM3383-002" {
+  input "2:7:SynPS/2_Synaptics_TouchPad" {
     dwt enabled
     tap enabled
     natural_scroll enabled
@@ -180,5 +180,8 @@ gaps inner 1
   bar {
     swaybar_command waybar
   }
+
+exec systemctl --user import-environment DISPLAY WAYLAND_DISPLAY SWAYSOCK XDG_CURRENT_DESKTOP
+exec hash dbus-update-activation-environment 2>/dev/null && dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK XDG_CURRENT_DESKTOP
 
 include /etc/sway/config.d/*

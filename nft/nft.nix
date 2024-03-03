@@ -14,6 +14,14 @@ in
     package = pkgs.emacs29;
   };
 
+  services.openvpn.servers = {
+    houseware_dev_vpn  = {
+      config = '' config ${h}/infra/openvpn_configs/hw_dev.ovpn ''; 
+      autoStart = false;
+      #updateResolvConf = true;
+    };
+  };
+
   security.wrappers.pmount = {
     setuid = true;
     setgid = true;
@@ -45,7 +53,7 @@ in
       # various configs from arch
       home.file.".config/git".source = "${x}/.config/git/";
       home.file.".config/waybar".source = "${x}/.config/waybar/";
-      home.file.".config/sway/config".source = "${x}/.config/sway/config_for_hq";
+      home.file.".config/sway/config".source = "${x}/.config/sway/config";
       home.file.".config/alacritty".source = "${x}/.config/alacritty";
       home.file.".config/nvim".source = "${x}/.config/nvim";
       home.file.".config/wofi".source = "${x}/.config/wofi";
@@ -209,6 +217,12 @@ in
           wl-mirror
           vscode-fhs
 
+          # aws
+          unstable.awscli2
+          unstable.copilot-cli
+          unstable.ssm-session-manager-plugin
+          nodePackages_latest.serve
+
           # misc
           bat
           unstable.ffmpeg
@@ -250,6 +264,7 @@ in
           dbeaver
           imv
           krita
+          unstable.cloudflared
           mediainfo
           losslesscut-bin
           grex
