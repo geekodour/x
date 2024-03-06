@@ -101,7 +101,7 @@ in
   #   '';
 
   networking.hostName = "nft";
-  networking.nameservers = [ "10.0.0.2" "1.1.1.1" "8.8.8.8" ];
+  networking.nameservers = [ "1.1.1.1" "8.8.8.8" ];
   networking.wireless.iwd.enable = true;  
   networking.wireless.userControlled.enable = true;
   networking.extraHosts = ''
