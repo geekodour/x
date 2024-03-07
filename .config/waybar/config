@@ -2,7 +2,7 @@
   "layer": "top",
 	"position": "bottom",
 	"modules-left": ["sway/workspaces", "sway/mode"],
-	"modules-right": ["custom/disk_home", "cpu", "memory", "backlight", "network", "pulseaudio", "clock", "battery", "idle_inhibitor"],
+	"modules-right": ["custom/disk_home", "cpu", "temperature", "memory", "backlight", "network", "pulseaudio", "clock", "battery", "idle_inhibitor"],
 	"sway/workspaces": {
 		"disable-scroll": true,
 		"all-outputs": true,
@@ -74,6 +74,9 @@
 		"format": "⏰ {:%d %A %I:%M%p}",
     "tooltip": false
 	},
+  "temperature": {
+    "format": "🌡️{temperatureC}°C "
+  },
 	"battery": {
 		"states": {
 			"warning": 20,

@@ -1,0 +1,189 @@
+# basic
+  set $mod Mod4
+  # home row direction keys
+  set $left h
+  set $down j
+  set $up k
+  set $right l
+  # default applications
+  set $term alacritty
+  set $menu wofi --show=run --lines=5 --prompt=""
+  set $clipboard clipman pick --tool wofi -T'--prompt=""'
+
+# output configuration
+  # note: we can also set display specific wallpapers
+  # swaymsg -t get_outputs
+  # output * bg ~/wallpaper.jpg fill
+  output * bg ~/wallpaper.jpg fill
+  # move workspaces between monitors
+  bindsym $mod+p move workspace to output right
+  bindsym $mod+q move workspace to output left
+
+# clipboard
+exec wl-paste -t text --watch clipman store --no-persist
+
+# idle configuration
+  exec swayidle -w \
+    timeout 300 'swaylock -f -c 000000' \
+    timeout 600 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' \
+    before-sleep 'swaylock -f -c 000000'
+
+# input configuration
+  # inputs: swaymsg -t get_inputs
+  # info: man 5 sway-input
+  input "1267:23:Elan_Touchpad" {
+    dwt enabled
+    tap enabled
+    natural_scroll enabled
+    middle_emulation enabled
+    accel_profile "adaptive"
+    pointer_accel 0.5
+  }
+
+# key bindings
+  # start a terminal
+  bindsym $mod+Return exec $term
+  # kill focused window
+  bindsym $mod+Shift+q kill
+  # launcher
+  bindsym $mod+d exec $menu
+  # clipboard list
+  bindsym $mod+Shift+d exec $clipboard
+  # floating window modifications
+  floating_modifier $mod normal
+  # reload/restart the configuration file
+  bindsym $mod+Shift+c reload
+  bindsym $mod+Shift+r restart
+  # exit sway
+  bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -B 'Yes, exit sway' 'swaymsg exit'
+  # note: using wev to get the wayland events
+  # brightness control
+  bindsym XF86MonBrightnessUp exec brightnessctl s 10000+
+  bindsym XF86MonBrightnessDown exec brightnessctl s 10000-
+  # volume and mic control
+  bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +10%
+  bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -10%
+  bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle
+  bindsym XF86AudioMicMute exec pactl set-source-mute @DEFAULT_SOURCE@ toggle
+  # touchpad/trackpad
+  # also: gsettings set org.gnome.desktop.peripherals.touchpad  disable-while-typing true
+  bindsym XF86Keyboard input type:touchpad events toggle enabled disabled
+
+# moving around
+  # move your focus around
+  bindsym $mod+$left focus left
+  bindsym $mod+$down focus down
+  bindsym $mod+$up focus up
+  bindsym $mod+$right focus right
+  # or use $mod+[up|down|left|right]
+  bindsym $mod+Left focus left
+  bindsym $mod+Down focus down
+  bindsym $mod+Up focus up
+  bindsym $mod+Right focus right
+
+  # move the focused window with the same, but add shift
+  bindsym $mod+Shift+$left move left
+  bindsym $mod+Shift+$down move down
+  bindsym $mod+Shift+$up move up
+  bindsym $mod+Shift+$right move right
+  # ditto, with arrow keys
+  bindsym $mod+Shift+Left move left
+  bindsym $mod+Shift+Down move down
+  bindsym $mod+Shift+Up move up
+  bindsym $mod+Shift+Right move right
+
+# workspaces:
+  # switch to workspace
+  bindsym $mod+1 workspace number 1
+  bindsym $mod+2 workspace number 2
+  bindsym $mod+3 workspace number 3
+  bindsym $mod+4 workspace number 4
+  bindsym $mod+5 workspace number 5
+  bindsym $mod+6 workspace number 6
+  bindsym $mod+7 workspace number 7
+  bindsym $mod+8 workspace number 8
+  bindsym $mod+9 workspace number 9
+  bindsym $mod+0 workspace number 10
+  # move focused container to workspace
+  bindsym $mod+Shift+1 move container to workspace number 1
+  bindsym $mod+Shift+2 move container to workspace number 2
+  bindsym $mod+Shift+3 move container to workspace number 3
+  bindsym $mod+Shift+4 move container to workspace number 4
+  bindsym $mod+Shift+5 move container to workspace number 5
+  bindsym $mod+Shift+6 move container to workspace number 6
+  bindsym $mod+Shift+7 move container to workspace number 7
+  bindsym $mod+Shift+8 move container to workspace number 8
+  bindsym $mod+Shift+9 move container to workspace number 9
+  bindsym $mod+Shift+0 move container to workspace number 10
+
+  # use swaymsg -t get_tree|grep app_id or grep class
+  assign [class="firefox"] workspace 2
+  assign [class="Emacs"] workspace 3
+  assign [app_id="cmus"] workspace 5
+  assign [app_id="mpv"] workspace 6
+  assign [app_id="telegramdesktop"] workspace 9
+
+# layout stuff:
+  # "split" the current object of your focus with
+  # $mod+b or $mod+v, for horizontal and vertical splits
+  # respectively.
+  # note: i don't know how to use this, i never needed this
+  bindsym $mod+b splith
+  bindsym $mod+v splitv
+  # switch the current container between different layout styles
+  bindsym $mod+s layout stacking
+  bindsym $mod+t layout tabbed
+  bindsym $mod+e layout toggle split
+  # make the current focus fullscreen
+  bindsym $mod+f fullscreen
+  # toggle the current focus between tiling and floating mode
+  bindsym $mod+Shift+space floating toggle
+  # swap focus between the tiling area and the floating area
+  bindsym $mod+space focus mode_toggle
+  # move focus to the parent container
+  bindsym $mod+a focus parent
+
+# scratchpad:
+  # Move the currently focused window to the scratchpad
+  bindsym $mod+Shift+minus move scratchpad
+  # Show the next scratchpad window or hide the focused scratchpad window.
+  # If there are multiple scratchpad windows, this command cycles through them.
+  bindsym $mod+minus scratchpad show
+
+# resizing
+  bindsym $mod+r mode "resize"
+  mode "resize" {
+    # left will shrink the containers width
+    # right will grow the containers width
+    # up will shrink the containers height
+    # down will grow the containers height
+    bindsym $left resize shrink width 10px
+    bindsym $down resize grow height 10px
+    bindsym $up resize shrink height 10px
+    bindsym $right resize grow width 10px
+  
+    # Ditto, with arrow keys
+    bindsym Left resize shrink width 10px
+    bindsym Down resize grow height 10px
+    bindsym Up resize shrink height 10px
+    bindsym Right resize grow width 10px
+  
+    # Return to default mode
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+  }
+
+# title bar
+default_border none
+gaps inner 1
+
+# status bar
+  # man 6 sway-bar
+  bar {
+    swaybar_command waybar
+  }
+
+exec systemctl --user import-environment DISPLAY WAYLAND_DISPLAY SWAYSOCK XDG_CURRENT_DESKTOP
+exec hash dbus-update-activation-environment 2>/dev/null && dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK XDG_CURRENT_DESKTOP
+
+include /etc/sway/config.d/*

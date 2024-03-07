@@ -5,6 +5,7 @@ map <Space> <Leader>
 set timeoutlen=500 " used for whichkey plugin
 set hidden " switch between buffers without having to save first
 set autoread " re-read file if external changes detected
+set noswapfile
 
 " natural languages
 set spelllang=en
