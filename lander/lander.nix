@@ -126,6 +126,7 @@ in
 
       # packages
       home.packages = with pkgs; [
+          hr
           tmux
           sway
           alacritty
@@ -161,6 +162,7 @@ in
           unstable.swayosd # is not working as expected at the moment
           handbrake
           feh
+          #thinkfan
           sqlite-interactive
           # act # gh actions local, installed docker for this
           #docker-compose

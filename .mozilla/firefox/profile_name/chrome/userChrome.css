@@ -1,0 +1,26 @@
+/* Source file https://github.com/MrOtherGuy/firefox-csshacks */
+
+/* Hide tabs */
+
+:root:not([customizing]) #navigator-toolbox{
+  position: relative;
+  z-index: 1;
+}
+
+:root:not([customizing],[chromehidden~="menubar"]) #titlebar{
+  margin-bottom: calc(0px - 2 * var(--tab-block-margin) - var(--tab-min-height));
+}
+#TabsToolbar:not([customizing]){ visibility: hidden; transition: visibility 0ms linear 200ms }
+
+#navigator-toolbox,
+#titlebar{ transition: margin-bottom 48ms ease-out 200ms }
+
+
+/* These rules make sure that height of tabs toolbar doesn't exceed tab-min-height */
+#tabbrowser-tabs:not([secondarytext-unsupported]) .tab-label-container{
+  max-height: var(--tab-min-height);
+}
+.tab-label{ line-height: 20px !important; }
+:root[uidensity="compact"] .tab-label{ line-height: 18px !important; }
+
+
