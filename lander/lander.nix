@@ -195,6 +195,7 @@ in
           nix-index
           dbeaver
           imv
+          unstable.ollama
           krita
           unstable.cloudflared
           mediainfo
