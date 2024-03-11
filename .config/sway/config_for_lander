@@ -61,6 +61,7 @@ exec wl-paste -t text --watch clipman store --no-persist
   bindsym XF86MonBrightnessUp exec brightnessctl s 10000+
   bindsym XF86MonBrightnessDown exec brightnessctl s 10000-
   # volume and mic control
+  # TODO: Also check "wpctl"
   bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +10%
   bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -10%
   bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle
