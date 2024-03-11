@@ -251,6 +251,7 @@ in
   services.openssh = {
     enable = true;
     allowSFTP = true;
+    ports = [22];
     settings.PermitRootLogin = "no";
     settings.PasswordAuthentication = false;
   };
@@ -262,6 +263,8 @@ in
   # networking.firewall.rejectPackets = true; # debug
   # networking.firewall.logRefusedPackets = true; # debug
   # networking.firewall.logReversePathDrops = true; # debug
+  networking.firewall.allowedTCPPorts = [ 22 ];
+  networking.firewall.allowedUDPPorts = [ 22 ];
   networking.firewall.interfaces.docker0.allowedTCPPorts = [ 3000 53 ];
   networking.firewall.interfaces.docker0.allowedUDPPorts = [ 3000 53 ];
   # networking.firewall.interfaces."docker0".allowedTCPPorts = [ 3000 8000 8080 ];
