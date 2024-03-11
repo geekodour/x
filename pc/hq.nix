@@ -17,6 +17,7 @@ in
   services.openvpn.servers = {
     officeVPN  = {
       config = '' config ${h}/infra/hw_dev.ovpn ''; 
+      autoStart=false;
       updateResolvConf = true;
     };
   };
@@ -225,6 +226,9 @@ in
           entr
           delta
           podman
+
+          # ops
+          terraform
 
           # aws
           unstable.awscli2
