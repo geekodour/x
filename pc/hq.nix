@@ -154,7 +154,7 @@ in
           handbrake
           feh
           sqlite-interactive
-          # act # gh actions local, installed docker for this
+          act # gh actions local, installed docker for this
           #docker-compose
           discord
           slack
