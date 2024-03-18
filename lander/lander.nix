@@ -157,6 +157,9 @@ in
           vscode-fhs
           code-minimap
 
+          # ops
+          terraform
+
           # aws
           unstable.awscli2
           unstable.copilot-cli
