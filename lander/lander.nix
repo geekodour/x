@@ -158,7 +158,7 @@ in
           code-minimap
 
           # ops
-          terraform
+          unstable.terraform
 
           # aws
           unstable.awscli2
