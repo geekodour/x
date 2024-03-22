@@ -161,15 +161,19 @@ in
           unstable.terraform
 
           # aws
-          unstable.awscli2
-          unstable.copilot-cli
-          unstable.ssm-session-manager-plugin
+          # see https://github.com/NixOS/nixpkgs/issues/218848
+          awscli2
+          nss.tools
+          # unstable.awscli2
+          # unstable.copilot-cli
+          # unstable.ssm-session-manager-plugin
           nodePackages_latest.serve
 
           # misc
           bat
           unstable.ffmpeg
           parallel
+          caddy
           unstable.swayosd # is not working as expected at the moment
           handbrake
           feh
