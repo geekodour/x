@@ -168,6 +168,7 @@ in
           # unstable.copilot-cli
           # unstable.ssm-session-manager-plugin
           nodePackages_latest.serve
+          unstable.yarn
 
           # misc
           bat
