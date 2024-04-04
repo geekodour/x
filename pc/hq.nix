@@ -228,12 +228,11 @@ in
           podman
 
           # ops
-          terraform
+          unstable.terraform
 
           # aws
-          unstable.awscli2
-          unstable.copilot-cli
-          unstable.ssm-session-manager-plugin
+          awscli2
+          # ssm-session-manager-plugin
 
           # inspection/debugging tools
           netcat-gnu
