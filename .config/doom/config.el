@@ -68,10 +68,10 @@
   ;; (apheleia-global-mode +1) ;; don't format by default/automatically
   (setf (alist-get 'python-mode apheleia-mode-alist)
         '(isort black))
-  (setf (alist-get 'pg_format apheleia-formatters)
-        '("pg_format" "-"))
+  ;; (setf (alist-get 'pg_format apheleia-formatters)
+  ;;       '("pg_format" "-"))
   (setf (alist-get 'sql-mode apheleia-mode-alist)
-        '(pg_format))
+        '(pgformatter))
    )
 (push '(sh-mode . shfmt) apheleia-mode-alist) ; apheleia for some reason does not already do this
 
