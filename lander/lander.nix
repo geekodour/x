@@ -53,7 +53,7 @@ in
   home-manager = {
     useUserPackages = true;
     useGlobalPkgs = true;
-    users.geekodour = {pkgs, ... }: {
+    users.geekodour = {config, pkgs, ... }: {
       home.stateVersion = "23.11";
 
       # various configs from arch
@@ -66,7 +66,10 @@ in
       home.file.".config/zoxide".source = "${x}/.config/zoxide";
       home.file.".config/nnn/init".source = "${x}/.config/nnn/init";
       home.file.".config/starship".source = "${x}/.config/starship";
-      home.file.".config/doom".source = "${x}/.config/doom";
+      # see https://discourse.nixos.org/t/neovim-config-read-only/35109/10
+      # NOTE: doom config is best edited directly from emacs and I need to quickly
+      #       see my changes, so additional nixos switch becomes an hassle
+      home.file."./.config/doom".source = config.lib.file.mkOutOfStoreSymlink "${x}/.config/doom";
       home.file.".config/mpv".source = "${x}/.config/mpv";
       home.file.".config/swappy".source = "${x}/.config/swappy";
       home.file.".config/pypoetry/config.toml".source = "${x}/.config/pypoetry/config.toml";
@@ -192,6 +195,7 @@ in
           unstable.eza
           brightnessctl
           emscripten
+          nethogs
           wlsunset
           zbar
           paperkey
@@ -227,7 +231,8 @@ in
           cpufetch
           obs-studio
           qbittorrent
-          unstable.advcpmv
+          # see https://github.com/NixOS/nixpkgs/issues/271508
+          # unstable.advcpmv
           gomi
           nix-tree # nice
           hyperfine
@@ -268,10 +273,10 @@ in
           duf
 
           # editor
-          nodePackages.bash-language-server
-          nodePackages.svelte-language-server
-          nodePackages.typescript-language-server
-          nodePackages_latest.yaml-language-server
+          unstable.nodePackages.bash-language-server
+          unstable.nodePackages.svelte-language-server
+          unstable.nodePackages.typescript-language-server
+          unstable.nodePackages_latest.yaml-language-server
           pgformatter
 
           # following isn't even helping
