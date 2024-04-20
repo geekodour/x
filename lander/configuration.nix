@@ -177,14 +177,6 @@ in
     NIX_SHELL_PRESERVE_PROMPT = "1";
    };
 
-  # NOTE: This is no longer needed as we use tailscale ssh
-  # services.openssh = {
-  #   enable = true;
-  #   allowSFTP = true;
-  #   settings.PermitRootLogin = "no";
-  #   settings.PasswordAuthentication = false;
-  # };
-
   services.tailscale = {
     enable = true;
     package = pkgs.unstable.tailscale;
@@ -205,6 +197,7 @@ in
   };
 
   networking.firewall = {
+    enable = true;
     extraCommands = ''
       iptables -A INPUT -i docker0 -j ACCEPT
     '';
