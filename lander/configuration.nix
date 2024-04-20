@@ -177,13 +177,13 @@ in
     NIX_SHELL_PRESERVE_PROMPT = "1";
    };
 
-  # Enabled services
-  services.openssh = {
-    enable = true;
-    allowSFTP = true;
-    settings.PermitRootLogin = "no";
-    settings.PasswordAuthentication = false;
-  };
+  # NOTE: This is no longer needed as we use tailscale ssh
+  # services.openssh = {
+  #   enable = true;
+  #   allowSFTP = true;
+  #   settings.PermitRootLogin = "no";
+  #   settings.PasswordAuthentication = false;
+  # };
 
   services.tailscale = {
     enable = true;
