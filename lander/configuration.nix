@@ -189,19 +189,22 @@ in
     enable = true;
     package = pkgs.unstable.tailscale;
     interfaceName = "tailscale";
-    # NOTE: The --ssh flag doesn't seem to work as expected, so we manually do tailscale up --ssh now
-    # extraUpFlags = ["--ssh"];
+    # NOTE: The --ssh flag doesn't seem to work as expected,
+    #       so we manually do tailscale up --ssh now. But we're letting the
+    #       statement be anyway.
+    extraUpFlags = ["--ssh"];
     # extraDaemonFlags = [];
-    # NOTE: Think we need to allow this if we want inbound traffic
-    #openFirewall = true;
+
+    # Firewall settings
+    # NOTE: Unsure if we need to enable these, but currently none of them are
+    #       enabled(commented) and tailscale ssh is working as expected.
+    # openFirewall = true;
+    # NOTE: The following two would go in networking.firewall
+    # trustedInterfaces = [ config.services.tailscale.interfaceName ];
+    # allowedUDPPorts = [ config.services.tailscale.port ];
   };
 
-  # Open ports in the firewall.
   networking.firewall = {
-    # NOTE: Unsure if we need to enable this if we have the openFirewall thing set
-    trustedInterfaces = [ config.services.tailscale.interfaceName ];
-    allowedTCPPorts = [22];
-    allowedUDPPorts = [ config.services.tailscale.port ];
     extraCommands = ''
       iptables -A INPUT -i docker0 -j ACCEPT
     '';
