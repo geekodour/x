@@ -8,6 +8,7 @@
 
 let
   unstableTarball = fetchTarball "https://github.com/NixOS/nixpkgs/archive/nixos-unstable.tar.gz";
+  unstable = import unstableTarball { config = config.nixpkgs.config; };
 in
 {
   imports = [
@@ -157,8 +158,6 @@ in
       ripgrep
       file
       exiftool
-      #tailscale
-      unstable.tailscale
       zlib
       git
       htop
@@ -188,7 +187,7 @@ in
   ];
 
 
-  fonts.fonts = with pkgs; [
+  fonts.packages = with pkgs; [
     noto-fonts
     noto-fonts-cjk
     noto-fonts-emoji
@@ -238,44 +237,37 @@ in
     NIX_SHELL_PRESERVE_PROMPT = "1";
    };
 
-
-  # Some programs need SUID wrappers, can be configured further or are
-  # started in user sessions.
-  # programs.mtr.enable = true;
-  # programs.gnupg.agent = {
+  # NOTE: No longer needed as tailscale ssh
+  # services.openssh = {
   #   enable = true;
-  #   enableSSHSupport = true;
+  #   allowSFTP = true;
+  #   ports = [22];
+  #   settings.PermitRootLogin = "no";
+  #   settings.PasswordAuthentication = false;
   # };
 
-  # Enabled services
-  services.openssh = {
+  services.tailscale = {
     enable = true;
-    allowSFTP = true;
-    ports = [22];
-    settings.PermitRootLogin = "no";
-    settings.PasswordAuthentication = false;
+    package = pkgs.unstable.tailscale;
+    interfaceName = "tailscale";
+    extraUpFlags = ["--ssh"];
   };
 
-  services.tailscale.enable = true;
-  services.tailscale.package = pkgs.unstable.tailscale;
-
-  # Open ports in the firewall.
-  # networking.firewall.rejectPackets = true; # debug
-  # networking.firewall.logRefusedPackets = true; # debug
-  # networking.firewall.logReversePathDrops = true; # debug
-  networking.firewall.allowedTCPPorts = [ 22 ];
-  networking.firewall.allowedUDPPorts = [ 22 ];
-  networking.firewall.interfaces.docker0.allowedTCPPorts = [ 3000 53 ];
-  networking.firewall.interfaces.docker0.allowedUDPPorts = [ 3000 53 ];
-  # networking.firewall.interfaces."docker0".allowedTCPPorts = [ 3000 8000 8080 ];
-  # NOTE: This is not working as expected
-  # able to ping host from docker but not able to send http req etc
-  networking.firewall.extraCommands = ''
-    iptables -A INPUT -i docker0 -j ACCEPT
-  '';
-  # networking.firewall.allowedUDPPorts = [ ... ];
-  # Or disable the firewall altogether.
-  networking.firewall.enable = true;
+  networking.firewall = {
+    enable = true;
+    # NOTE: These are for docker to host communication
+    # NOTE: Docker to host communication also needs docker to run as root at
+    #       the moment  
+    interfaces.docker0.allowedTCPPorts = [ 3000 53 ];
+    interfaces.docker0.allowedUDPPorts = [ 3000 53 ];
+    extraCommands = ''
+      iptables -A INPUT -i docker0 -j ACCEPT
+    '';
+    # Debugging help
+    # rejectPackets = true; # debug
+    # logRefusedPackets = true; # debug
+    # logReversePathDrops = true; # debug
+  };
 
   system.stateVersion = "23.05";
 }
