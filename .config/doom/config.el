@@ -57,11 +57,12 @@
 (setenv "XDG_SESSION_TYPE" "wayland") ;; for some reason emacs does not pick this up so we set it up manually
 (setenv "GPG_AGENT_INFO")
 
-(use-package! tree-sitter
+(use-package treesit-auto
+  :custom
+  (treesit-auto-install 'prompt)
   :config
-  (global-tree-sitter-mode)
-  (require 'tree-sitter-langs)
-  (add-hook 'tree-sitter-after-on-hook #'tree-sitter-hl-mode))
+  (treesit-auto-add-to-auto-mode-alist 'all)
+  (global-treesit-auto-mode))
 
 (use-package! apheleia
   :config
@@ -118,33 +119,77 @@
   :hook (org-agenda-mode . org-super-agenda-mode))
 
 (setq eglot-prefer-plaintext t)
-(setq-default eglot-workspace-configuration '((:gopls . ((gofumpt . t)))))
+;; (setq-default eglot-workspace-configuration '((:gopls . ((gofumpt . t)))))
 
-(add-hook 'eglot-managed-mode-hook (lambda ()(add-to-list 'company-backends '(company-capf :with company-yasnippet))))
 
-(define-derived-mode typescriptreact-mode web-mode "TypescriptReact" "A major mode for tsx.")
-;; (define-derived-mode svelte-mode web-mode "Svelte" "A major mode for sveltejs.")
-(use-package! typescript-mode
-  :mode (("\\.ts\\'" . typescript-mode)
-         ("\\.tsx\\'" . typescriptreact-mode)))
+;; Here we're using https://github.com/leafOfTree/svelte-mode/blob/master/svelte-mode.el till we find a treesitter supported svelte major mode
+;; (setq treesit-language-source-alist
+;;    '((svelte "https://github.com/tree-sitter-grammars/tree-sitter-svelte" "master" "src")))
+(add-to-list 'auto-mode-alist '("\\.svelte\\'" . svelte-mode))
 
-(use-package! svelte-mode
-  :mode (("\\.svelte\\'" . svelte-mode))) ;; for some reason this does not work. it should work
-;; :mode (("\\.svelte\\'" . typescript-mode))) ;; this works surprisingly
+;; (add-hook 'eglot-managed-mode-hook (lambda ()(add-to-list 'company-backends '(company-capf :with company-yasnippet))))
 
 (use-package! eglot
   :ensure t
-  :defer 3
-  :hook
-  ((js-mode
-    typescript-mode
-    typescriptreact-mode) . eglot-ensure)
+  :defer t
   :config
-  (add-to-list 'eglot-server-programs '(svelte-mode . ("svelteserver" "--stdio")))
-  (add-to-list 'eglot-server-programs '(tuareg-mode . ("ocamllsp" "--stdio")))
-  (cl-pushnew '((js-mode typescript-mode typescriptreact-mode) . ("typescript-language-server" "--stdio"))
-              eglot-server-programs
-              :test #'equal))
+  (add-to-list 'eglot-server-programs '(svelte-mode . ("svelteserver" "--stdio"))))
+
+;; https://emacs.stackexchange.com/questions/73983/how-to-make-eldoc-only-popup-on-demand
+(setq
+ eldoc-echo-area-prefer-doc-buffer t
+ eldoc-echo-area-use-multiline-p nil)
+
+(add-hook 'typescript-ts-mode-hook 'eglot-ensure)
+(add-hook 'python-ts-mode-hook 'eglot-ensure)
+(add-hook 'go-ts-mode-hook 'eglot-ensure)
+
+;; https://www.reddit.com/r/emacs/comments/1447fy2/looking_for_help_in_improving_typescript_eglot/
+;; (fset #'jsonrpc--log-event #'ignore)
+
+;; https://github.com/leafOfTree/svelte-mode/blob/master/svelte-mode.el
+;; https://www.masteringemacs.org/article/lets-write-a-treesitter-major-mode
+;; https://www.gnu.org/software/emacs/manual/html_node/elisp/Tree_002dsitter-Major-Modes.html
+;; https://magnus.therning.org/2023-03-22-making-an-emacs-major-mode-for-cabal-using-tree-sitter.html
+;; I was able to get the basic thing running but think highlighting is handled somewhat differently, will have to figure that out
+
+(advice-add 'eglot-completion-at-point :around #'cape-wrap-buster)
+
+;; (defvar svelte--treesit-font-lock-setting
+;;   (treesit-font-lock-rules
+;;    :feature 'comment
+;;    :language 'svelte
+;;    '((comment) @font-lock-comment-face)
+
+;;    :feature 'svelte-version
+;;    :language 'svelte
+;;    '((cabal_version _) @font-lock-constant-face)
+
+;;    :feature 'field-name
+;;    :language 'svelte
+;;    '((field_name) @font-lock-keyword-face)
+
+;;    :feature 'section-name
+;;    :language 'svelte
+;;    '((section_name) @font-lock-variable-name-face))
+;;   "Tree-sitter font-lock settings.")
+
+
+;; (define-derived-mode svelte-ts-mode fundamental-mode "Svelte"
+;;   "My mode for Svelte files"
+;;   :syntax-table html-mode-syntax-table
+
+;;   (when (treesit-ready-p 'svelte)
+;;     (treesit-parser-create 'svelte)
+;;     ;; set up treesit
+;;     (setq-local treesit-font-lock-feature-list
+;;                 '((comment field-name section-name)
+;;                   (svelte-version)
+;;                   () ()))
+;;     (setq-local treesit-font-lock-settings svelte--treesit-font-lock-setting)
+;;     (treesit-major-mode-setup)))
+
+;; (add-to-list 'auto-mode-alist '("\\.svelte\\'" . svelte-ts-mode))
 
 (after! org
   (setq
@@ -445,9 +490,9 @@
  (:leader :desc "Show available snippets" "m y" #'yas-describe-tables))
 ; TODO Need binding for treemacs workspace edit
 
-(with-eval-after-load 'company
-  (define-key company-mode-map (kbd "C-/") 'company-complete)
-  )
+;; (with-eval-after-load 'company
+;;   (define-key company-mode-map (kbd "C-/") 'company-complete)
+;;   )
 
 (use-package! org
   :mode ("\\.org\\'" . org-mode)

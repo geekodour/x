@@ -125,8 +125,6 @@ in
       ripgrep
       file
       exiftool
-      #tailscale
-      unstable.tailscale
       zlib
       git
       htop
@@ -151,7 +149,11 @@ in
     (nerdfonts.override { fonts = [ "FiraCode" "JetBrainsMono" ]; })
   ];
 
-
+  services.tailscale = {
+    enable = true;
+    package = pkgs.unstable.tailscale;
+    interfaceName = "tailscale";
+  };
 
   services.interception-tools = {
     enable = true;
@@ -188,16 +190,12 @@ in
     settings.PasswordAuthentication = false;
   };
 
-  services.tailscale.enable = true;
-  services.tailscale.package = pkgs.unstable.tailscale;
-
   # Open ports in the firewall.
   networking.firewall.allowedTCPPorts = [ 22 ];
   networking.firewall.allowedUDPPorts = [ ];
   networking.firewall.extraCommands = ''
     iptables -A INPUT -i docker0 -j ACCEPT
   '';
-
 
   system.stateVersion = "23.11";
 }
