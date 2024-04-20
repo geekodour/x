@@ -14,12 +14,16 @@ in
     package = pkgs.emacs29;
   };
 
-  services.openvpn.servers = {
-    officeVPN  = {
-      config = '' config ${h}/infra/hw_dev.ovpn ''; 
-      autoStart=false;
-      updateResolvConf = true;
-    };
+  # services.openvpn.servers = {
+  #   officeVPN  = {
+  #     config = '' config ${h}/infra/hw_dev.ovpn ''; 
+  #     autoStart=false;
+  #     updateResolvConf = true;
+  #   };
+  # };
+
+  programs.firefox = {
+    enable = true;
   };
 
   # security.wrappers.pmount = {
@@ -86,19 +90,11 @@ in
       home.file.".config/fish/functions".source = "${x}/.config/fish/functions";
       home.file.".config/fish/conf.d/gitaliases.fish".source = "${x}/.config/fish/conf.d/gitaliases.fish";
 
-      services.syncthing = {
-        enable = true;
-        tray.enable = true;
-      };
+      # services.syncthing = {
+      #   enable = true;
+      #   tray.enable = true;
+      # };
 
-
-      programs.firefox = {
-        enable = true;
-        package = pkgs.firefox.override {
-          cfg = { enableTridactylNative = true; };
-        };
-        # nativeMessagingHosts.packages = with pkgs; [tridactyl-native];
-      };
 
       programs.chromium = {
         enable = true;

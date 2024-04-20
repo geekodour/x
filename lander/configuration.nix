@@ -12,23 +12,23 @@ let
 in
 {
   imports = [
+      ./cachix.nix
       ./hardware-configuration.nix
-     /home/geekodour/x/lander/lander.nix
+      /home/zuck/x/pc/hq.nix
   ];
 
-   virtualisation.docker.enable = true;
-   virtualisation.docker.rootless = {
-           enable = false;
-           setSocketVariable = false;
-   };
-   #virtualisation.docker.storageDriver = "ext4";
+  virtualisation.docker.enable = true;
+  # NOTE: not using rootless for the firewall issue debugging
+  # TODO: Enable this and check if we can still access port on some service form container to host
+  virtualisation.docker.rootless = {
+	  enable = false;
+	  setSocketVariable = false;
+  };
+  virtualisation.docker.storageDriver = "btrfs";
 
 
-  #hardware.pulseaudio.enable = true;
   security.rtkit.enable = true;
-  services.tlp.enable = true;
   services.pipewire = {
-    package = unstable.pipewire;
     enable = true;
     alsa.enable = true;
     alsa.support32Bit = true;
@@ -39,6 +39,7 @@ in
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   nixpkgs.config.allowUnfree = true;
   # see https://discourse.nixos.org/t/where-are-options-like-config-cudasupport-documented/17806/9
+  # nixpkgs.config.cudaSupport = true; # ollama
   nixpkgs.config.packageOverrides = pkgs: {
     unstable = import unstableTarball {
         config = config.nixpkgs.config;
@@ -48,20 +49,22 @@ in
     keep-outputs = true
     keep-derivations = true
   '';
+  #nixpkgs.overlays = [
+  #  (import (builtins.fetchTarball {
+  #    url = https://github.com/nix-community/emacs-overlay/archive/master.tar.gz;
+  #  }))
+  #];
 
   # postgres
-  #services.postgresql = {
-  #  enable = true;
-  #  ensureDatabases = [ "geekodourdb" ];
-  #  authentication = pkgs.lib.mkOverride 10 ''
-  #    #type database  DBuser  auth-method
-  #    local all       all     trust
-  #  '';
-  #};
+  services.postgresql = {
+    enable = true;
+    ensureDatabases = [ "zuckdb" ];
+    authentication = pkgs.lib.mkOverride 10 ''
+      #type database  DBuser  auth-method
+      local all       all     trust
+    '';
+  };
 
-  hardware.bluetooth.enable = true;
-  hardware.bluetooth.powerOnBoot = true;
-  services.blueman.enable = true;
   hardware.opengl = {
     enable = true;
     extraPackages = with pkgs; [
@@ -72,26 +75,56 @@ in
     #driSupport = true;
     #driSupport32Bit = true;
   };
+  services.xserver.videoDrivers = ["nvidia"]; # needed for wayland too
   services.udisks2.enable = true;
+  hardware.nvidia = {
+     # powerManagement.enable = true; # hoping this fixes hibernation, conclusion: does not work
+     # nvidiaPersistenced = true; # does not make any diff
+     modesetting.enable = true;
+     open = false; # open source kernel module 515.43.04+
+     nvidiaSettings = true;
+     package = config.boot.kernelPackages.nvidiaPackages.stable;
+     # package = config.boot.kernelPackages.nvidiaPackages.beta;
+   };
+
+   # KDE
+   services.xserver.enable = true;
+   services.xserver.displayManager.sddm.enable = false;
+   # services.xserver.displayManager.sddm.enable = true;
+   services.xserver.displayManager.startx.enable = true;
+   services.xserver.desktopManager.plasma5.enable = true;
+   environment.plasma5.excludePackages = with pkgs.libsForQt5; [
+     plasma-browser-integration
+     konsole
+     oxygen
+   ];
+
+
 
   # Use the systemd-boot EFI boot loader.
-  boot.supportedFilesystems = [ "ntfs" ];
-  boot.kernelParams = [ "psmouse.synaptics_intertouch=0" ];
   boot.loader.systemd-boot.enable = true;
   boot.loader.systemd-boot.configurationLimit = 3;
   boot.loader.efi.canTouchEfiVariables = true;
   programs.thunar.enable = true;
-  programs.fish.enable = true;
 
+  # boot.extraModulePackages = with config.boot.kernelPackages; [ v4l2loopback.out ];
+  # boot.kernelModules = [ "v4l2loopback" "snd-aloop" ];
+
+  # boot.kernelPackages = pkgs.linuxPackages_zen;
+  # boot.extraModulePackages = [ pkgs.linuxKernel.packages.linux_zen.v4l2loopback ];
   boot.kernelModules = [ "v4l2loopback" ];
   boot.extraModulePackages = with config.boot.kernelPackages; [ v4l2loopback.out ];
+  # boot.extraModprobeConfig =
+  #   ''
+  #   options v4l2loopback nr_devices=2 exclusive_caps=1,1 video_nr=0,1 card_label=v4l2lo0,v4l2lo1
+  #   '';
 
-  networking.hostName = "lander";
+  networking.hostName = "hq";
   networking.nameservers = [ "1.1.1.1" "8.8.8.8" ];
   networking.wireless.iwd.enable = true;  
   networking.wireless.userControlled.enable = true;
   networking.extraHosts = ''
-    #192.168.1.69 pi
+    192.168.1.69 pi
     #23.137.249.79 archive.is
   '';
   security.polkit.enable = true;
@@ -103,17 +136,17 @@ in
 
   # Enable sound.
   sound.enable = true;
-
+  # hardware.pulseaudio.enable = true;
   # xdg portal is required for screenshare
-  xdg.portal.config.common.default = "*";
   xdg.portal = {
     enable = true;
     wlr.enable = true;
+    extraPortals = [pkgs.xdg-desktop-portal-gtk];
   };
 
-  users.users.geekodour = {
+  users.users.zuck = {
     isNormalUser = true;
-    extraGroups = [ "docker" "wheel" "input" ]; # Enable ‘sudo’ for the user
+    extraGroups = [ "wheel" "input" "docker" "postgres" ]; # Enable ‘sudo’ for the user.
     shell = pkgs.fish;
   };
 
@@ -132,8 +165,25 @@ in
       stdenv
       pkg-config
       iwd
-      # we're using pulseaudio compatibility layer via pipewire
-      pulseaudio
+      #mesa
+      #libGL
+      #libGLU
+      #libglvnd
+
+      # nvidia
+      # unstable.cachix
+      # unstable.cudaPackages.cudatoolkit
+      # unstable.cudaPackages.cudnn
+      # unstable.cudaPackages.libcublas
+      # unstable.cudaPackages.cuda_cudart
+
+      cachix
+      cudaPackages.cudatoolkit
+      cudaPackages.cudnn
+      cudaPackages.libcublas
+      cudaPackages.cuda_cudart
+
+      # cudaPackages.cutensor
   ];
 
 
@@ -148,6 +198,7 @@ in
     jetbrains-mono
     (nerdfonts.override { fonts = [ "FiraCode" "JetBrainsMono" ]; })
   ];
+
 
 
   services.interception-tools = {
@@ -174,13 +225,23 @@ in
   };
 
    environment.sessionVariables = rec {
+    LD_LIBRARY_PATH = "${pkgs.linuxPackages.nvidia_x11}/lib:${pkgs.cudaPackages.cudatoolkit}/lib64:${pkgs.cudaPackages.cudatoolkit}/include:${pkgs.stdenv.cc.cc.lib}/lib:${pkgs.zlib}/lib:${pkgs.cudaPackages.cudnn}/lib";
+    CUDA_PATH = "${pkgs.cudaPackages.cudatoolkit}";
+    CUDART_PATH = "${pkgs.cudaPackages.cuda_cudart}";
+
+    # LD_LIBRARY_PATH = "${pkgs.unstable.linuxPackages.nvidia_x11}/lib:${pkgs.unstable.cudaPackages.cudatoolkit}/lib64:${pkgs.unstable.cudaPackages.cudatoolkit}/include:${pkgs.stdenv.cc.cc.lib}/lib:${pkgs.zlib}/lib:${pkgs.unstable.cudaPackages.cudnn}/lib";
+    # CUDA_PATH = "${pkgs.unstable.cudaPackages.cudatoolkit}";
+    # CUDART_PATH = "${pkgs.unstable.cudaPackages.cuda_cudart}";
+
+    #EXTRA_LDFLAGS = "-L${pkgs.linuxPackages.nvidia_x11}/lib";
     NIX_SHELL_PRESERVE_PROMPT = "1";
    };
 
-  # NOTE: This is no longer needed as we use tailscale ssh
+  # NOTE: No longer needed as tailscale ssh
   # services.openssh = {
   #   enable = true;
   #   allowSFTP = true;
+  #   ports = [22];
   #   settings.PermitRootLogin = "no";
   #   settings.PasswordAuthentication = false;
   # };
@@ -189,27 +250,25 @@ in
     enable = true;
     package = pkgs.unstable.tailscale;
     interfaceName = "tailscale";
-    # NOTE: The --ssh flag doesn't seem to work as expected,
-    #       so we manually do tailscale up --ssh now. But we're letting the
-    #       statement be anyway.
     extraUpFlags = ["--ssh"];
-    # extraDaemonFlags = [];
-
-    # Firewall settings
-    # NOTE: Unsure if we need to enable these, but currently none of them are
-    #       enabled(commented) and tailscale ssh is working as expected.
-    # openFirewall = true;
-    # NOTE: The following two would go in networking.firewall
-    # trustedInterfaces = [ config.services.tailscale.interfaceName ];
-    # allowedUDPPorts = [ config.services.tailscale.port ];
   };
 
   networking.firewall = {
+    enable = true;
+    # NOTE: These are for docker to host communication
+    # NOTE: Docker to host communication also needs docker to run as root at
+    #       the moment  
+    interfaces.docker0.allowedTCPPorts = [ 3000 53 ];
+    interfaces.docker0.allowedUDPPorts = [ 3000 53 ];
     extraCommands = ''
       iptables -A INPUT -i docker0 -j ACCEPT
     '';
+    # Debugging help
+    # rejectPackets = true; # debug
+    # logRefusedPackets = true; # debug
+    # logReversePathDrops = true; # debug
   };
 
-  system.stateVersion = "23.11";
+  system.stateVersion = "23.05";
 }
 
