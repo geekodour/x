@@ -137,7 +137,7 @@ in
   ];
 
 
-  fonts.fonts = with pkgs; [
+  fonts.packages = with pkgs; [
     noto-fonts
     noto-fonts-cjk
     noto-fonts-emoji
@@ -149,11 +149,6 @@ in
     (nerdfonts.override { fonts = [ "FiraCode" "JetBrainsMono" ]; })
   ];
 
-  services.tailscale = {
-    enable = true;
-    package = pkgs.unstable.tailscale;
-    interfaceName = "tailscale";
-  };
 
   services.interception-tools = {
     enable = true;
@@ -190,12 +185,27 @@ in
     settings.PasswordAuthentication = false;
   };
 
+  services.tailscale = {
+    enable = true;
+    package = pkgs.unstable.tailscale;
+    interfaceName = "tailscale";
+    # NOTE: The --ssh flag doesn't seem to work as expected, so we manually do tailscale up --ssh now
+    # extraUpFlags = ["--ssh"];
+    # extraDaemonFlags = [];
+    # NOTE: Think we need to allow this if we want inbound traffic
+    #openFirewall = true;
+  };
+
   # Open ports in the firewall.
-  networking.firewall.allowedTCPPorts = [ 22 ];
-  networking.firewall.allowedUDPPorts = [ ];
-  networking.firewall.extraCommands = ''
-    iptables -A INPUT -i docker0 -j ACCEPT
-  '';
+  networking.firewall = {
+    # NOTE: Unsure if we need to enable this if we have the openFirewall thing set
+    trustedInterfaces = [ config.services.tailscale.interfaceName ];
+    allowedTCPPorts = [22];
+    allowedUDPPorts = [ config.services.tailscale.port ];
+    extraCommands = ''
+      iptables -A INPUT -i docker0 -j ACCEPT
+    '';
+  };
 
   system.stateVersion = "23.11";
 }
