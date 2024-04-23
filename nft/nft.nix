@@ -280,7 +280,7 @@ in
           cpufetch
           obs-studio
           qbittorrent
-          unstable.advcpmv
+          # unstable.advcpmv
           gomi
           nix-tree # nice
           hyperfine
