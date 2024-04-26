@@ -159,14 +159,14 @@ in
           wtype
           vscode-fhs
           code-minimap
+          bluetuith
 
           # ops
-          unstable.terraform
+          #unstable.terraform
 
           # aws
           # see https://github.com/NixOS/nixpkgs/issues/218848
-          awscli2
-          nss.tools
+          #awscli2 # we want to be using unstable as it supports ssm but something fails w it
           # unstable.awscli2
           # unstable.copilot-cli
           # unstable.ssm-session-manager-plugin
@@ -178,6 +178,7 @@ in
           unstable.ffmpeg
           parallel
           caddy
+          nss.tools # needed for caddy internal cert
           unstable.swayosd # is not working as expected at the moment
           handbrake
           feh

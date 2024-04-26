@@ -125,6 +125,7 @@ in
       ripgrep
       file
       exiftool
+      qemu
       zlib
       git
       htop
