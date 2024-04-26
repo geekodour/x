@@ -37,6 +37,9 @@
 
 ;; web
 (package! treesit-auto)
+;; (package! combobulate)
+(package! corfu)
+(package! orderless)
 
 ;; (package! chatgpt-shell
 ;;   :recipe (:host github :repo "xenodium/chatgpt-shell"))
