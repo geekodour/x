@@ -33,12 +33,13 @@
 (package! verb)
 (package! devdocs-browser)
 (package! go-dlv)
-(package! svelte-mode)
+;; (package! svelte-mode)
 
 ;; web
 (package! treesit-auto)
 ;; (package! combobulate)
 (package! corfu)
+(package! cape)
 (package! orderless)
 
 ;; (package! chatgpt-shell

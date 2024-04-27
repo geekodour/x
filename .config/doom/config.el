@@ -77,9 +77,8 @@
 (push '(sh-mode . shfmt) apheleia-mode-alist) ; apheleia for some reason does not already do this
 
 (add-hook! prog-mode #'flymake-mode) ; start flymake-mode by default only for programming language
-(setq
- eglot-stay-out-of nil
- )
+(setq eglot-report-progress nil)
+(setq eglot-stay-out-of nil)
 (map!
  (:leader :desc "Enable vale" "t V" #'flymake-vale-maybe-load)) ; no way to toggle apparently
 
@@ -118,14 +117,14 @@
 (use-package! org-super-agenda
   :hook (org-agenda-mode . org-super-agenda-mode))
 
-(setq eglot-prefer-plaintext t)
+;; (setq eglot-prefer-plaintext t)
 ;; (setq-default eglot-workspace-configuration '((:gopls . ((gofumpt . t)))))
 
 
 ;; Here we're using https://github.com/leafOfTree/svelte-mode/blob/master/svelte-mode.el till we find a treesitter supported svelte major mode
 ;; (setq treesit-language-source-alist
 ;;    '((svelte "https://github.com/tree-sitter-grammars/tree-sitter-svelte" "master" "src")))
-(add-to-list 'auto-mode-alist '("\\.svelte\\'" . svelte-mode))
+;; (add-to-list 'auto-mode-alist '("\\.svelte\\'" . svelte-mode))
 
 ;; (add-hook 'eglot-managed-mode-hook (lambda ()(add-to-list 'company-backends '(company-capf :with company-yasnippet))))
 
@@ -133,7 +132,8 @@
   :ensure t
   :defer t
   :config
-  (add-to-list 'eglot-server-programs '(svelte-mode . ("svelteserver" "--stdio"))))
+;;  (add-to-list 'eglot-server-programs '(svelte-mode . ("svelteserver" "--stdio"))))
+)
 
 ;; https://emacs.stackexchange.com/questions/73983/how-to-make-eldoc-only-popup-on-demand
 (setq

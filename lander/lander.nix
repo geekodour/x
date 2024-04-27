@@ -239,6 +239,7 @@ in
           mpv
           gimp
           ispell
+          just
           yt-dlp
           wdisplays
           tree-sitter
