@@ -145,6 +145,7 @@ in
           bat
           ffmpeg
           handbrake
+          just
           parallel
           unstable.swayosd # is not working as expected at the moment
           handbrake
