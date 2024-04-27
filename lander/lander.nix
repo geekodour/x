@@ -384,7 +384,7 @@ in
           gotestsum
           gofumpt
           golangci-lint
-          nodePackages.pyright
+          unstable.nodePackages.pyright
           isort
           shellcheck
           shfmt

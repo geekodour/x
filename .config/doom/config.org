@@ -760,7 +760,7 @@ This uses =with-eval-after-load=. It executes body after file/feature is loaded.
 NOTE: maybe I want to do the same with corfu???
 NOTE: Corfu is broken in doom emacs at the moment: https://github.com/doomemacs/doomemacs/issues/7767
 #+begin_src elisp
-(setq tab-always-indent 'complete)
+(setq tab-always-indent nil)
 (setq text-mode-ispell-word-completion nil)
 (setq read-extended-command-predicate #'command-completion-default-include-p)
 ;; (with-eval-after-load 'company

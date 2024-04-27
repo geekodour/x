@@ -520,7 +520,7 @@
   (completion-styles '(orderless basic))
   (completion-category-overrides '((file (styles basic partial-completion)))))
 
-(setq tab-always-indent 'complete)
+(setq tab-always-indent nil)
 (setq text-mode-ispell-word-completion nil)
 (setq read-extended-command-predicate #'command-completion-default-include-p)
 ;; (with-eval-after-load 'company
