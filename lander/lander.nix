@@ -247,6 +247,8 @@ in
           wtype
           code-minimap
           bluetuith
+          dive
+          cinny-desktop
 
           # ops
           #unstable.terraform
@@ -326,6 +328,8 @@ in
           hyperfine
           pdfarranger
           ocrmypdf
+          pdftk
+
           pgcli
           starship
           trash-cli
