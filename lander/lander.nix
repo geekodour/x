@@ -131,6 +131,7 @@ in
         extensions = (with pkgs.vscode-extensions; [
           # Stable
           ms-vscode-remote.remote-ssh
+          vim
           mhutchie.git-graph
           pkief.material-icon-theme
           oderwat.indent-rainbow
