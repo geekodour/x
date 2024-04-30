@@ -42,7 +42,7 @@ in
            addresses = [ "tcp://op:51820" ];
          };
          lander = {
-           id = "TZYIAZA-6KYWGAF-IK4YVFW-SGTPJ3U-3M5TOAS-2I3CL3C-I6FOD2M-7EI2NQ7";
+           id = "522LX6G-G2DGPDR-LYT2WIX-SA3VV7E-HI4IPJJ-QJIFPGQ-YF763DX-YTNEYQH";
            autoAcceptFolders = true;
            allowedNetwork = "100.102.189.25/32"; # network set on tailscale interface
            addresses = [ "tcp://lander:51820" ];
