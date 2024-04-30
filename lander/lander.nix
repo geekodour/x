@@ -3,11 +3,56 @@ let
   home-manager = builtins.fetchTarball "https://github.com/nix-community/home-manager/archive/release-23.11.tar.gz";
   h = "/home/geekodour";
   x = "/home/geekodour/x";
+  user = "geekodour";
 in
 {
   imports = [
     (import "${home-manager}/nixos")
   ];
+
+  # also setup backup
+  services.syncthing = {
+     enable = true;
+     openDefaultPorts = true;
+     dataDir = "${h}/.local/share/syncthing";
+     configDir = "${h}/.config/syncthing";
+     user = "${user}";
+     group = "users";
+     guiAddress = "127.0.0.1:8384";
+     overrideFolders = true;
+     overrideDevices = true;
+
+     settings = {
+       devices = {
+         "tab" = {
+           id = "P67XKES-772THBN-5Q4JDZI-USHRBEW-KXUM6BC-PXYWNSR-BNIJ4VW-U2WRNAT";
+           autoAcceptFolders = true;
+           allowedNetwork = "100.102.189.25/32"; # network set on tailscale interface
+           addresses = [ "tcp://tab:51820" ];
+         };
+         "phone" = {
+           id = "TZYIAZA-6KYWGAF-IK4YVFW-SGTPJ3U-3M5TOAS-2I3CL3C-I6FOD2M-7EI2NQ7";
+           autoAcceptFolders = true;
+           allowedNetwork = "100.102.189.25/32"; # network set on tailscale interface
+           addresses = [ "tcp://op:51820" ];
+         };
+       };
+
+       folders = {
+         documents = {
+           id = "documents";
+           path = "${h}/Documents";
+           devices = [ "tab" "phone" ];
+         };
+         screenshots = {
+           id = "screenshots";
+           path = "${h}/Pictures/screenshots";
+           devices = [ "tab" "phone" ];
+         };
+       };
+       options.globalAnnounceEnabled = false; # Only sync on LAN
+     };
+  };
 
   # NOTE: Unsure why we're installing emacs twice, maybe for emacs daemon mode?
   # we're installing it in home manager block as-well, think one of them need
@@ -101,6 +146,8 @@ in
       home.file.".config/fish/functions".source = "${x}/.config/fish/functions";
       home.file.".config/fish/conf.d/gitaliases.fish".source = "${x}/.config/fish/conf.d/gitaliases.fish";
 
+
+
       # NOTES about gpg
       # 1. Restore/Create GPG keys
       # 2. Make sure gpg-agent can access it
@@ -131,7 +178,7 @@ in
         extensions = (with pkgs.vscode-extensions; [
           # Stable
           ms-vscode-remote.remote-ssh
-          vim
+          vscodevim.vim
           mhutchie.git-graph
           pkief.material-icon-theme
           oderwat.indent-rainbow
@@ -267,6 +314,8 @@ in
           bat
           unstable.ffmpeg
           parallel
+          unstable.zulip
+          unstable.zulip-term
           caddy
           nss.tools # needed for caddy internal cert
           unstable.swayosd # is not working as expected at the moment
