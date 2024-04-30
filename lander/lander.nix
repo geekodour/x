@@ -24,18 +24,24 @@ in
 
      settings = {
        devices = {
-         "tab" = {
+         tab = {
            id = "P67XKES-772THBN-5Q4JDZI-USHRBEW-KXUM6BC-PXYWNSR-BNIJ4VW-U2WRNAT";
            autoAcceptFolders = true;
            allowedNetwork = "100.102.189.25/32"; # network set on tailscale interface
            addresses = [ "tcp://tab:51820" ];
          };
-         "phone" = {
+         phone = {
            id = "TZYIAZA-6KYWGAF-IK4YVFW-SGTPJ3U-3M5TOAS-2I3CL3C-I6FOD2M-7EI2NQ7";
            autoAcceptFolders = true;
            allowedNetwork = "100.102.189.25/32"; # network set on tailscale interface
            addresses = [ "tcp://op:51820" ];
          };
+         # hq = {
+         #   id = "";
+         #   autoAcceptFolders = true;
+         #   allowedNetwork = "100.102.189.25/32"; # network set on tailscale interface
+         #   addresses = [ "tcp://hq:51820" ];
+         # };
        };
 
        folders = {

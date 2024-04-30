@@ -3,6 +3,7 @@ let
   home-manager = builtins.fetchTarball "https://github.com/nix-community/home-manager/archive/release-23.11.tar.gz";
   h = "/home/zuck";
   x = "/home/zuck/x";
+  user = "zuck";
   # ollamagpu = pkgs.unstable.ollama.override { llama-cpp = (pkgs.unstable.llama-cpp.override {cudaSupport = true; }); };
 in
 {
@@ -12,6 +13,56 @@ in
   services.emacs = {
     enable = true;
     package = pkgs.emacs29;
+  };
+
+  # also setup backup
+  services.syncthing = {
+     enable = true;
+     openDefaultPorts = true;
+     dataDir = "${h}/.local/share/syncthing";
+     configDir = "${h}/.config/syncthing";
+     user = "${user}";
+     group = "users";
+     guiAddress = "127.0.0.1:8384";
+     overrideFolders = true;
+     overrideDevices = true;
+
+     settings = {
+       devices = {
+         tab = {
+           id = "P67XKES-772THBN-5Q4JDZI-USHRBEW-KXUM6BC-PXYWNSR-BNIJ4VW-U2WRNAT";
+           autoAcceptFolders = true;
+           allowedNetwork = "100.102.189.25/32"; # network set on tailscale interface
+           addresses = [ "tcp://tab:51820" ];
+         };
+         phone = {
+           id = "TZYIAZA-6KYWGAF-IK4YVFW-SGTPJ3U-3M5TOAS-2I3CL3C-I6FOD2M-7EI2NQ7";
+           autoAcceptFolders = true;
+           allowedNetwork = "100.102.189.25/32"; # network set on tailscale interface
+           addresses = [ "tcp://op:51820" ];
+         };
+         lander = {
+           id = "TZYIAZA-6KYWGAF-IK4YVFW-SGTPJ3U-3M5TOAS-2I3CL3C-I6FOD2M-7EI2NQ7";
+           autoAcceptFolders = true;
+           allowedNetwork = "100.102.189.25/32"; # network set on tailscale interface
+           addresses = [ "tcp://lander:51820" ];
+         };
+       };
+
+       folders = {
+         documents = {
+           id = "documents";
+           path = "${h}/Documents";
+           devices = [ "tab" "phone" "lander" ];
+         };
+         screenshots = {
+           id = "screenshots";
+           path = "${h}/Pictures/screenshots";
+           devices = [ "tab" "phone" "lander" ];
+         };
+       };
+       options.globalAnnounceEnabled = false; # Only sync on LAN
+     };
   };
 
   # services.openvpn.servers = {
