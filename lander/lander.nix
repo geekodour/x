@@ -36,24 +36,24 @@ in
            allowedNetwork = "100.102.189.25/32"; # network set on tailscale interface
            addresses = [ "tcp://op:51820" ];
          };
-         # hq = {
-         #   id = "";
-         #   autoAcceptFolders = true;
-         #   allowedNetwork = "100.102.189.25/32"; # network set on tailscale interface
-         #   addresses = [ "tcp://hq:51820" ];
-         # };
+         hq = {
+           id = "TS43BYW-RNYC5LE-3DMVYEF-5BDTFLZ-NFYZMAJ-ODF2EWI-VYBOMZT-2U4IHQD";
+           autoAcceptFolders = true;
+           allowedNetwork = "100.102.189.25/32"; # network set on tailscale interface
+           addresses = [ "tcp://hq:51820" ];
+         };
        };
 
        folders = {
          documents = {
            id = "documents";
            path = "${h}/Documents";
-           devices = [ "tab" "phone" ];
+           devices = [ "tab" "phone" "hq" ];
          };
          screenshots = {
            id = "screenshots";
            path = "${h}/Pictures/screenshots";
-           devices = [ "tab" "phone" ];
+           devices = [ "tab" "phone" "hq" ];
          };
        };
        options.globalAnnounceEnabled = false; # Only sync on LAN
