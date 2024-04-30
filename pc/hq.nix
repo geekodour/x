@@ -154,6 +154,7 @@ in
           act # gh actions local, installed docker for this
           #docker-compose
           discord
+          unstable.zulip
           slack
           element-desktop
           betterdiscordctl
