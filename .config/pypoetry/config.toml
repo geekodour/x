@@ -1,5 +1,6 @@
 [virtualenvs]
 prefer-active-python = true
+system-site-packages = false
 in-project = true
 
 [repositories.test-pypi]

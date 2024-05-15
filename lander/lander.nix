@@ -378,6 +378,7 @@ in
           # unstable.advcpmv
           gomi
           nix-tree # nice
+          nix-du # nice
           hyperfine
           pdfarranger
           ocrmypdf
@@ -450,7 +451,7 @@ in
           cmake
           nodejs
           gomodifytags
-          visidata
+          visidata # comment and gc if facing boto3 issues
           gotests
           gore
           nixfmt
