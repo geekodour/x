@@ -234,6 +234,7 @@ in
           mediainfo
           losslesscut-bin
           grex
+          lux
           neofetch
           #sniffnet
           # libcap
@@ -276,8 +277,8 @@ in
           # ops
           unstable.terraform
 
-          # aws
-          awscli2
+          # # aws
+          # awscli2
           # ssm-session-manager-plugin
 
           # inspection/debugging tools
