@@ -10,6 +10,16 @@ in
     (import "${home-manager}/nixos")
   ];
 
+
+  services.tor = {
+    enable = true;
+    settings = {
+      UseBridges = true;
+      ClientTransportPlugin = "obfs4 exec ${pkgs.obfs4}/bin/lyrebird";
+      Bridge = "obfs4 IP:ORPort [fingerprint]";
+    };
+  };
+
   # also setup backup
   services.syncthing = {
      enable = true;
@@ -227,6 +237,12 @@ in
           # Gitmoji
           # "gitmoji.onlyUseCustomEmoji" = true;
           # "gitmoji.addCustomEmoji" = [ ];
+          # "vim.normalModeKeyBindings" = [
+          #   {
+          #     before = ["<leader>" "p"];
+          #     commands = ["workbench.action.quickOpen"];
+          #   }
+          # ];
         };
     
         # Keybindings
@@ -284,6 +300,7 @@ in
           gtk3
           zathura
           #ungoogled-chromium
+          tor-browser
           sfz
           nnn
           fd
