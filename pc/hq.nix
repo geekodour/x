@@ -73,14 +73,21 @@ in
   programs.firefox = {
     enable = true;
   };
+  security.wrappers.pmount = {
+    setuid = true;
+    setgid = true;
+    owner = "root";
+    group = "root";
+    source = "${pkgs.pmount}/bin/pmount";
+  };
+  security.wrappers.pumount = {
+    setuid = true;
+    setgid = true;
+    owner = "root";
+    group = "root";
+    source = "${pkgs.pmount}/bin/pumount";
+  };
 
-  # security.wrappers.pmount = {
-  #   setuid = true;
-  #   setgid = true;
-  #   owner = "root";
-  #   group = "root";
-  #   source = "${pkgs.pmount}/bin/pmount";
-  # };
   programs.fish.enable = true; # need to enable it outside of hm aswell
   #xdg.portal.wlr.enable = true; # screen share, disabled for now because causes startup slow
   home-manager = {
@@ -121,17 +128,7 @@ in
           source ~/.config/zoxide/init # zoxide
           alias cd z
           if test (tty) = /dev/tty1
-              while true
-                read -l -P 'Sway or KDE little indian man? [k/s]' wm
-                switch $wm
-                  case s S
-                    sway --unsupported-gpu
-                    return 0
-                  case k K
-                    startplasma-x11
-                    return 0
-                end
-              end
+              sway --unsupported-gpu
           end
         ''; 
       };

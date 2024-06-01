@@ -88,16 +88,16 @@ in
    };
 
    # KDE
-   services.xserver.enable = true;
-   services.xserver.displayManager.sddm.enable = false;
-   # services.xserver.displayManager.sddm.enable = true;
-   services.xserver.displayManager.startx.enable = true;
-   services.xserver.desktopManager.plasma5.enable = true;
-   environment.plasma5.excludePackages = with pkgs.libsForQt5; [
-     plasma-browser-integration
-     konsole
-     oxygen
-   ];
+   #services.xserver.enable = true;
+   #services.xserver.displayManager.sddm.enable = false;
+   ## services.xserver.displayManager.sddm.enable = true;
+   #services.xserver.displayManager.startx.enable = true;
+   #services.xserver.desktopManager.plasma5.enable = true;
+   #environment.plasma5.excludePackages = with pkgs.libsForQt5; [
+   #  plasma-browser-integration
+   #  konsole
+   #  oxygen
+   #];
 
 
 
@@ -143,6 +143,7 @@ in
     wlr.enable = true;
     extraPortals = [pkgs.xdg-desktop-portal-gtk];
   };
+  xdg.portal.config.common.default = "*";
 
   users.users.zuck = {
     isNormalUser = true;
