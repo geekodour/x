@@ -1,6 +1,7 @@
 { config, pkgs, ... }:
 let
-  home-manager = builtins.fetchTarball "https://github.com/nix-community/home-manager/archive/release-23.11.tar.gz";
+  #home-manager = builtins.fetchTarball "https://github.com/nix-community/home-manager/archive/release-24.05.tar.gz";
+  home-manager = builtins.fetchTarball "https://github.com/nix-community/home-manager/archive/release-24.05.tar.gz";
   h = "/home/geekodour";
   x = "/home/geekodour/x";
   user = "geekodour";
@@ -11,14 +12,15 @@ in
   ];
 
 
-  services.tor = {
-    enable = true;
-    settings = {
-      UseBridges = true;
-      ClientTransportPlugin = "obfs4 exec ${pkgs.obfs4}/bin/lyrebird";
-      Bridge = "obfs4 IP:ORPort [fingerprint]";
-    };
-  };
+  # NOTE: After updating to 24.05 faced some issues so disabling it for now
+  # services.tor = {
+  #   enable = true;
+  #   settings = {
+  #     UseBridges = true;
+  #     ClientTransportPlugin = "obfs4 exec ${pkgs.obfs4}/bin/lyrebird";
+  #     Bridge = "obfs4 IP:ORPort [fingerprint]";
+  #   };
+  # };
 
   # also setup backup
   services.syncthing = {
@@ -373,7 +375,7 @@ in
           google-chrome
           libtree
           nix-index
-          dbeaver
+          dbeaver-bin
           imv
           unstable.ollama
           krita
@@ -459,7 +461,9 @@ in
           gotestsum
           gofumpt
           golangci-lint
-          unstable.nodePackages.pyright
+          # NOTE: gone missing in 24.05 upgrade
+          #unstable.nodePackages.pyright
+          pyright
           isort
           shellcheck
           shfmt
@@ -471,7 +475,7 @@ in
           visidata # comment and gc if facing boto3 issues
           gotests
           gore
-          nixfmt
+          nixfmt-classic
           graphviz
           ruby
           rust-analyzer
