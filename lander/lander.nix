@@ -320,6 +320,8 @@ in
           dive
           cinny-desktop
 
+          unstable.zed-editor
+
           # ops
           #unstable.terraform
 
@@ -438,7 +440,7 @@ in
           duf
 
           # editor
-          unstable.nodePackages.bash-language-server
+          unstable.bash-language-server
           unstable.nodePackages.svelte-language-server
           unstable.nodePackages.typescript-language-server
           unstable.nodePackages_latest.yaml-language-server
